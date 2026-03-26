@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conso Tasks</title>
+  <title>Pattern Tasks</title>
 </head>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --primary-color: #2563eb;
@@ -804,6 +804,182 @@ tbody tr:hover {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* Custom Additions for Pattern Table */
+.pattern-tasks {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 1px 3px -1px rgba(0,0,0,0.02);
+  border: 1px solid var(--border-color);
+}
+
+.pattern-tasks h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.pattern-tasks .subtitle-text {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.segmented-control {
+  display: flex;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.segment {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.segment.active {
+  background-color: white;
+  color: var(--primary-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+  border-color: #e5e7eb;
+  font-weight: 600;
+}
+
+.export-btn:hover {
+  background-color: #8ceabb1a; /* slight green tint */
+}
+
+/* Table Enhancements */
+.pattern-tasks table {
+  margin-top: 16px;
+}
+
+.pattern-tasks th {
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pattern-tasks td {
+  padding: 16px 20px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f9fafb;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.pending-badge {
+  background-color: #fffbeb;
+  color: #d97706;
+}
+
+.success-badge {
+  background-color: #ecfdf5;
+  color: #059669;
+}
+
+.neutral-badge {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.danger-badge {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.inprogress-badge {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+/* Actions */
+.assign-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+}
+
+.assign-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.details-link {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+}
+
+.icon-btn-small {
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+  font-weight: bold;
+}
+
+.icon-btn-small:hover {
+  color: var(--text-main);
+}
+
+.pattern-tasks tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.pattern-due-danger {
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Table footer pagination */
+.pattern-footer-text {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
 </style>
 <body>
   <div class="app-container">
@@ -818,7 +994,7 @@ tbody tr:hover {
               <path d="m4 6 8-4 8 4"></path>
             </svg>
           </div>
-          Conso
+          Pattern
         </div>
         <div class="search-bar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -830,8 +1006,8 @@ tbody tr:hover {
         </div>
         <div class="nav-links">
           <a href="#">Dashboard</a>
-          <a href="#" class="active" id="nav-conso">Conso</a>
-          <a href="#" id="nav-conso-assigned">Conso Assigned</a>
+          <a href="#" class="active" id="nav-pattern">Patterns</a>
+          <a href="#" id="nav-complete">PM Assigned</a>
           <a href="#" id="nav-calendar">Calendar View</a>
         </div>
       </div>
@@ -854,11 +1030,11 @@ tbody tr:hover {
         <!-- Table Header -->
         <div class="table-header">
           <div>
-            <h2 id="table-header-title">Active Conso Tasks</h2>
-            <p class="subtitle-text">Managing current production conso deliverables</p>
+            <h2 id="table-header-title">Active Pattern Tasks</h2>
+            <p class="subtitle-text">Managing current production pattern deliverables</p>
           </div>
           <div class="header-actions">
-            <input type="text" id="filter-conso-name" placeholder="Filter by Conso..."
+            <input type="text" id="filter-pm-name" placeholder="Filter by PM..."
               style="display: none; padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; outline: none;" />
             <button class="btn-outline export-btn" id="export-excel-btn">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"
@@ -887,7 +1063,7 @@ tbody tr:hover {
           </thead>
           <tbody id="table-body">
             <tr>
-              <td colspan="8" style="text-align: center; padding: 40px;">⏳ Loading conso tasks from Google Sheets...
+              <td colspan="8" style="text-align: center; padding: 40px;">⏳ Loading pattern tasks from Google Sheets...
               </td>
             </tr>
           </tbody>
@@ -895,12 +1071,13 @@ tbody tr:hover {
 
         <!-- Footer -->
         <div class="table-footer" style="padding-top: 16px; margin-top: 8px;">
-          <span class="pattern-footer-text">Showing 0 of 0 conso tasks</span>
+          <span class="pattern-footer-text">Showing 4 of 24 patterns</span>
           <div class="pagination">
             <button class="page-btn" disabled>&lt;</button>
             <button class="page-btn">&gt;</button>
           </div>
         </div>
+
       </div>
 
       <!-- Calendar View Section -->
@@ -946,39 +1123,37 @@ tbody tr:hover {
       </div>
     </div>
 
-    <!-- Assign Conso Modal -->
-    <div class="modal" id="assign-conso-modal"
+    <!-- Assign PM Modal -->
+    <div class="modal" id="assign-pm-modal"
       style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
       <div class="card" style="width: 400px; padding: 24px; background: white; border-radius: 8px;">
-        <h3 style="margin-bottom: 16px;">Assign Conso Maker</h3>
-        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">Request ID:
-          <strong id="assign-conso-req-id" style="color: #1f2937;">-</strong>
-        </p>
+        <h3 style="margin-bottom: 16px;">Assign Pattern Maker</h3>
+        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">Request ID: <strong id="assign-pm-req-id"
+            style="color: #1f2937;">-</strong></p>
         <p style="margin-bottom: 16px; font-size: 12px; color: #6b7280;">Folder Path:
-          <span id="assign-conso-folder-path"
-            style="color: #1f2937; font-family: monospace; word-break: break-all; display: inline-block;">-</span>
+          <span id="assign-pm-folder-path" style="color: #1f2937; font-family: monospace; word-break: break-all; display: inline-block;">-</span>
         </p>
 
         <div style="margin-bottom: 24px;">
-          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Select or Add Conso
-            Maker Name</label>
-          <input type="text" id="conso-name-input" list="conso-list" placeholder="Enter Conso Maker Name..."
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Select or Add PM
+            Name</label>
+          <input type="text" id="pm-name-input" list="pm-list" placeholder="Enter Pattern Maker Name..."
             style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit;" />
-          <datalist id="conso-list">
-            <option value="John Conso Maker"></option>
-            <option value="Sarah Conso Maker"></option>
+          <datalist id="pm-list">
+            <option value="John D. Patternist"></option>
+            <option value="Sarah Jenkins"></option>
           </datalist>
         </div>
 
         <div style="margin-bottom: 24px;">
-          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Conso Email Address</label>
-          <input type="email" id="conso-email-input" placeholder="Populated automatically or enter email..."
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">PM Email Address</label>
+          <input type="email" id="pm-email-input" placeholder="Populated automatically or enter email..."
             style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; background-color: #f9fafb;" />
         </div>
 
         <div style="display: flex; justify-content: flex-end; gap: 12px;">
-          <button class="btn-secondary" id="close-conso-modal-btn" style="padding: 8px 16px;">Cancel</button>
-          <button class="btn-primary" id="confirm-conso-btn" style="padding: 8px 16px;">Assign Conso</button>
+          <button class="btn-secondary" id="close-pm-modal-btn" style="padding: 8px 16px;">Cancel</button>
+          <button class="btn-primary" id="confirm-pm-btn" style="padding: 8px 16px;">Assign PM</button>
         </div>
       </div>
     </div>
@@ -998,65 +1173,98 @@ tbody tr:hover {
       </div>
     </div>
 
+    <!-- Remarks Modal -->
+    <div class="modal" id="remarks-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+      <div class="card"
+        style="width: 500px; padding: 24px; background: white; border-radius: 8px; max-height: 80vh; overflow-y: auto;">
+        <h3 style="margin-bottom: 16px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Storage Area Remarks</h3>
+        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">Request ID: <strong id="remarks-req-id"
+            style="color: #1f2937;">-</strong></p>
+
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Remarks</label>
+          <textarea id="remarks-textarea" rows="6" placeholder="Enter your remarks..."
+            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+
+        <div id="remarks-status" style="font-size: 13px; color: #059669; margin-bottom: 16px; display: none;">Saved</div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px;">
+          <button class="btn-secondary" id="close-remarks-btn" style="padding: 8px 16px;">Cancel</button>
+          <button class="btn-primary" id="save-remarks-btn" style="padding: 8px 16px;">Save</button>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMVYOSwIwbUchXuqOeH_r5h7Zxu1AWH4WkvxGHciuVYz1a-N2OOrtagBqCbTyRSgdjHA/exec';
-
   const tableBody = document.getElementById('table-body');
+
   let allRequests = [];
-  let currentTab = 'AWAITING CONSO';
-  let consoFilterName = '';
+  let currentTab = 'AWAITING PATTERN';
+  let pmFilterName = '';
 
   const normalizeStatus = (s) => String(s || '').toUpperCase().replace(/\s+/g, ' ').trim();
-
-  // TODO: If your sheet uses different status strings for conso assignment,
-  // update the checks below.
-  const isConsoAssignedStatus = (s) => {
+  const isPmAssignedStatus = (s) => {
     const ns = normalizeStatus(s);
-    return ns === 'CONSO ASSIGN' || ns === 'CONSO ASSIGNED' || ns.includes('CONSO ASSIGN');
+    return ns === 'PM ASSIGN' || ns === 'PM ASSIGNED';
+  };
+  const isPendingOrBlackStatus = (row) => {
+    const statusUpper = normalizeStatus(row.status);
+    const statusClassUpper = String(row.statusClass || '').toUpperCase().trim();
+
+    // In this Pattern screen, "pending" maps to "AWAITING PATTERN"
+    // (and we also accept generic "PENDING" strings just in case).
+    const isPending =
+      statusUpper === 'AWAITING PATTERN' ||
+      statusUpper.includes('PENDING') ||
+      statusUpper === 'PENDING';
+
+    const isBlack = statusUpper.includes('BLACK') || statusClassUpper.includes('BLACK');
+    return isPending || isBlack;
   };
 
-  const filterConsoInput = document.getElementById('filter-conso-name');
-  if (filterConsoInput) {
-    filterConsoInput.addEventListener('input', (e) => {
-      consoFilterName = e.target.value.trim();
+  const filterPmInput = document.getElementById('filter-pm-name');
+  if (filterPmInput) {
+    filterPmInput.addEventListener('input', (e) => {
+      pmFilterName = e.target.value.trim();
       renderTable();
     });
   }
 
-  const navConso = document.getElementById('nav-conso');
-  const navConsoAssigned = document.getElementById('nav-conso-assigned');
+  const navPattern = document.getElementById('nav-pattern');
+  const navComplete = document.getElementById('nav-complete');
   const navCalendar = document.getElementById('nav-calendar');
   const tableSection = document.querySelector('.pattern-tasks');
   const calendarSection = document.getElementById('calendar-section');
 
-  if (navConso && navConsoAssigned && navCalendar && tableSection && calendarSection) {
-    navConso.addEventListener('click', (e) => {
+  if (navPattern && navComplete && navCalendar) {
+    navPattern.addEventListener('click', (e) => {
       e.preventDefault();
-      currentTab = 'AWAITING CONSO';
-      navConso.classList.add('active');
-      navConsoAssigned.classList.remove('active');
+      currentTab = 'AWAITING PATTERN';
+      navPattern.classList.add('active');
+      navComplete.classList.remove('active');
       navCalendar.classList.remove('active');
-      if (filterConsoInput) filterConsoInput.style.display = 'none';
+      if (filterPmInput) filterPmInput.style.display = 'none';
       tableSection.style.display = 'block';
       calendarSection.style.display = 'none';
-      const titleEl = document.getElementById('table-header-title');
-      if (titleEl) titleEl.textContent = 'Active Conso Tasks';
+      document.getElementById('table-header-title').textContent = 'Active Pattern Tasks';
       renderTable();
     });
 
-    navConsoAssigned.addEventListener('click', (e) => {
+    navComplete.addEventListener('click', (e) => {
       e.preventDefault();
-      currentTab = 'CONSO ASSIGN';
-      navConsoAssigned.classList.add('active');
-      navConso.classList.remove('active');
+      currentTab = 'PM ASSIGN';
+      navComplete.classList.add('active');
+      navPattern.classList.remove('active');
       navCalendar.classList.remove('active');
-      if (filterConsoInput) filterConsoInput.style.display = 'inline-block';
+      if (filterPmInput) filterPmInput.style.display = 'inline-block';
       tableSection.style.display = 'block';
       calendarSection.style.display = 'none';
-      const titleEl = document.getElementById('table-header-title');
-      if (titleEl) titleEl.textContent = 'Assigned Conso';
+      document.getElementById('table-header-title').textContent = 'Assigned Pattern';
       renderTable();
     });
 
@@ -1064,119 +1272,118 @@ tbody tr:hover {
       e.preventDefault();
       currentTab = 'CALENDAR';
       navCalendar.classList.add('active');
-      navConso.classList.remove('active');
-      navConsoAssigned.classList.remove('active');
+      navPattern.classList.remove('active');
+      navComplete.classList.remove('active');
       tableSection.style.display = 'none';
       calendarSection.style.display = 'block';
       renderCalendar();
     });
   }
 
-  async function loadConsoTasks() {
+  async function loadPatternTasks() {
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL);
-      if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status}`);
+      }
 
       const data = await response.json();
-      if (data.error) throw new Error(data.error);
+      if (data.error) {
+        throw new Error(data.error);
+      }
 
       allRequests = data;
       renderTable();
     } catch (error) {
-      console.error('Failed to load data:', error);
-      if (tableBody) {
-        tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Failed to load data: <b>${error.message}</b></td></tr>`;
-      }
+      console.error("Failed to load data:", error);
+      tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #dc2626; padding: 40px;">❌ Failed to load data: <b>${error.message}</b></td></tr>`;
     }
-  }
-
-  function parseSheetDate(dateStr) {
-    if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
-
-    const parts = String(dateStr).trim().split(' ');
-    const datePart = parts[0];
-    const timePart = parts[1] || '00:00:00';
-
-    if (datePart.includes('/')) {
-      const pts = datePart.split('/');
-      if (pts.length === 3) {
-        const yr = pts[2].length === 2 ? '20' + pts[2] : pts[2];
-        const d = new Date(`${yr}-${pts[1]}-${pts[0]}T${timePart}`);
-        if (!isNaN(d)) return d;
-      }
-    }
-
-    const fallback = new Date(dateStr);
-    return isNaN(fallback) ? null : fallback;
   }
 
   function renderTable() {
     if (currentTab === 'CALENDAR') return;
-    if (!tableBody) return;
 
     tableBody.innerHTML = '';
 
     const thDynamic = document.getElementById('th-dynamic');
     if (thDynamic) {
-      thDynamic.style.display = 'table-cell';
-      thDynamic.textContent = currentTab === 'CONSO ASSIGN' ? 'Conso Maker' : 'PL Overdue';
+      if (currentTab === 'PM ASSIGN') {
+        thDynamic.style.display = 'table-cell';
+        thDynamic.textContent = 'PM Name';
+      } else {
+        thDynamic.style.display = 'none';
+      }
     }
 
-    const consoRequests = allRequests.filter((row) => {
-      const statusUpper = normalizeStatus(row.status);
+    // Filter for requests based on active tab
+    const patternRequests = allRequests.filter(row => {
+      const status = normalizeStatus(row.status);
 
-      if (currentTab === 'CONSO ASSIGN') {
-        if (!isConsoAssignedStatus(statusUpper)) return false;
+      if (currentTab === 'PM ASSIGN') {
+        if (!isPmAssignedStatus(status)) return false;
       } else {
-        if (statusUpper !== currentTab) return false;
+        if (status !== currentTab) return false;
       }
 
-      if (currentTab === 'CONSO ASSIGN' && consoFilterName) {
-        const maker = (row.Conso_Name || row.Conso_Maker || row.assignee || '').toLowerCase();
-        if (!maker.includes(consoFilterName.toLowerCase())) return false;
+      if (currentTab === 'PM ASSIGN' && pmFilterName) {
+        const pmName = (row.PM_Name || row.Pattern_Maker || '').toLowerCase();
+        if (!pmName.includes(pmFilterName.toLowerCase())) return false;
       }
 
       return true;
     });
 
-    const footerEl = document.querySelector('.pattern-footer-text');
-    if (footerEl) footerEl.textContent = `Showing ${consoRequests.length} conso tasks`;
+    document.querySelector('.pattern-footer-text').textContent = `Showing ${patternRequests.length} patterns`;
 
-    if (consoRequests.length === 0) {
-      const msg =
-        currentTab === 'AWAITING CONSO'
-          ? 'No conso tasks are awaiting assignment.'
-          : 'No conso makers have been assigned yet.';
-      tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px; color: #6b7280;">${msg}</td></tr>`;
+    if (patternRequests.length === 0) {
+      const msg = currentTab === 'AWAITING PATTERN'
+        ? 'No patterns currently awaiting assignment.'
+        : 'No pattern makers have been assigned yet.';
+      tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: #6b7280;">${msg}</td></tr>`;
       return;
     }
 
-    consoRequests.forEach((row, index) => {
+    patternRequests.forEach((row, index) => {
       const safeId = row.id || `REQ-${index + 1}`;
+      const tr = document.createElement('tr');
+
+      const parseSheetDate = (dateStr) => {
+        if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
+        let parts = String(dateStr).trim().split(' ');
+        let datePart = parts[0];
+        let timePart = parts[1] || '00:00:00';
+        if (datePart.includes('/')) {
+          let pts = datePart.split('/');
+          if (pts.length === 3) {
+            let yr = pts[2].length === 2 ? '20' + pts[2] : pts[2];
+            let d = new Date(`${yr}-${pts[1]}-${pts[0]}T${timePart}`);
+            if (!isNaN(d)) return d;
+          }
+        }
+        let fallback = new Date(dateStr);
+        return isNaN(fallback) ? null : fallback;
+      };
+
+      let colValue = '-';
       const plUploaded = parseSheetDate(row.PL_Uploaded_Date || row.Uploaded_Date);
 
-      // Keep the same UX metric as Pattern: "overdue" based on hours since PL_Uploaded_Date.
-      let overdueValue = '-';
       if (plUploaded) {
-        const targetEndTime = new Date(); // continues running if not yet assigned
+        let targetEndTime = new Date(); // Timer continues if not yet assigned
+        if (currentTab === 'PM ASSIGN') {
+           const pmUploaded = parseSheetDate(row.PM_Uploaded_Date);
+           if (pmUploaded) {
+             targetEndTime = pmUploaded;
+           }
+        }
+        
         const diffHours = Math.floor((targetEndTime - plUploaded) / (1000 * 60 * 60));
-
         if (diffHours > 24) {
-          overdueValue = `<span style="background-color: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; display: inline-block; border: 1px solid #f87171; box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);">${diffHours} hr</span>`;
+          colValue = `<span style="background-color: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; display: inline-block; border: 1px solid #f87171; box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);">${diffHours} hr</span>`;
         } else {
-          overdueValue = (diffHours >= 0 ? diffHours : 0) + ' hr';
+          colValue = (diffHours >= 0 ? diffHours : 0) + ' hr';
         }
       }
 
-      const consoMaker =
-        row.Conso_Name ||
-        row.Conso_Maker ||
-        row.assignee ||
-        'Unassigned';
-
-      const statusText = row.status || 'PENDING';
-
-      const tr = document.createElement('tr');
       tr.innerHTML = `
         <td class="req-id" style="color: var(--primary-color); font-weight: 600;">${safeId}</td>
         <td class="style-name" style="font-weight: 500;">${row.style || '-'}</td>
@@ -1189,96 +1396,79 @@ tbody tr:hover {
         </td>
         <td>${row.due || '-'}</td>
         <td>
-          <span class="status-badge ${currentTab === 'AWAITING CONSO' ? 'pending-badge' : 'success-badge'}">
-            ${statusText}
+          <span class="status-badge ${currentTab === 'AWAITING PATTERN' ? 'pending-badge' : 'success-badge'}">
+            ${row.status || 'PENDING'}
           </span>
         </td>
-        <td style="font-weight: 500; color: var(--text-main);">
-          ${currentTab === 'CONSO ASSIGN' ? consoMaker : overdueValue}
+        <td style="display: ${currentTab === 'PM ASSIGN' ? 'table-cell' : 'none'}; font-weight: 500; color: var(--text-main);">
+          ${currentTab === 'PM ASSIGN' ? (row.PM_Name || row.Pattern_Maker || 'Unknown') : ''}
         </td>
         <td style="text-align: center;">
-          ${
-        currentTab === 'AWAITING CONSO'
+             ${currentTab === 'AWAITING PATTERN'
           ? `<button class="assign-btn" data-id="${safeId}" style="margin: 0 auto; display: inline-flex; justify-content: center;">
                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5c-2.2 0-4 1.8-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
                      Assign
                    </button>`
-          : currentTab === 'CONSO ASSIGN'
-            ? `<div style="display: flex; justify-content: center; align-items: center;">
-                  <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
-                </div>`
-            : `<div style="display: flex; justify-content: center; align-items: center;">
-                  <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
-                </div>`
-      }
+         : currentTab === 'PM ASSIGN'
+           ? `<div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+                <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
+                <button class="btn-outline remarks-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Remarks</button>
+              </div>`
+           : `<div style="display: flex; justify-content: center; align-items: center;">
+                <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
+              </div>`
+        }
         </td>
       `;
-
       tableBody.appendChild(tr);
     });
 
     // Wire up Assign buttons
-    document.querySelectorAll('.assign-btn').forEach((btn) => {
+    document.querySelectorAll('.assign-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = e.currentTarget.getAttribute('data-id');
-
-        const reqEl = document.getElementById('assign-conso-req-id');
-        const folderEl = document.getElementById('assign-conso-folder-path');
-        if (reqEl) reqEl.textContent = id;
-
-        if (folderEl) {
+        document.getElementById('assign-pm-req-id').textContent = id;
+        const assignFolderEl = document.getElementById('assign-pm-folder-path');
+        if (assignFolderEl) {
           const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
           const folderPath = rowData ? (rowData.folderLink || rowData.folder_link || '-') : '-';
 
-          if (
-            folderPath &&
-            folderPath !== '-' &&
-            String(folderPath).toLowerCase() !== 'null' &&
-            String(folderPath).startsWith('http')
-          ) {
-            folderEl.innerHTML = `<a href="${folderPath}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">${folderPath}</a>`;
+          // Show full path; if it's a URL, keep it clickable.
+          if (folderPath && folderPath !== '-' && String(folderPath).toLowerCase() !== 'null' && String(folderPath).startsWith('http')) {
+            assignFolderEl.innerHTML = `<a href="${folderPath}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">${folderPath}</a>`;
           } else {
-            folderEl.textContent = folderPath || '-';
+            assignFolderEl.textContent = folderPath || '-';
           }
         }
-
-        const modal = document.getElementById('assign-conso-modal');
-        if (modal) modal.style.display = 'flex';
-        const nameInput = document.getElementById('conso-name-input');
-        if (nameInput) nameInput.value = '';
+        document.getElementById('pm-name-input').value = '';
+        document.getElementById('assign-pm-modal').style.display = 'flex';
       });
     });
 
     // Wire up Details buttons
-    document.querySelectorAll('.details-btn').forEach((btn) => {
+    document.querySelectorAll('.details-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = e.currentTarget.getAttribute('data-id');
         const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
-        if (!rowData) return;
 
-        const detailsContent = document.getElementById('details-content');
-        if (!detailsContent) return;
+        if (rowData) {
+          const detailsContent = document.getElementById('details-content');
+          const displayFields = [
+            { label: 'Request ID', value: rowData.id },
+            { label: 'Customer', value: rowData.Customer || rowData.customer },
+            { label: 'Style', value: rowData.Style || rowData.style },
+            { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
+            { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+            { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
+            { label: 'Status', value: rowData.Status || rowData.status }
+          ];
 
-        const displayFields = [
-          { label: 'Request ID', value: rowData.id },
-          { label: 'Customer', value: rowData.Customer || rowData.customer },
-          { label: 'Style', value: rowData.Style || rowData.style },
-          { label: 'Conso Maker', value: rowData.Conso_Name || rowData.Conso_Maker || rowData.assignee || 'Unknown' },
-          {
-            label: 'Assigned Date',
-            value: rowData.Conso_Uploaded_Date || rowData.Conso_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date,
-          },
-          { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
-          { label: 'Status', value: rowData.Status || rowData.status },
-        ];
-
-        detailsContent.innerHTML = displayFields
-          .map((field) => {
+          detailsContent.innerHTML = displayFields.map(field => {
             let displayValue = field.value || '-';
             if (field.label === 'Status') {
               displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
             } else if (field.label === 'Folder Path' && field.value !== '-') {
-              if (String(field.value).startsWith('http')) {
+              if (field.value.startsWith('http')) {
                 displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
               } else {
                 displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
@@ -1290,11 +1480,37 @@ tbody tr:hover {
                 <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
               </div>
             `;
-          })
-          .join('');
+          }).join('');
 
-        const detailsModal = document.getElementById('details-modal');
-        if (detailsModal) detailsModal.style.display = 'flex';
+          document.getElementById('details-modal').style.display = 'flex';
+        }
+      });
+    });
+
+    // Wire up Remarks buttons
+    document.querySelectorAll('.remarks-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.getAttribute('data-id');
+        currentRemarksReqId = id;
+
+        const remarksModalEl = document.getElementById('remarks-modal');
+        const remarksReqIdEl = document.getElementById('remarks-req-id');
+        const remarksTextareaEl = document.getElementById('remarks-textarea');
+        const remarksStatusEl = document.getElementById('remarks-status');
+
+        if (remarksReqIdEl) remarksReqIdEl.textContent = id;
+        if (remarksStatusEl) {
+          remarksStatusEl.style.display = 'none';
+          remarksStatusEl.textContent = 'Saved';
+        }
+
+        if (remarksTextareaEl) {
+          const saved = localStorage.getItem(`patternRemarks:${id}`);
+          remarksTextareaEl.value = saved || '';
+        }
+
+        if (remarksModalEl) remarksModalEl.style.display = 'flex';
+        if (remarksTextareaEl) setTimeout(() => remarksTextareaEl.focus(), 0);
       });
     });
   }
@@ -1303,36 +1519,161 @@ tbody tr:hover {
   const closeDetailsBtn = document.getElementById('close-details-btn');
   if (closeDetailsBtn) {
     closeDetailsBtn.addEventListener('click', () => {
-      const detailsModal = document.getElementById('details-modal');
-      if (detailsModal) detailsModal.style.display = 'none';
+      document.getElementById('details-modal').style.display = 'none';
     });
   }
 
-  const assignConsoModal = document.getElementById('assign-conso-modal');
-  const closeConsoModalBtn = document.getElementById('close-conso-modal-btn');
-  if (closeConsoModalBtn && assignConsoModal) {
-    closeConsoModalBtn.addEventListener('click', () => {
-      assignConsoModal.style.display = 'none';
+  // --- Remarks Modal Logic ---
+  const remarksModal = document.getElementById('remarks-modal');
+  const closeRemarksBtn = document.getElementById('close-remarks-btn');
+  const saveRemarksBtn = document.getElementById('save-remarks-btn');
+  const remarksTextarea = document.getElementById('remarks-textarea');
+
+  // Set by the "Remarks" button click handler inside renderTable()
+  let currentRemarksReqId = null;
+
+  if (closeRemarksBtn) {
+    closeRemarksBtn.addEventListener('click', () => {
+      if (remarksModal) remarksModal.style.display = 'none';
     });
   }
 
-  // Auto-fill email based on standard company convention (same pattern as Pattern page).
-  const consoNameInput = document.getElementById('conso-name-input');
-  const consoEmailInput = document.getElementById('conso-email-input');
-  if (consoNameInput && consoEmailInput) {
-    consoNameInput.addEventListener('input', (e) => {
-      const val = e.target.value.trim();
-      if (!val) {
-        consoEmailInput.value = '';
+  if (saveRemarksBtn) {
+    saveRemarksBtn.addEventListener('click', async () => {
+      if (!currentRemarksReqId) {
+        alert('No request selected for remarks.');
         return;
       }
-      let generatedEmail = val.toLowerCase().replace(/[^a-z0-9]/g, '.').replace(/\.+/g, '.') + '@tropicknits.com';
-      generatedEmail = generatedEmail.replace('.@', '@');
-      consoEmailInput.value = generatedEmail;
+      const value = (remarksTextarea ? remarksTextarea.value : '').trim();
+      let saveSucceeded = false;
+      const originalText = saveRemarksBtn.textContent;
+      saveRemarksBtn.textContent = 'Saving...';
+      saveRemarksBtn.style.opacity = '0.7';
+      saveRemarksBtn.style.pointerEvents = 'none';
+
+      const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === currentRemarksReqId);
+      const folderLink = rowData ? (rowData.folderLink || rowData.folder_link || '') : '';
+      const isValidFolderLink = folderLink && String(folderLink).trim() !== '-' && String(folderLink).trim().toLowerCase() !== 'null';
+      // Open a blank tab during the click (avoids popup blockers). After save succeeds, navigate to the folder.
+      let folderWin = null;
+      if (isValidFolderLink) {
+        folderWin = window.open('about:blank', '_blank', 'noopener,noreferrer');
+      }
+
+      try {
+        // Persist to Google Apps Script.
+        // NOTE: Your Apps Script must handle `action: "saveStorageAreaRemarks"` and the move/status fields below.
+        const payload = {
+          action: 'saveStorageAreaRemarks',
+          requestId: currentRemarksReqId,
+          storageAreaRemarks: value,
+          timestamp: new Date().toISOString(),
+
+          // Requested workflow: PM Assigned -> Awaiting Conso
+          status: 'Awaiting Conso',
+          nextStatus: 'Awaiting Conso',
+          moveToFolder: 'Conso',
+          destinationFolder: 'Conso'
+        };
+
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        // Keep local copy as a fallback (and for instant UI reflection).
+        localStorage.setItem(`patternRemarks:${currentRemarksReqId}`, value);
+        saveSucceeded = true;
+
+        // Optimistically update status so the item leaves "PM Assigned" immediately.
+        if (rowData) {
+          rowData.status = 'Awaiting Conso';
+        }
+
+        // Switch UI to the Conso gallery and refresh data so the folder link matches the moved folder.
+        currentTab = 'PM ASSIGN';
+        if (navPattern) navPattern.classList.remove('active');
+        if (navComplete) navComplete.classList.add('active');
+        if (navCalendar) navCalendar.classList.remove('active');
+        if (filterPmInput) filterPmInput.style.display = 'none';
+        if (tableSection) tableSection.style.display = 'block';
+        if (calendarSection) calendarSection.style.display = 'none';
+        const titleEl = document.getElementById('table-header-title');
+        if (titleEl) titleEl.textContent = 'Assigned Pattern';
+
+        await loadPatternTasks();
+
+        // After refresh, open the updated (moved) Conso folder path if available.
+        if (folderWin && !folderWin.closed) {
+          const updatedRow = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === currentRemarksReqId);
+          const updatedFolderLink = updatedRow ? (updatedRow.folderLink || updatedRow.folder_link || '') : '';
+          const isValidUpdatedFolderLink =
+            updatedFolderLink &&
+            String(updatedFolderLink).trim() !== '-' &&
+            String(updatedFolderLink).trim().toLowerCase() !== 'null';
+
+          if (isValidUpdatedFolderLink) {
+            folderWin.location = updatedFolderLink;
+          } else {
+            folderWin.close();
+          }
+        }
+      } catch (err) {
+        console.error('Error saving remarks:', err);
+        // Save locally even if Google save fails, so user doesn't lose data.
+        localStorage.setItem(`patternRemarks:${currentRemarksReqId}`, value);
+        alert('Remarks saved locally, but Google save failed. Please try again.');
+
+        // Close the blank tab since we didn't complete the Google save.
+        if (folderWin && !folderWin.closed) {
+          folderWin.close();
+        }
+      } finally {
+        saveRemarksBtn.textContent = originalText;
+        saveRemarksBtn.style.opacity = '1';
+        saveRemarksBtn.style.pointerEvents = 'auto';
+      }
+
+      const remarksStatusEl = document.getElementById('remarks-status');
+      if (remarksStatusEl) {
+        remarksStatusEl.style.display = 'block';
+        remarksStatusEl.textContent = saveSucceeded ? 'Saved' : 'Saved locally';
+      }
+
+      // Small delay so the user sees the "Saved" status
+      setTimeout(() => {
+        if (remarksModal) remarksModal.style.display = 'none';
+      }, 500);
     });
   }
 
-  function getFullDateTime() {
+  // --- Assign PM Modal Logic ---
+  const pmModal = document.getElementById('assign-pm-modal');
+  const pmNameInput = document.getElementById('pm-name-input');
+  const pmEmailInput = document.getElementById('pm-email-input');
+
+  // Auto-fill email based on standard company convention
+  if (pmNameInput && pmEmailInput) {
+    pmNameInput.addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      if (!val) {
+        pmEmailInput.value = '';
+        return;
+      }
+      // Simple generator: "John Doe" -> "john.doe@tropicknits.com"
+      let generatedEmail = val.toLowerCase().replace(/[^a-z0-9]/g, '.').replace(/\.+/g, '.') + '@tropicknits.com';
+      generatedEmail = generatedEmail.replace('.@', '@');
+      pmEmailInput.value = generatedEmail;
+    });
+  }
+
+  document.getElementById('close-pm-modal-btn').addEventListener('click', () => {
+    pmModal.style.display = 'none';
+  });
+
+  const getFullDateTime = () => {
     const d = new Date();
     const day = String(d.getDate()).padStart(2, '0');
     const month = String(d.getMonth() + 1).padStart(2, '0');
@@ -1341,109 +1682,130 @@ tbody tr:hover {
     const min = String(d.getMinutes()).padStart(2, '0');
     const sec = String(d.getSeconds()).padStart(2, '0');
     return `${day}/${month}/${year} ${hr}:${min}:${sec}`;
-  }
+  };
 
-  const confirmConsoBtn = document.getElementById('confirm-conso-btn');
-  if (confirmConsoBtn) {
-    confirmConsoBtn.addEventListener('click', async () => {
-      const reqId = document.getElementById('assign-conso-req-id')?.textContent || '-';
-      const consoName = consoNameInput ? consoNameInput.value.trim() : '';
-      const consoEmail = consoEmailInput ? consoEmailInput.value.trim() : '';
+  document.getElementById('confirm-pm-btn').addEventListener('click', async () => {
+    const reqId = document.getElementById('assign-pm-req-id').textContent;
+    const pmName = document.getElementById('pm-name-input').value.trim();
+    const pmEmail = document.getElementById('pm-email-input').value.trim();
 
-      if (!consoName || consoName === '-') {
-        alert('Please enter or select a Conso Maker Name.');
-        return;
+    if (!pmName) {
+      alert("Please enter or select a Pattern Maker Name.");
+      return;
+    }
+
+    const btn = document.getElementById('confirm-pm-btn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Saving...';
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+
+    // Calculate EXACT fields requested for the Google Sheet
+    const rowData = allRequests.find(r => r.id === reqId);
+    let plDueDate = rowData ? (rowData.due || '-') : '-';
+    let plLeadtime = '-';
+    const folderLink = rowData ? (rowData.folderLink || rowData.folder_link || '') : '';
+    const todayStamp = getFullDateTime();
+
+    const parseDateHelper = (dateStr) => {
+        if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
+        let parts = String(dateStr).trim().split(' ');
+        let datePart = parts[0];
+        let timePart = parts[1] || '00:00:00';
+        if (datePart.includes('/')) {
+          let pts = datePart.split('/');
+          if (pts.length === 3) {
+            let yr = pts[2].length === 2 ? '20' + pts[2] : pts[2];
+            let d = new Date(`${yr}-${pts[1]}-${pts[0]}T${timePart}`);
+            if (!isNaN(d)) return d;
+          }
+        }
+        let fallback = new Date(dateStr);
+        return isNaN(fallback) ? null : fallback;
+    };
+
+    if (rowData) {
+      const plUploaded = parseDateHelper(rowData.PL_Uploaded_Date || rowData.Uploaded_Date);
+      const pmUploaded = new Date(); // Right now, PM Uploaded Date
+      if (plUploaded && pmUploaded) {
+         const diffHours = Math.floor((pmUploaded - plUploaded) / (1000 * 60 * 60));
+         plLeadtime = `${diffHours} hr`;
+      }
+    }
+
+    const payload = {
+      requestId: reqId,
+      status: 'PM Assign',
+
+      // Explicit Data Map for Google Apps Script Code.gs
+      PL_Due_Date: plDueDate,
+      PL_Leadtime: plLeadtime,
+      PM_Name: pmName,
+      // Keep old key for compatibility with existing UI/backend
+      PM_Uploaded_Date: todayStamp,
+      // New key requested: write to column "PM_Date"
+      PM_Date: todayStamp,
+      PM_Due_Date: '-', // Can be updated if they have a specific SLA rule
+
+      // Fallback Vanilla fields to prevent backend crashing
+      processRoute: 'N/A',
+      specialInstructions: 'N/A',
+      pathFlow: 'N/A',
+      plAlias: pmName,
+      currentRef: rowData ? (rowData.style || '-') : '-',
+      currentCustomer: rowData ? (rowData.customer || '-') : '-',
+      appLink: window.location.origin + window.location.pathname,
+      
+      PM_Email: pmEmail,
+      emailTo: pmEmail || 'YTeeluck@tropicknits.com',
+      emailSubject: `New Assigned Pattern Task: ${reqId}`,
+      emailBody: `Hi ${pmName},\n\nYou have been newly assigned as the Pattern Maker for ${reqId}.\n\nPlease check the Pattern for more details.\n\nRegards,\nThe System`,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // Optimistically update the UI so it cleanly sweeps to the Complete tab
+      const reqIndex = allRequests.findIndex(r => r.id === reqId);
+      if (reqIndex !== -1) {
+        allRequests[reqIndex].status = 'PM Assign';
+        allRequests[reqIndex].PM_Name = pmName;
+        allRequests[reqIndex].Pattern_Maker = pmName;
+        allRequests[reqIndex].PM_Uploaded_Date = payload.PM_Uploaded_Date;
+        allRequests[reqIndex].PM_Date = payload.PM_Date;
       }
 
-      const btn = confirmConsoBtn;
-      const originalText = btn.textContent;
-      btn.textContent = 'Saving...';
-      btn.style.opacity = '0.7';
-      btn.style.pointerEvents = 'none';
+      alert('✅ Pattern Maker successfully assigned and saved to sheet!');
 
-      try {
-        const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === reqId);
-        const plDueDate = rowData ? (rowData.due || '-') : '-';
+      // Switch user to the "PM Assigned" screen after status updates
+      currentTab = 'PM ASSIGN';
+      if (navComplete) navComplete.classList.add('active');
+      if (navPattern) navPattern.classList.remove('active');
+      if (navCalendar) navCalendar.classList.remove('active');
+      if (filterPmInput) filterPmInput.style.display = 'inline-block';
+      tableSection.style.display = 'block';
+      calendarSection.style.display = 'none';
+      document.getElementById('table-header-title').textContent = 'Assigned Pattern';
+      renderTable();
 
-        let plLeadtime = '-';
-        const plUploaded = rowData ? parseSheetDate(rowData.PL_Uploaded_Date || rowData.Uploaded_Date) : null;
-        const consoUploaded = new Date();
-        if (plUploaded && !isNaN(consoUploaded)) {
-          const diffHours = Math.floor((consoUploaded - plUploaded) / (1000 * 60 * 60));
-          plLeadtime = `${diffHours} hr`;
-        }
+      pmModal.style.display = 'none';
+    } catch (err) {
+      console.error("Error saving PM data:", err);
+      alert('❌ Failed to assign Pattern Maker.');
+    } finally {
+      btn.textContent = originalText;
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    }
+  });
 
-        const todayStamp = getFullDateTime();
-
-        const payload = {
-          requestId: reqId,
-          status: 'Conso Assign',
-
-          // Explicit mapping for the sheet/backend (adjust if needed).
-          PL_Due_Date: plDueDate,
-          PL_Leadtime: plLeadtime,
-          Conso_Name: consoName,
-          Conso_Uploaded_Date: todayStamp,
-          Conso_Date: todayStamp,
-          Conso_Due_Date: '-',
-
-          // Fallback vanilla fields (keeps Apps Script stable if it expects these keys).
-          processRoute: 'N/A',
-          specialInstructions: 'N/A',
-          pathFlow: 'N/A',
-          plAlias: consoName,
-          currentRef: rowData ? (rowData.style || '-') : '-',
-          currentCustomer: rowData ? (rowData.customer || '-') : '-',
-          appLink: window.location.origin + window.location.pathname,
-
-          Conso_Email: consoEmail,
-          emailTo: consoEmail || 'YTeeluck@tropicknits.com',
-          emailSubject: `New Assigned Conso Task: ${reqId}`,
-          emailBody: `Hi ${consoName},\n\nYou have been newly assigned as the Conso Maker for ${reqId}.\n\nPlease check the Conso for more details.\n\nRegards,\nThe System`,
-          timestamp: new Date().toISOString(),
-        };
-
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-
-        // Optimistically update the UI so the item moves to "Conso Assigned".
-        const reqIndex = allRequests.findIndex((r, i) => (r.id || `REQ-${i + 1}`) === reqId);
-        if (reqIndex !== -1) {
-          allRequests[reqIndex].status = 'Conso Assign';
-          allRequests[reqIndex].Conso_Name = consoName;
-          allRequests[reqIndex].Conso_Uploaded_Date = todayStamp;
-          allRequests[reqIndex].Conso_Date = todayStamp;
-          allRequests[reqIndex].Conso_Email = consoEmail;
-        }
-
-        currentTab = 'CONSO ASSIGN';
-        if (navConso) navConso.classList.remove('active');
-        if (navConsoAssigned) navConsoAssigned.classList.add('active');
-        if (navCalendar) navCalendar.classList.remove('active');
-        if (filterConsoInput) filterConsoInput.style.display = 'inline-block';
-
-        if (tableSection) tableSection.style.display = 'block';
-        if (calendarSection) calendarSection.style.display = 'none';
-        const titleEl = document.getElementById('table-header-title');
-        if (titleEl) titleEl.textContent = 'Assigned Conso';
-
-        renderTable();
-        if (assignConsoModal) assignConsoModal.style.display = 'none';
-        alert('✅ Conso Maker successfully assigned (front-end update).');
-      } catch (err) {
-        console.error('Error saving conso data:', err);
-        alert('❌ Failed to assign Conso Maker. Please check sheet/backend settings.');
-      } finally {
-        btn.textContent = originalText;
-        btn.style.opacity = '1';
-        btn.style.pointerEvents = 'auto';
-      }
-    });
-  }
+  loadPatternTasks();
 
   // --- Calendar GUI Rendering Logic ---
   let calCurrentDate = new Date();
@@ -1451,56 +1813,63 @@ tbody tr:hover {
   function renderCalendar() {
     const grid = document.getElementById('calendar-grid');
     if (!grid) return;
-
     grid.innerHTML = '';
 
     const year = calCurrentDate.getFullYear();
     const month = calCurrentDate.getMonth();
 
-    const monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-
-    const monthTitleEl = document.getElementById('cal-month-title');
-    if (monthTitleEl) monthTitleEl.textContent = `${monthNames[month]} ${year}`;
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    document.getElementById('cal-month-title').textContent = `${monthNames[month]} ${year}`;
 
     const firstDayIndex = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    const dayCounts = {};
+    let dayCounts = {};
 
-    const getCalendarDateStr = (row) => row.Conso_Uploaded_Date || row.Conso_Date || row.PM_Uploaded_Date || row.PL_Uploaded_Date || row.createdDate;
-    const calendarRows = allRequests.filter((r) => isConsoAssignedStatus(r.status));
+    const globalParseSheetDate = (dateStr) => {
+      if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
+      let parts = String(dateStr).trim().split(' ');
+      let datePart = parts[0];
+      let timePart = parts[1] || '00:00:00';
+      if (datePart.includes('/')) {
+        let pts = datePart.split('/');
+        if (pts.length === 3) {
+          let yr = pts[2].length === 2 ? '20' + pts[2] : pts[2];
+          let d = new Date(`${yr}-${pts[1]}-${pts[0]}T${timePart}`);
+          if (!isNaN(d)) return d;
+        }
+      }
+      let fallback = new Date(dateStr);
+        return isNaN(fallback) ? null : fallback;
+    };
 
-    calendarRows.forEach((row) => {
-      const d = parseSheetDate(getCalendarDateStr(row));
+    const getCalendarDateStr = (row) => {
+      // In Pattern, calendar is for assigned items ("PM ASSIGN") so we anchor on PM_Uploaded_Date.
+      return row.PM_Uploaded_Date || row.PM_Date || row.PL_Uploaded_Date || row.createdDate;
+    };
+
+    // Pattern calendar should show assigned pattern tasks.
+    const calendarRows = allRequests.filter(r => isPmAssignedStatus(r.status));
+
+    calendarRows.forEach(row => {
+      const d = globalParseSheetDate(getCalendarDateStr(row));
       if (d && !isNaN(d)) {
         if (d.getFullYear() === year && d.getMonth() === month) {
-          dayCounts[d.getDate()] = (dayCounts[d.getDate()] || 0) + 1;
+          let day = d.getDate();
+          dayCounts[day] = (dayCounts[day] || 0) + 1;
         }
       }
     });
 
     for (let x = 0; x < firstDayIndex; x++) {
-      const emptyCell = document.createElement('div');
+      let emptyCell = document.createElement('div');
       emptyCell.style.background = '#f9fafb';
       emptyCell.style.borderRadius = '6px';
       grid.appendChild(emptyCell);
     }
 
     for (let i = 1; i <= daysInMonth; i++) {
-      const dayCell = document.createElement('div');
+      let dayCell = document.createElement('div');
       dayCell.style.border = '1px solid #e5e7eb';
       dayCell.style.borderRadius = '6px';
       dayCell.style.padding = '8px';
@@ -1508,13 +1877,13 @@ tbody tr:hover {
       dayCell.style.flexDirection = 'column';
       dayCell.style.backgroundColor = '#ffffff';
 
-      const dateNumber = document.createElement('strong');
+      let dateNumber = document.createElement('strong');
       dateNumber.style.color = '#374151';
       dateNumber.textContent = i;
       dayCell.appendChild(dateNumber);
 
       if (dayCounts[i]) {
-        const countBadge = document.createElement('div');
+        let countBadge = document.createElement('div');
         countBadge.style.marginTop = 'auto';
         countBadge.style.backgroundColor = 'var(--primary-color)';
         countBadge.style.color = '#fff';
@@ -1524,14 +1893,14 @@ tbody tr:hover {
         countBadge.style.fontWeight = 'bold';
         countBadge.style.textAlign = 'center';
         countBadge.style.cursor = 'pointer';
-        countBadge.textContent = `${dayCounts[i]} Conso Assignment${dayCounts[i] > 1 ? 's' : ''}`;
+        countBadge.textContent = `${dayCounts[i]} Assignment${dayCounts[i] > 1 ? 's' : ''}`;
 
-        countBadge.addEventListener('mouseenter', () => (countBadge.style.opacity = '0.8'));
-        countBadge.addEventListener('mouseleave', () => (countBadge.style.opacity = '1'));
+        countBadge.addEventListener('mouseenter', () => countBadge.style.opacity = '0.8');
+        countBadge.addEventListener('mouseleave', () => countBadge.style.opacity = '1');
 
         countBadge.addEventListener('click', () => {
-          const dailyReqs = calendarRows.filter((r) => {
-            const rd = parseSheetDate(getCalendarDateStr(r));
+          const dailyReqs = calendarRows.filter(r => {
+            const rd = globalParseSheetDate(getCalendarDateStr(r));
             return rd && !isNaN(rd) && rd.getFullYear() === year && rd.getMonth() === month && rd.getDate() === i;
           });
 
@@ -1540,75 +1909,65 @@ tbody tr:hover {
           const content = document.getElementById('calendar-day-content');
 
           if (modal && title && content) {
-            title.textContent = `Conso assignments on ${monthNames[month]} ${i}, ${year}`;
-            content.innerHTML = dailyReqs
-              .map(
-                (r) => `
-                  <div style="padding: 10px 8px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                    <div style="display:flex; flex-direction: column;">
-                      <span style="font-weight: 500; color: var(--text-main);">${r.id || 'Unknown ID'}</span>
-                      <span style="font-size: 12px; color: var(--text-muted);">${r.customer || r.Customer || 'No Customer'}</span>
+            title.textContent = `Assignments on ${monthNames[month]} ${i}, ${year}`;
+            content.innerHTML = dailyReqs.map(r => `
+                    <div style="padding: 10px 8px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                       <div style="display:flex; flex-direction: column;">
+                           <span style="font-weight: 500; color: var(--text-main);">${r.id || 'Unknown ID'}</span>
+                           <span style="font-size: 12px; color: var(--text-muted);">${r.customer || r.Customer || 'No Customer'}</span>
+                       </div>
+                       <button class="btn-outline calendar-details-btn" data-id="${r.id || ''}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
                     </div>
-                    <button class="btn-outline calendar-details-btn" data-id="${r.id || ''}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
-                  </div>
-                `,
-              )
-              .join('');
+                 `).join('');
 
+            // Bind per-day "Details" buttons to open the full details modal (with folder path).
             const calDetailsBtns = content.querySelectorAll('.calendar-details-btn');
-            calDetailsBtns.forEach((btn) => {
+            calDetailsBtns.forEach(btn => {
               btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.getAttribute('data-id');
-                const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
+                const rowData = allRequests.find((r, idx) => (r.id || `REQ-${idx + 1}`) === id);
                 if (!rowData) return;
 
                 const detailsContent = document.getElementById('details-content');
-                if (!detailsContent) return;
-
                 const displayFields = [
                   { label: 'Request ID', value: rowData.id },
                   { label: 'Customer', value: rowData.Customer || rowData.customer },
                   { label: 'Style', value: rowData.Style || rowData.style },
-                  { label: 'Conso Maker', value: rowData.Conso_Name || rowData.Conso_Maker || rowData.assignee || 'Unknown' },
-                  { label: 'Assigned Date', value: rowData.Conso_Uploaded_Date || rowData.Conso_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+                  { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
+                  { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
                   { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
-                  { label: 'Status', value: rowData.Status || rowData.status },
+                  { label: 'Status', value: rowData.Status || rowData.status }
                 ];
 
-                detailsContent.innerHTML = displayFields
-                  .map((field) => {
-                    let displayValue = field.value || '-';
-                    if (field.label === 'Status') {
-                      displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
-                    } else if (field.label === 'Folder Path' && field.value !== '-') {
-                      if (String(field.value).startsWith('http')) {
-                        displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
-                      } else {
-                        displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
-                      }
+                detailsContent.innerHTML = displayFields.map(field => {
+                  let displayValue = field.value || '-';
+                  if (field.label === 'Status') {
+                    displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
+                  } else if (field.label === 'Folder Path' && field.value !== '-') {
+                    if (String(field.value).startsWith('http')) {
+                      displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
+                    } else {
+                      displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
                     }
+                  }
 
-                    return `
-                      <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;">
-                        <strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong>
-                        <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
-                      </div>
-                    `;
-                  })
-                  .join('');
+                  return `
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;">
+                      <strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong>
+                      <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
+                    </div>
+                  `;
+                }).join('');
 
-                const detailsModal = document.getElementById('details-modal');
-                if (detailsModal) detailsModal.style.display = 'flex';
+                document.getElementById('details-modal').style.display = 'flex';
               });
             });
-
             modal.style.display = 'flex';
           }
         });
 
         dayCell.appendChild(countBadge);
       }
-
       grid.appendChild(dayCell);
     }
   }
@@ -1616,8 +1975,7 @@ tbody tr:hover {
   const closeCalDayBtn = document.getElementById('close-calendar-day-btn');
   if (closeCalDayBtn) {
     closeCalDayBtn.addEventListener('click', () => {
-      const modal = document.getElementById('calendar-day-modal');
-      if (modal) modal.style.display = 'none';
+      document.getElementById('calendar-day-modal').style.display = 'none';
     });
   }
 
@@ -1642,62 +2000,48 @@ tbody tr:hover {
   if (exportBtn) {
     exportBtn.addEventListener('click', () => {
       if (typeof XLSX === 'undefined') {
-        alert('Excel export library is loading. Please try again in a few seconds.');
+        alert("Excel export library is loading. Please try again in a few seconds.");
         return;
       }
 
-      const exportRows = allRequests.filter((row) => {
+      const exportData = allRequests.filter(row => {
         const rowStatus = normalizeStatus(row.status);
-
-        if (currentTab === 'CONSO ASSIGN') {
-          if (!isConsoAssignedStatus(rowStatus)) return false;
+        if (currentTab === 'PM ASSIGN') {
+          if (!isPmAssignedStatus(rowStatus)) return false;
         } else {
           if (rowStatus !== currentTab) return false;
         }
-
-        if (currentTab === 'CONSO ASSIGN' && consoFilterName) {
-          const maker = (row.Conso_Name || row.Conso_Maker || row.assignee || '').toLowerCase();
-          if (!maker.includes(consoFilterName.toLowerCase())) return false;
+        if (currentTab === 'PM ASSIGN' && pmFilterName) {
+          const pmName = (row.PM_Name || row.Pattern_Maker || '').toLowerCase();
+          if (!pmName.includes(pmFilterName.toLowerCase())) return false;
         }
-
         return true;
-      });
-
-      const exportData = exportRows.map((row) => ({
-        'Request ID': row.id || '',
-        'Style Name': row.style || '',
-        'Customer': row.customer || '',
-        'Assigned PL': row.assignee || '',
-        'Costing Ready Date': row.due || '',
-        'Status': row.status || '',
-        'Conso Name': row.Conso_Name || row.Conso_Maker || '',
-        'Assigned Conso Date': row.Conso_Uploaded_Date || row.Conso_Date || '',
+      }).map(row => ({
+        "Request ID": row.id || '',
+        "Style Name": row.style || '',
+        "Customer": row.customer || '',
+        "Assigned PL": row.assignee || '',
+        "Costing Ready Date": row.due || '',
+        "Status": row.status || '',
+        "PM Name": row.PM_Name || row.Pattern_Maker || '',
+        "Assigned PM Date": row.PM_Uploaded_Date || ''
       }));
 
       if (exportData.length === 0) {
-        alert('No data available to export for the current view.');
+        alert("No data available to export for the current view.");
         return;
       }
 
       const worksheet = XLSX.utils.json_to_sheet(exportData);
       const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(
-        workbook,
-        worksheet,
-        currentTab === 'CONSO ASSIGN' ? 'Conso Assigned' : 'Conso'
-      );
-
-      const fileName = `Conso_Tasks_${currentTab.replace(' ', '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
+      XLSX.utils.book_append_sheet(workbook, worksheet, currentTab === 'PM ASSIGN' ? "Completed" : "Patterns");
+      const fileName = `Pattern_Tasks_${currentTab.replace(' ', '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
       XLSX.writeFile(workbook, fileName);
     });
   }
-
-  loadConsoTasks();
 });
-
 
     </script>
 </body>
 
 </html>
-
