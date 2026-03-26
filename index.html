@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conso Tasks</title>
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --bg-color: #f7f9fb;
+  --surface-color: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+
+  --status-pending-bg: #fef3c7;
+  --status-pending-text: #b45309;
+  --status-completed-bg: #d1fae5;
+  --status-completed-text: #047857;
+  --status-inprogress-bg: #dbeafe;
+  --status-inprogress-text: #1d4ed8;
+  --status-draft-bg: #f3f4f6;
+  --status-draft-text: #374151;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: var(--transition);
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  outline: none;
+  transition: var(--transition);
+}
+
+.input-field:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Layout container */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.brand-icon {
+  width: 28px;
+  height: 28px;
+  background-color: var(--primary-color);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f3f4f6;
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  width: 240px;
+  gap: 8px;
+  color: var(--text-muted);
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  color: var(--text-main);
+}
+
+.search-bar input::placeholder {
+  color: var(--text-muted);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.nav-links a.active {
+  color: var(--primary-color);
+  position: relative;
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+  border-radius: 2px 2px 0 0;
+}
+
+.nav-links a:hover:not(.active) {
+  color: var(--text-main);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  background-color: transparent;
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  transform: scale(1.05);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.page-title .subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.page-title h1 {
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-color) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+/* Split Layout */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* Cards */
+.card {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Request Banner */
+.request-banner {
+  background-color: var(--bg-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.request-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.request-info-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.request-info-top .badge {
+  background-color: #dbeafe;
+  color: #1e40af;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.request-info-top h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.request-info-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.request-info-meta span {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.btn-secondary {
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid #bfdbfe;
+  background-color: #eff6ff;
+  border-radius: 6px;
+}
+
+.btn-secondary:hover {
+  background-color: #dbeafe;
+}
+
+/* Tab Toggle */
+.tabs {
+  display: flex;
+  background-color: #f3f4f6;
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.tab.active {
+  background-color: var(--surface-color);
+  color: var(--text-main);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tab:hover:not(.active) {
+  color: var(--text-main);
+  background-color: #e5e7eb;
+}
+
+/* Drag and Drop Area */
+.dropzone {
+  border: 2px dashed #cbd5e1;
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #f8fafc;
+  transition: var(--transition);
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.dropzone:hover {
+  border-color: var(--primary-color);
+  background-color: #eff6ff;
+}
+
+.dropzone-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #dbeafe;
+  color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 24px;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+}
+
+.dropzone h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dropzone p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.btn-outline {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: transparent;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-outline:hover {
+  background-color: #eff6ff;
+}
+
+/* Input Row */
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+/* Planning Calendar Details */
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calendar-card .card-title {
+  margin-bottom: 0;
+}
+
+.fieldset {
+  margin-bottom: 16px;
+}
+
+.fieldset label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--text-main);
+  background: var(--bg-color);
+}
+
+.calendar-grid {
+  width: 100%;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.cal-day:hover:not(.empty) {
+  background-color: #f3f4f6;
+}
+
+.cal-day.empty {
+  cursor: default;
+}
+
+.cal-day.muted {
+  color: #d1d5db;
+}
+
+.cal-day.active {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.cal-day.highlight {
+  background-color: #eff6ff;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.legend-color {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.legend-color.blue {
+  background-color: var(--primary-color);
+}
+
+.legend-color.light-blue {
+  background-color: #bfdbfe;
+}
+
+/* Table Section */
+.table-section {
+  background-color: var(--surface-color);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table-header h2 {
+  font-size: 18px;
+}
+
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+}
+
+.btn-ghost:hover {
+  background-color: #f3f4f6;
+  color: var(--text-main);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+}
+
+td {
+  padding: 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+tbody tr {
+  transition: var(--transition);
+}
+
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.req-id {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.style-name {
+  font-weight: 500;
+}
+
+.customer-name {
+  color: var(--text-muted);
+}
+
+.assignee {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.assignee-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.status-badge {
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.pending {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
+}
+
+.status-badge.completed {
+  background-color: var(--status-completed-bg);
+  color: var(--status-completed-text);
+}
+
+.status-badge.in-progress {
+  background-color: var(--status-inprogress-bg);
+  color: var(--status-inprogress-text);
+}
+
+.status-badge.draft {
+  background-color: var(--status-draft-bg);
+  color: var(--status-draft-text);
+}
+
+.action-btn {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}
+
+.action-btn:hover {
+  background-color: #e5e7eb;
+  color: var(--text-main);
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.page-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: white;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #d1d5db;
+  color: var(--text-main);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m4 10 8 8 8-8"></path>
+              <path d="m4 6 8-4 8 4"></path>
+            </svg>
+          </div>
+          Conso
+        </div>
+        <div class="search-bar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" placeholder="Search Style or Customer..." />
+        </div>
+        <div class="nav-links">
+          <a href="#">Dashboard</a>
+          <a href="#" class="active" id="nav-conso">Conso</a>
+          <a href="#" id="nav-conso-assigned">Conso Assigned</a>
+          <a href="#" id="nav-calendar">Calendar View</a>
+        </div>
+      </div>
+      <div class="nav-right">
+        <button class="icon-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+        <img class="avatar" src="https://i.pravatar.cc/150?img=52" alt="User Profile" />
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="main-content" style="max-width: 1280px; padding: 40px 24px;">
+
+      <div class="pattern-tasks">
+        <!-- Table Header -->
+        <div class="table-header">
+          <div>
+            <h2 id="table-header-title">Active Conso Tasks</h2>
+            <p class="subtitle-text">Managing current production conso deliverables</p>
+          </div>
+          <div class="header-actions">
+            <input type="text" id="filter-conso-name" placeholder="Filter by Conso..."
+              style="display: none; padding: 6px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; outline: none;" />
+            <button class="btn-outline export-btn" id="export-excel-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Style</th>
+              <th>Customer</th>
+              <th>Assigned PL</th>
+              <th>Costing Ready Date</th>
+              <th>Status</th>
+              <th id="th-dynamic">PL Overdue</th>
+              <th style="text-align: center;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 40px;">⏳ Loading conso tasks from Google Sheets...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Footer -->
+        <div class="table-footer" style="padding-top: 16px; margin-top: 8px;">
+          <span class="pattern-footer-text">Showing 0 of 0 conso tasks</span>
+          <div class="pagination">
+            <button class="page-btn" disabled>&lt;</button>
+            <button class="page-btn">&gt;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar View Section -->
+      <div class="calendar-section" id="calendar-section"
+        style="display: none; margin-bottom: 32px; background: white; padding: 24px; border-radius: 8px; box-shadow: var(--shadow-sm);">
+        <div class="calendar-header"
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <button class="btn-outline" id="cal-prev-btn" style="padding: 6px 12px;">&lt; Previous</button>
+          <h2 id="cal-month-title" style="margin: 0; font-size: 20px;">Month Year</h2>
+          <button class="btn-outline" id="cal-next-btn" style="padding: 6px 12px;">Next &gt;</button>
+        </div>
+        <div
+          style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: bold; margin-bottom: 10px; color: var(--text-muted); padding-bottom: 8px; border-bottom: 1px solid var(--border-color);">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+        <div id="calendar-grid"
+          style="display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 100px; gap: 8px; text-align: left;">
+          <!-- Calendar cells rendered here via JS -->
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Calendar Day Requests Modal -->
+    <div class="modal" id="calendar-day-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+      <div class="card"
+        style="width: 400px; padding: 24px; background: white; border-radius: 8px; max-height: 80vh; overflow-y: auto;">
+        <h3 id="calendar-day-title" style="margin-bottom: 16px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">
+          Assignments for Date</h3>
+        <div id="calendar-day-content" style="line-height: 1.6; font-size: 14px; margin-bottom: 24px;">
+          <!-- Populated via JS -->
+        </div>
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="btn-secondary" id="close-calendar-day-btn" style="padding: 8px 16px;">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assign Conso Modal -->
+    <div class="modal" id="assign-conso-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+      <div class="card" style="width: 400px; padding: 24px; background: white; border-radius: 8px;">
+        <h3 style="margin-bottom: 16px;">Assign Conso Maker</h3>
+        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">Request ID:
+          <strong id="assign-conso-req-id" style="color: #1f2937;">-</strong>
+        </p>
+        <p style="margin-bottom: 16px; font-size: 12px; color: #6b7280;">Folder Path:
+          <span id="assign-conso-folder-path"
+            style="color: #1f2937; font-family: monospace; word-break: break-all; display: inline-block;">-</span>
+        </p>
+
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Select or Add Conso
+            Maker Name</label>
+          <input type="text" id="conso-name-input" list="conso-list" placeholder="Enter Conso Maker Name..."
+            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit;" />
+          <datalist id="conso-list">
+            <option value="John Conso Maker"></option>
+            <option value="Sarah Conso Maker"></option>
+          </datalist>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Conso Email Address</label>
+          <input type="email" id="conso-email-input" placeholder="Populated automatically or enter email..."
+            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; background-color: #f9fafb;" />
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px;">
+          <button class="btn-secondary" id="close-conso-modal-btn" style="padding: 8px 16px;">Cancel</button>
+          <button class="btn-primary" id="confirm-conso-btn" style="padding: 8px 16px;">Assign Conso</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal" id="details-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+      <div class="card"
+        style="width: 500px; padding: 24px; background: white; border-radius: 8px; max-height: 80vh; overflow-y: auto;">
+        <h3 style="margin-bottom: 16px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Request Details</h3>
+        <div id="details-content" style="line-height: 1.6; font-size: 14px; margin-bottom: 24px;">
+          <!-- Populated via JS -->
+        </div>
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="btn-secondary" id="close-details-btn" style="padding: 8px 16px;">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMVYOSwIwbUchXuqOeH_r5h7Zxu1AWH4WkvxGHciuVYz1a-N2OOrtagBqCbTyRSgdjHA/exec';
+
+  const tableBody = document.getElementById('table-body');
+  let allRequests = [];
+  let currentTab = 'AWAITING CONSO';
+  let consoFilterName = '';
+
+  const normalizeStatus = (s) => String(s || '').toUpperCase().replace(/\s+/g, ' ').trim();
+
+  // TODO: If your sheet uses different status strings for conso assignment,
+  // update the checks below.
+  const isConsoAssignedStatus = (s) => {
+    const ns = normalizeStatus(s);
+    return ns === 'CONSO ASSIGN' || ns === 'CONSO ASSIGNED' || ns.includes('CONSO ASSIGN');
+  };
+
+  const filterConsoInput = document.getElementById('filter-conso-name');
+  if (filterConsoInput) {
+    filterConsoInput.addEventListener('input', (e) => {
+      consoFilterName = e.target.value.trim();
+      renderTable();
+    });
+  }
+
+  const navConso = document.getElementById('nav-conso');
+  const navConsoAssigned = document.getElementById('nav-conso-assigned');
+  const navCalendar = document.getElementById('nav-calendar');
+  const tableSection = document.querySelector('.pattern-tasks');
+  const calendarSection = document.getElementById('calendar-section');
+
+  if (navConso && navConsoAssigned && navCalendar && tableSection && calendarSection) {
+    navConso.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentTab = 'AWAITING CONSO';
+      navConso.classList.add('active');
+      navConsoAssigned.classList.remove('active');
+      navCalendar.classList.remove('active');
+      if (filterConsoInput) filterConsoInput.style.display = 'none';
+      tableSection.style.display = 'block';
+      calendarSection.style.display = 'none';
+      const titleEl = document.getElementById('table-header-title');
+      if (titleEl) titleEl.textContent = 'Active Conso Tasks';
+      renderTable();
+    });
+
+    navConsoAssigned.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentTab = 'CONSO ASSIGN';
+      navConsoAssigned.classList.add('active');
+      navConso.classList.remove('active');
+      navCalendar.classList.remove('active');
+      if (filterConsoInput) filterConsoInput.style.display = 'inline-block';
+      tableSection.style.display = 'block';
+      calendarSection.style.display = 'none';
+      const titleEl = document.getElementById('table-header-title');
+      if (titleEl) titleEl.textContent = 'Assigned Conso';
+      renderTable();
+    });
+
+    navCalendar.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentTab = 'CALENDAR';
+      navCalendar.classList.add('active');
+      navConso.classList.remove('active');
+      navConsoAssigned.classList.remove('active');
+      tableSection.style.display = 'none';
+      calendarSection.style.display = 'block';
+      renderCalendar();
+    });
+  }
+
+  async function loadConsoTasks() {
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL);
+      if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+
+      allRequests = data;
+      renderTable();
+    } catch (error) {
+      console.error('Failed to load data:', error);
+      if (tableBody) {
+        tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Failed to load data: <b>${error.message}</b></td></tr>`;
+      }
+    }
+  }
+
+  function parseSheetDate(dateStr) {
+    if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
+
+    const parts = String(dateStr).trim().split(' ');
+    const datePart = parts[0];
+    const timePart = parts[1] || '00:00:00';
+
+    if (datePart.includes('/')) {
+      const pts = datePart.split('/');
+      if (pts.length === 3) {
+        const yr = pts[2].length === 2 ? '20' + pts[2] : pts[2];
+        const d = new Date(`${yr}-${pts[1]}-${pts[0]}T${timePart}`);
+        if (!isNaN(d)) return d;
+      }
+    }
+
+    const fallback = new Date(dateStr);
+    return isNaN(fallback) ? null : fallback;
+  }
+
+  function renderTable() {
+    if (currentTab === 'CALENDAR') return;
+    if (!tableBody) return;
+
+    tableBody.innerHTML = '';
+
+    const thDynamic = document.getElementById('th-dynamic');
+    if (thDynamic) {
+      thDynamic.style.display = 'table-cell';
+      thDynamic.textContent = currentTab === 'CONSO ASSIGN' ? 'Conso Maker' : 'PL Overdue';
+    }
+
+    const consoRequests = allRequests.filter((row) => {
+      const statusUpper = normalizeStatus(row.status);
+
+      if (currentTab === 'CONSO ASSIGN') {
+        if (!isConsoAssignedStatus(statusUpper)) return false;
+      } else {
+        if (statusUpper !== currentTab) return false;
+      }
+
+      if (currentTab === 'CONSO ASSIGN' && consoFilterName) {
+        const maker = (row.Conso_Name || row.Conso_Maker || row.assignee || '').toLowerCase();
+        if (!maker.includes(consoFilterName.toLowerCase())) return false;
+      }
+
+      return true;
+    });
+
+    const footerEl = document.querySelector('.pattern-footer-text');
+    if (footerEl) footerEl.textContent = `Showing ${consoRequests.length} conso tasks`;
+
+    if (consoRequests.length === 0) {
+      const msg =
+        currentTab === 'AWAITING CONSO'
+          ? 'No conso tasks are awaiting assignment.'
+          : 'No conso makers have been assigned yet.';
+      tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px; color: #6b7280;">${msg}</td></tr>`;
+      return;
+    }
+
+    consoRequests.forEach((row, index) => {
+      const safeId = row.id || `REQ-${index + 1}`;
+      const plUploaded = parseSheetDate(row.PL_Uploaded_Date || row.Uploaded_Date);
+
+      // Keep the same UX metric as Pattern: "overdue" based on hours since PL_Uploaded_Date.
+      let overdueValue = '-';
+      if (plUploaded) {
+        const targetEndTime = new Date(); // continues running if not yet assigned
+        const diffHours = Math.floor((targetEndTime - plUploaded) / (1000 * 60 * 60));
+
+        if (diffHours > 24) {
+          overdueValue = `<span style="background-color: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; display: inline-block; border: 1px solid #f87171; box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);">${diffHours} hr</span>`;
+        } else {
+          overdueValue = (diffHours >= 0 ? diffHours : 0) + ' hr';
+        }
+      }
+
+      const consoMaker =
+        row.Conso_Name ||
+        row.Conso_Maker ||
+        row.assignee ||
+        'Unassigned';
+
+      const statusText = row.status || 'PENDING';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="req-id" style="color: var(--primary-color); font-weight: 600;">${safeId}</td>
+        <td class="style-name" style="font-weight: 500;">${row.style || '-'}</td>
+        <td class="customer-name" style="color: var(--text-muted);">${row.customer || '-'}</td>
+        <td>
+          <div class="assignee" style="display: flex; align-items: center; gap: 8px;">
+            <img class="assignee-avatar" src="${row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId)}" alt="${row.assignee || 'User'}" style="width: 24px; height: 24px; border-radius: 50%;" />
+            ${row.assignee || 'Unassigned'}
+          </div>
+        </td>
+        <td>${row.due || '-'}</td>
+        <td>
+          <span class="status-badge ${currentTab === 'AWAITING CONSO' ? 'pending-badge' : 'success-badge'}">
+            ${statusText}
+          </span>
+        </td>
+        <td style="font-weight: 500; color: var(--text-main);">
+          ${currentTab === 'CONSO ASSIGN' ? consoMaker : overdueValue}
+        </td>
+        <td style="text-align: center;">
+          ${
+        currentTab === 'AWAITING CONSO'
+          ? `<button class="assign-btn" data-id="${safeId}" style="margin: 0 auto; display: inline-flex; justify-content: center;">
+                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5c-2.2 0-4 1.8-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                     Assign
+                   </button>`
+          : currentTab === 'CONSO ASSIGN'
+            ? `<div style="display: flex; justify-content: center; align-items: center;">
+                  <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
+                </div>`
+            : `<div style="display: flex; justify-content: center; align-items: center;">
+                  <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
+                </div>`
+      }
+        </td>
+      `;
+
+      tableBody.appendChild(tr);
+    });
+
+    // Wire up Assign buttons
+    document.querySelectorAll('.assign-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.getAttribute('data-id');
+
+        const reqEl = document.getElementById('assign-conso-req-id');
+        const folderEl = document.getElementById('assign-conso-folder-path');
+        if (reqEl) reqEl.textContent = id;
+
+        if (folderEl) {
+          const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
+          const folderPath = rowData ? (rowData.folderLink || rowData.folder_link || '-') : '-';
+
+          if (
+            folderPath &&
+            folderPath !== '-' &&
+            String(folderPath).toLowerCase() !== 'null' &&
+            String(folderPath).startsWith('http')
+          ) {
+            folderEl.innerHTML = `<a href="${folderPath}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">${folderPath}</a>`;
+          } else {
+            folderEl.textContent = folderPath || '-';
+          }
+        }
+
+        const modal = document.getElementById('assign-conso-modal');
+        if (modal) modal.style.display = 'flex';
+        const nameInput = document.getElementById('conso-name-input');
+        if (nameInput) nameInput.value = '';
+      });
+    });
+
+    // Wire up Details buttons
+    document.querySelectorAll('.details-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.getAttribute('data-id');
+        const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
+        if (!rowData) return;
+
+        const detailsContent = document.getElementById('details-content');
+        if (!detailsContent) return;
+
+        const displayFields = [
+          { label: 'Request ID', value: rowData.id },
+          { label: 'Customer', value: rowData.Customer || rowData.customer },
+          { label: 'Style', value: rowData.Style || rowData.style },
+          { label: 'Conso Maker', value: rowData.Conso_Name || rowData.Conso_Maker || rowData.assignee || 'Unknown' },
+          {
+            label: 'Assigned Date',
+            value: rowData.Conso_Uploaded_Date || rowData.Conso_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date,
+          },
+          { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
+          { label: 'Status', value: rowData.Status || rowData.status },
+        ];
+
+        detailsContent.innerHTML = displayFields
+          .map((field) => {
+            let displayValue = field.value || '-';
+            if (field.label === 'Status') {
+              displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
+            } else if (field.label === 'Folder Path' && field.value !== '-') {
+              if (String(field.value).startsWith('http')) {
+                displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
+              } else {
+                displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
+              }
+            }
+            return `
+              <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;">
+                <strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong>
+                <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
+              </div>
+            `;
+          })
+          .join('');
+
+        const detailsModal = document.getElementById('details-modal');
+        if (detailsModal) detailsModal.style.display = 'flex';
+      });
+    });
+  }
+
+  // --- Modals Logic ---
+  const closeDetailsBtn = document.getElementById('close-details-btn');
+  if (closeDetailsBtn) {
+    closeDetailsBtn.addEventListener('click', () => {
+      const detailsModal = document.getElementById('details-modal');
+      if (detailsModal) detailsModal.style.display = 'none';
+    });
+  }
+
+  const assignConsoModal = document.getElementById('assign-conso-modal');
+  const closeConsoModalBtn = document.getElementById('close-conso-modal-btn');
+  if (closeConsoModalBtn && assignConsoModal) {
+    closeConsoModalBtn.addEventListener('click', () => {
+      assignConsoModal.style.display = 'none';
+    });
+  }
+
+  // Auto-fill email based on standard company convention (same pattern as Pattern page).
+  const consoNameInput = document.getElementById('conso-name-input');
+  const consoEmailInput = document.getElementById('conso-email-input');
+  if (consoNameInput && consoEmailInput) {
+    consoNameInput.addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      if (!val) {
+        consoEmailInput.value = '';
+        return;
+      }
+      let generatedEmail = val.toLowerCase().replace(/[^a-z0-9]/g, '.').replace(/\.+/g, '.') + '@tropicknits.com';
+      generatedEmail = generatedEmail.replace('.@', '@');
+      consoEmailInput.value = generatedEmail;
+    });
+  }
+
+  function getFullDateTime() {
+    const d = new Date();
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    const hr = String(d.getHours()).padStart(2, '0');
+    const min = String(d.getMinutes()).padStart(2, '0');
+    const sec = String(d.getSeconds()).padStart(2, '0');
+    return `${day}/${month}/${year} ${hr}:${min}:${sec}`;
+  }
+
+  const confirmConsoBtn = document.getElementById('confirm-conso-btn');
+  if (confirmConsoBtn) {
+    confirmConsoBtn.addEventListener('click', async () => {
+      const reqId = document.getElementById('assign-conso-req-id')?.textContent || '-';
+      const consoName = consoNameInput ? consoNameInput.value.trim() : '';
+      const consoEmail = consoEmailInput ? consoEmailInput.value.trim() : '';
+
+      if (!consoName || consoName === '-') {
+        alert('Please enter or select a Conso Maker Name.');
+        return;
+      }
+
+      const btn = confirmConsoBtn;
+      const originalText = btn.textContent;
+      btn.textContent = 'Saving...';
+      btn.style.opacity = '0.7';
+      btn.style.pointerEvents = 'none';
+
+      try {
+        const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === reqId);
+        const plDueDate = rowData ? (rowData.due || '-') : '-';
+
+        let plLeadtime = '-';
+        const plUploaded = rowData ? parseSheetDate(rowData.PL_Uploaded_Date || rowData.Uploaded_Date) : null;
+        const consoUploaded = new Date();
+        if (plUploaded && !isNaN(consoUploaded)) {
+          const diffHours = Math.floor((consoUploaded - plUploaded) / (1000 * 60 * 60));
+          plLeadtime = `${diffHours} hr`;
+        }
+
+        const todayStamp = getFullDateTime();
+
+        const payload = {
+          requestId: reqId,
+          status: 'Conso Assign',
+
+          // Explicit mapping for the sheet/backend (adjust if needed).
+          PL_Due_Date: plDueDate,
+          PL_Leadtime: plLeadtime,
+          Conso_Name: consoName,
+          Conso_Uploaded_Date: todayStamp,
+          Conso_Date: todayStamp,
+          Conso_Due_Date: '-',
+
+          // Fallback vanilla fields (keeps Apps Script stable if it expects these keys).
+          processRoute: 'N/A',
+          specialInstructions: 'N/A',
+          pathFlow: 'N/A',
+          plAlias: consoName,
+          currentRef: rowData ? (rowData.style || '-') : '-',
+          currentCustomer: rowData ? (rowData.customer || '-') : '-',
+          appLink: window.location.origin + window.location.pathname,
+
+          Conso_Email: consoEmail,
+          emailTo: consoEmail || 'YTeeluck@tropicknits.com',
+          emailSubject: `New Assigned Conso Task: ${reqId}`,
+          emailBody: `Hi ${consoName},\n\nYou have been newly assigned as the Conso Maker for ${reqId}.\n\nPlease check the Conso for more details.\n\nRegards,\nThe System`,
+          timestamp: new Date().toISOString(),
+        };
+
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        // Optimistically update the UI so the item moves to "Conso Assigned".
+        const reqIndex = allRequests.findIndex((r, i) => (r.id || `REQ-${i + 1}`) === reqId);
+        if (reqIndex !== -1) {
+          allRequests[reqIndex].status = 'Conso Assign';
+          allRequests[reqIndex].Conso_Name = consoName;
+          allRequests[reqIndex].Conso_Uploaded_Date = todayStamp;
+          allRequests[reqIndex].Conso_Date = todayStamp;
+          allRequests[reqIndex].Conso_Email = consoEmail;
+        }
+
+        currentTab = 'CONSO ASSIGN';
+        if (navConso) navConso.classList.remove('active');
+        if (navConsoAssigned) navConsoAssigned.classList.add('active');
+        if (navCalendar) navCalendar.classList.remove('active');
+        if (filterConsoInput) filterConsoInput.style.display = 'inline-block';
+
+        if (tableSection) tableSection.style.display = 'block';
+        if (calendarSection) calendarSection.style.display = 'none';
+        const titleEl = document.getElementById('table-header-title');
+        if (titleEl) titleEl.textContent = 'Assigned Conso';
+
+        renderTable();
+        if (assignConsoModal) assignConsoModal.style.display = 'none';
+        alert('✅ Conso Maker successfully assigned (front-end update).');
+      } catch (err) {
+        console.error('Error saving conso data:', err);
+        alert('❌ Failed to assign Conso Maker. Please check sheet/backend settings.');
+      } finally {
+        btn.textContent = originalText;
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
+      }
+    });
+  }
+
+  // --- Calendar GUI Rendering Logic ---
+  let calCurrentDate = new Date();
+
+  function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    const year = calCurrentDate.getFullYear();
+    const month = calCurrentDate.getMonth();
+
+    const monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    const monthTitleEl = document.getElementById('cal-month-title');
+    if (monthTitleEl) monthTitleEl.textContent = `${monthNames[month]} ${year}`;
+
+    const firstDayIndex = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const dayCounts = {};
+
+    const getCalendarDateStr = (row) => row.Conso_Uploaded_Date || row.Conso_Date || row.PM_Uploaded_Date || row.PL_Uploaded_Date || row.createdDate;
+    const calendarRows = allRequests.filter((r) => isConsoAssignedStatus(r.status));
+
+    calendarRows.forEach((row) => {
+      const d = parseSheetDate(getCalendarDateStr(row));
+      if (d && !isNaN(d)) {
+        if (d.getFullYear() === year && d.getMonth() === month) {
+          dayCounts[d.getDate()] = (dayCounts[d.getDate()] || 0) + 1;
+        }
+      }
+    });
+
+    for (let x = 0; x < firstDayIndex; x++) {
+      const emptyCell = document.createElement('div');
+      emptyCell.style.background = '#f9fafb';
+      emptyCell.style.borderRadius = '6px';
+      grid.appendChild(emptyCell);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+      const dayCell = document.createElement('div');
+      dayCell.style.border = '1px solid #e5e7eb';
+      dayCell.style.borderRadius = '6px';
+      dayCell.style.padding = '8px';
+      dayCell.style.display = 'flex';
+      dayCell.style.flexDirection = 'column';
+      dayCell.style.backgroundColor = '#ffffff';
+
+      const dateNumber = document.createElement('strong');
+      dateNumber.style.color = '#374151';
+      dateNumber.textContent = i;
+      dayCell.appendChild(dateNumber);
+
+      if (dayCounts[i]) {
+        const countBadge = document.createElement('div');
+        countBadge.style.marginTop = 'auto';
+        countBadge.style.backgroundColor = 'var(--primary-color)';
+        countBadge.style.color = '#fff';
+        countBadge.style.padding = '4px 8px';
+        countBadge.style.borderRadius = '4px';
+        countBadge.style.fontSize = '12px';
+        countBadge.style.fontWeight = 'bold';
+        countBadge.style.textAlign = 'center';
+        countBadge.style.cursor = 'pointer';
+        countBadge.textContent = `${dayCounts[i]} Conso Assignment${dayCounts[i] > 1 ? 's' : ''}`;
+
+        countBadge.addEventListener('mouseenter', () => (countBadge.style.opacity = '0.8'));
+        countBadge.addEventListener('mouseleave', () => (countBadge.style.opacity = '1'));
+
+        countBadge.addEventListener('click', () => {
+          const dailyReqs = calendarRows.filter((r) => {
+            const rd = parseSheetDate(getCalendarDateStr(r));
+            return rd && !isNaN(rd) && rd.getFullYear() === year && rd.getMonth() === month && rd.getDate() === i;
+          });
+
+          const modal = document.getElementById('calendar-day-modal');
+          const title = document.getElementById('calendar-day-title');
+          const content = document.getElementById('calendar-day-content');
+
+          if (modal && title && content) {
+            title.textContent = `Conso assignments on ${monthNames[month]} ${i}, ${year}`;
+            content.innerHTML = dailyReqs
+              .map(
+                (r) => `
+                  <div style="padding: 10px 8px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                    <div style="display:flex; flex-direction: column;">
+                      <span style="font-weight: 500; color: var(--text-main);">${r.id || 'Unknown ID'}</span>
+                      <span style="font-size: 12px; color: var(--text-muted);">${r.customer || r.Customer || 'No Customer'}</span>
+                    </div>
+                    <button class="btn-outline calendar-details-btn" data-id="${r.id || ''}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
+                  </div>
+                `,
+              )
+              .join('');
+
+            const calDetailsBtns = content.querySelectorAll('.calendar-details-btn');
+            calDetailsBtns.forEach((btn) => {
+              btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
+                if (!rowData) return;
+
+                const detailsContent = document.getElementById('details-content');
+                if (!detailsContent) return;
+
+                const displayFields = [
+                  { label: 'Request ID', value: rowData.id },
+                  { label: 'Customer', value: rowData.Customer || rowData.customer },
+                  { label: 'Style', value: rowData.Style || rowData.style },
+                  { label: 'Conso Maker', value: rowData.Conso_Name || rowData.Conso_Maker || rowData.assignee || 'Unknown' },
+                  { label: 'Assigned Date', value: rowData.Conso_Uploaded_Date || rowData.Conso_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+                  { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
+                  { label: 'Status', value: rowData.Status || rowData.status },
+                ];
+
+                detailsContent.innerHTML = displayFields
+                  .map((field) => {
+                    let displayValue = field.value || '-';
+                    if (field.label === 'Status') {
+                      displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
+                    } else if (field.label === 'Folder Path' && field.value !== '-') {
+                      if (String(field.value).startsWith('http')) {
+                        displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
+                      } else {
+                        displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
+                      }
+                    }
+
+                    return `
+                      <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;">
+                        <strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong>
+                        <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
+                      </div>
+                    `;
+                  })
+                  .join('');
+
+                const detailsModal = document.getElementById('details-modal');
+                if (detailsModal) detailsModal.style.display = 'flex';
+              });
+            });
+
+            modal.style.display = 'flex';
+          }
+        });
+
+        dayCell.appendChild(countBadge);
+      }
+
+      grid.appendChild(dayCell);
+    }
+  }
+
+  const closeCalDayBtn = document.getElementById('close-calendar-day-btn');
+  if (closeCalDayBtn) {
+    closeCalDayBtn.addEventListener('click', () => {
+      const modal = document.getElementById('calendar-day-modal');
+      if (modal) modal.style.display = 'none';
+    });
+  }
+
+  const prevBtn = document.getElementById('cal-prev-btn');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      calCurrentDate.setMonth(calCurrentDate.getMonth() - 1);
+      renderCalendar();
+    });
+  }
+
+  const nextBtn = document.getElementById('cal-next-btn');
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      calCurrentDate.setMonth(calCurrentDate.getMonth() + 1);
+      renderCalendar();
+    });
+  }
+
+  // --- Export to Excel ---
+  const exportBtn = document.getElementById('export-excel-btn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+      if (typeof XLSX === 'undefined') {
+        alert('Excel export library is loading. Please try again in a few seconds.');
+        return;
+      }
+
+      const exportRows = allRequests.filter((row) => {
+        const rowStatus = normalizeStatus(row.status);
+
+        if (currentTab === 'CONSO ASSIGN') {
+          if (!isConsoAssignedStatus(rowStatus)) return false;
+        } else {
+          if (rowStatus !== currentTab) return false;
+        }
+
+        if (currentTab === 'CONSO ASSIGN' && consoFilterName) {
+          const maker = (row.Conso_Name || row.Conso_Maker || row.assignee || '').toLowerCase();
+          if (!maker.includes(consoFilterName.toLowerCase())) return false;
+        }
+
+        return true;
+      });
+
+      const exportData = exportRows.map((row) => ({
+        'Request ID': row.id || '',
+        'Style Name': row.style || '',
+        'Customer': row.customer || '',
+        'Assigned PL': row.assignee || '',
+        'Costing Ready Date': row.due || '',
+        'Status': row.status || '',
+        'Conso Name': row.Conso_Name || row.Conso_Maker || '',
+        'Assigned Conso Date': row.Conso_Uploaded_Date || row.Conso_Date || '',
+      }));
+
+      if (exportData.length === 0) {
+        alert('No data available to export for the current view.');
+        return;
+      }
+
+      const worksheet = XLSX.utils.json_to_sheet(exportData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        currentTab === 'CONSO ASSIGN' ? 'Conso Assigned' : 'Conso'
+      );
+
+      const fileName = `Conso_Tasks_${currentTab.replace(' ', '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
+      XLSX.writeFile(workbook, fileName);
+    });
+  }
+
+  loadConsoTasks();
+});
+
+
+    </script>
+</body>
+
+</html>
+
