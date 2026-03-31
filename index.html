@@ -1387,15 +1387,25 @@
               }
             }
 
+            let assigneesHtml = '';
+            const assigneeList = (row.assignee || 'Unassigned').split(',').map(s => s.trim()).filter(s => s);
+            if (assigneeList.length === 0) assigneeList.push('Unassigned');
+            
+            assigneeList.forEach(name => {
+              const avatarUrl = row.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name === 'Unassigned' ? 'U' : name) + '&background=random&color=fff';
+              assigneesHtml += `
+              <div class="assignee" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <img class="assignee-avatar" src="${avatarUrl}" alt="${name}" style="width: 24px; height: 24px; border-radius: 50%;" />
+                <span>${name}</span>
+              </div>`;
+            });
+
             tr.innerHTML = `
         <td class="req-id" style="color: var(--primary-color); font-weight: 600;">${safeId}</td>
         <td class="style-name" style="font-weight: 500;">${row.style || '-'}</td>
         <td class="customer-name" style="color: var(--text-muted);">${row.customer || '-'}</td>
         <td>
-          <div class="assignee" style="display: flex; align-items: center; gap: 8px;">
-            <img class="assignee-avatar" src="${row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId)}" alt="${row.assignee || 'User'}" style="width: 24px; height: 24px; border-radius: 50%;" />
-            ${row.assignee || 'Unassigned'}
-          </div>
+          ${assigneesHtml}
         </td>
         <td>${row.due || '-'}</td>
         <td>
