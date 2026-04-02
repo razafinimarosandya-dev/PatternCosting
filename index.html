@@ -2119,7 +2119,7 @@ tbody tr:hover {
         });
 
         alert('✅ Pattern Maker successfully assigned!');
-        assignmentCard.style.display = 'none';
+        document.getElementById('pattern-assignment-card').style.display = 'none';
         loadPatternTasks();
       } catch (err) {
         console.error("Error saving PM data:", err);
