@@ -1878,6 +1878,7 @@
                   { label: 'Customer', value: rowData.Customer || rowData.customer },
                   { label: 'Style', value: rowData.Style || rowData.style },
                   { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
+                  { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '' },
                   { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
                   { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
                   { label: 'Status', value: rowData.Status || rowData.status }
@@ -2496,6 +2497,7 @@
               "Style Name": row.style || '',
               "Customer": row.customer || '',
               "Assigned PL": row.assignee || '',
+              "Remarks": row.remarks || row.Remarks || '',
               "Costing Ready Date": row.due || '',
               "Status": row.status || '',
               "PM Name": row.PM_Name || row.Pattern_Maker || '',
