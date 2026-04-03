@@ -1514,6 +1514,19 @@
 
         const normalizeStatus = (s) => String(s || '').toUpperCase().replace(/\s+/g, ' ').trim();
 
+        function formatToDDMMYYYY(dateStr) {
+          if (!dateStr || dateStr === '-') return '-';
+          if (typeof dateStr === 'string' && dateStr.includes('/')) {
+            return dateStr.split(' ')[0];
+          }
+          const d = new Date(dateStr);
+          if (isNaN(d)) return dateStr;
+          const day = String(d.getDate()).padStart(2, '0');
+          const month = String(d.getMonth() + 1).padStart(2, '0');
+          const year = d.getFullYear();
+          return `${day}/${month}/${year}`;
+        }
+
         function populateDatalists() {
           const ids = [...new Set(allRequests.map(r => r.id).filter(Boolean))];
           const styles = [...new Set(allRequests.map(r => r.style || r.Style).filter(Boolean))];
@@ -1779,7 +1792,7 @@
             ${row.assignee || 'Unassigned'}
           </div>
         </td>
-        <td>${row.due || '-'}</td>
+        <td>${formatToDDMMYYYY(row.due)}</td>
         <td>
           <span class="status-badge ${currentTab === 'AWAITING PATTERN' ? 'pending-badge' : 'success-badge'}">
             ${row.status || 'PENDING'}
@@ -1879,7 +1892,7 @@
                   { label: 'Style', value: rowData.Style || rowData.style },
                   { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
                   { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '' },
-                  { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+                  { label: 'Assigned Date', value: formatToDDMMYYYY(rowData.PM_Uploaded_Date || rowData.Uploaded_Date) },
                   { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
                   { label: 'Status', value: rowData.Status || rowData.status }
                 ];
