@@ -1302,6 +1302,10 @@
                     style="font-family: monospace; font-size: 12px; color: #0f172a; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                     -</div>
                 </div>
+                <div class="detail-item" style="grid-column: span 2;">
+                  <label style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks</label>
+                  <div id="sel-detail-remarks" style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
+                </div>
               </div>
             </div>
 
@@ -1314,7 +1318,7 @@
                   <input type="text" id="action-pm-name" list="pm-list" placeholder="Enter or select Pattern Maker..."
                     style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; font-size: 14px;" />
                 </div>
-                <div style="display: flex; gap: 12px;">
+                <div style="display: flex; gap: 12px; margin-top: auto;">
                   <button class="btn-outline" id="action-browse-files-btn"
                     style="padding: 12px 20px; font-weight: 600; height: 45px;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1853,6 +1857,7 @@
 
                 const folderValue = rowData.folderLink || rowData.folder_link || '-';
                 document.getElementById('sel-detail-folder').textContent = folderValue;
+                document.getElementById('sel-detail-remarks').textContent = rowData.Remarks || rowData.remarks || '-';
 
                 // Clear PM name input and set up folder button
                 document.getElementById('action-pm-name').value = '';
@@ -1891,7 +1896,7 @@
                   { label: 'Customer', value: rowData.Customer || rowData.customer },
                   { label: 'Style', value: rowData.Style || rowData.style },
                   { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
-                  { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '' },
+                  { label: 'Remarks', value: rowData.Remarks || rowData.remarks || '-' },
                   { label: 'Assigned Date', value: formatToDDMMYYYY(rowData.PM_Uploaded_Date || rowData.Uploaded_Date) },
                   { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
                   { label: 'Status', value: rowData.Status || rowData.status }
@@ -2019,37 +2024,37 @@
                 // Content-Type: application/json is not allowed in no-cors mode
                 body: JSON.stringify(unifiedPayload)
               });
-  
+
               // Keep local copy as a fallback (and for instant UI reflection).
               localStorage.setItem(`patternRemarks:${currentRemarksReqId}`, value);
               saveSucceeded = true;
-  
+
               // Optimistically update status so the item leaves "PM Assigned" immediately.
               if (rowData) {
                 rowData.status = 'Awaiting Conso';
                 rowData.Status = 'Awaiting Conso';
                 rowData.Remarks = value;
               }
-  
+
               alert(isPmAssignContext
                 ? (isValidFolderLink
                   ? '✅ Saved. Status is now Awaiting Conso. The folder opens in a new tab for upload.'
                   : '✅ Saved. Status is now Awaiting Conso. No folder path was found on this row.')
                 : '✅ Remarks successfully saved and status changed to Awaiting Conso!');
-  
+
               // Switch UI to the List View so the user can easily see the updated status.
               currentTab = 'LIST_VIEW';
               // Fallback for global element references which might not be defined in all contexts
               if (typeof setActiveTab === 'function') setActiveTab('nav-list');
-              
+
               const titleEl = document.getElementById('table-header-title');
               if (titleEl) titleEl.textContent = 'Awaiting Conso';
-  
+
               renderTable(); // Re-render the UI using optimistic state
-  
+
               // Refresh full dataset to ensure sheet/UI are fully in sync.
               await loadPatternTasks();
-  
+
               if (isValidFolderLink) {
                 let opened = false;
                 if (folderWin && !folderWin.closed) {
@@ -2434,7 +2439,8 @@
             { label: 'Customer', value: rowData.Customer || rowData.customer },
             { label: 'Style', value: rowData.Style || rowData.style },
             { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
-            { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+            { label: 'Remarks', value: rowData.Remarks || rowData.remarks || '-' },
+            { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.PM_Date || rowData.Uploaded_Date },
             { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
             { label: 'Status', value: rowData.Status || rowData.status }
           ];
