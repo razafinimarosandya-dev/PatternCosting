@@ -1303,8 +1303,10 @@
                     -</div>
                 </div>
                 <div class="detail-item" style="grid-column: span 2;">
-                  <label style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks</label>
-                  <div id="sel-detail-remarks" style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
+                  <label
+                    style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks</label>
+                  <div id="sel-detail-remarks"
+                    style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
                 </div>
               </div>
             </div>
@@ -1892,19 +1894,26 @@
               if (rowData) {
                 const detailsContent = document.getElementById('details-content');
                 const displayFields = [
-                  { label: 'Request ID', value: rowData.id },
+                  { label: 'Request ID', value: rowData.id || rowData.C_Number },
+                  { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
                   { label: 'Customer', value: rowData.Customer || rowData.customer },
-                  { label: 'Style', value: rowData.Style || rowData.style },
-                  { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
-                  { label: 'Remarks', value: rowData.Remarks || rowData.remarks || '-' },
-                  { label: 'Assigned Date', value: formatToDDMMYYYY(rowData.PM_Uploaded_Date || rowData.Uploaded_Date) },
-                  { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
-                  { label: 'Status', value: rowData.Status || rowData.status }
+                  { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
+                  { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
+                  { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
+                  { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
+                  { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || rowData.PM_Name || rowData.Pattern_Maker },
+                  { label: 'Status', value: rowData.Status || rowData.status },
+                  { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+                  { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
+                  { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
+                  { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
                 ];
 
                 detailsContent.innerHTML = displayFields.map(field => {
                   let displayValue = field.value || '-';
-                  if (field.label === 'Status') {
+                  if (field.label === 'Created' && displayValue !== '-') {
+                    displayValue = formatToDDMMYYYY(displayValue);
+                  } else if (field.label === 'Status') {
                     displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
                   } else if (field.label === 'Folder Path' && field.value !== '-') {
                     if (field.value.startsWith('http')) {
@@ -2296,18 +2305,26 @@
 
                       const detailsContent = document.getElementById('details-content');
                       const displayFields = [
-                        { label: 'Request ID', value: rowData.id },
+                        { label: 'Request ID', value: rowData.id || rowData.C_Number },
+                        { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
                         { label: 'Customer', value: rowData.Customer || rowData.customer },
-                        { label: 'Style', value: rowData.Style || rowData.style },
-                        { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
-                        { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
-                        { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
-                        { label: 'Status', value: rowData.Status || rowData.status }
+                        { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
+                        { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
+                        { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
+                        { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
+                        { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || rowData.PM_Name || rowData.Pattern_Maker },
+                        { label: 'Status', value: rowData.Status || rowData.status },
+                        { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+                        { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
+                        { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
+                        { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
                       ];
 
                       detailsContent.innerHTML = displayFields.map(field => {
                         let displayValue = field.value || '-';
-                        if (field.label === 'Status') {
+                        if (field.label === 'Created' && displayValue !== '-') {
+                          displayValue = formatToDDMMYYYY(displayValue);
+                        } else if (field.label === 'Status') {
                           displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
                         } else if (field.label === 'Folder Path' && field.value !== '-') {
                           if (String(field.value).startsWith('http')) {
@@ -2435,14 +2452,19 @@
           if (!rowData) return;
           const detailsContent = document.getElementById('details-content');
           const displayFields = [
-            { label: 'Request ID', value: rowData.id },
+            { label: 'Request ID', value: rowData.id || rowData.C_Number },
+            { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
             { label: 'Customer', value: rowData.Customer || rowData.customer },
-            { label: 'Style', value: rowData.Style || rowData.style },
-            { label: 'Pattern Maker', value: rowData.PM_Name || rowData.Pattern_Maker || 'Unknown' },
-            { label: 'Remarks', value: rowData.Remarks || rowData.remarks || '-' },
-            { label: 'Assigned Date', value: rowData.PM_Uploaded_Date || rowData.PM_Date || rowData.Uploaded_Date },
-            { label: 'Folder Path', value: rowData.folderLink || rowData.folder_link || '-' },
-            { label: 'Status', value: rowData.Status || rowData.status }
+            { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
+            { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
+            { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
+            { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
+            { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || rowData.PM_Name || rowData.Pattern_Maker },
+            { label: 'Status', value: rowData.Status || rowData.status },
+            { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+            { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
+            { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
+            { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
           ];
           detailsContent.innerHTML = displayFields.map(field => {
             let displayValue = field.value || '-';
@@ -2516,11 +2538,11 @@
               "Style Name": row.style || '',
               "Customer": row.customer || '',
               "Assigned PL": row.assignee || '',
-              "Remarks": row.remarks || row.Remarks || '',
               "Costing Ready Date": row.due || '',
               "Status": row.status || '',
               "PM Name": row.PM_Name || row.Pattern_Maker || '',
-              "Assigned PM Date": row.PM_Uploaded_Date || ''
+              "Assigned PM Date": row.PM_Uploaded_Date || '',
+              "Remarks": row.remarks || row.Remarks || ''
             }));
 
             if (exportData.length === 0) {
