@@ -2008,10 +2008,9 @@
 
             const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === currentRemarksReqId);
             const folderLink = getRowFolderLink(rowData);
-            const isValidFolderLink = Boolean(folderLink);
-            let folderWin = null;
+            const isValidFolderLink = Boolean(folderLink) && folderLink !== '-';
             if (isValidFolderLink) {
-              folderWin = window.open('about:blank', '_blank', 'noopener,noreferrer');
+              window.open(folderLink, '_blank', 'noopener,noreferrer');
             }
 
             try {
@@ -2069,32 +2068,11 @@
               // Refresh full dataset to ensure sheet/UI are fully in sync.
               await loadPatternTasks();
 
-              if (isValidFolderLink) {
-                let opened = false;
-                if (folderWin && !folderWin.closed) {
-                  try {
-                    folderWin.location.href = folderLink;
-                    opened = true;
-                  } catch (e) {
-                    console.warn('Could not navigate preload tab to folder', e);
-                  }
-                }
-                if (!opened) {
-                  openFolderInNewTab(folderLink);
-                }
-              } else if (folderWin && !folderWin.closed) {
-                folderWin.close();
-              }
+              // UI refreshed
             } catch (err) {
               console.error('Error saving remarks:', err);
               localStorage.setItem(`patternRemarks:${currentRemarksReqId}`, value);
               alert('Remarks saved locally, but Google save failed.\n\nError: ' + err.message);
-              if (folderWin && !folderWin.closed) {
-                folderWin.close();
-              }
-              if (isValidFolderLink) {
-                openFolderInNewTab(folderLink);
-              }
             } finally {
               saveRemarksBtn.textContent = originalText;
               saveRemarksBtn.style.opacity = '1';
