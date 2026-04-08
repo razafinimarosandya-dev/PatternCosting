@@ -1858,7 +1858,12 @@
                 document.getElementById('sel-detail-created-by').textContent = rowData.plAlias || rowData.PL_Name || 'System';
 
                 const folderValue = rowData.folderLink || rowData.folder_link || '-';
-                document.getElementById('sel-detail-folder').textContent = folderValue;
+                const folderEl = document.getElementById('sel-detail-folder');
+                if (folderValue !== '-' && String(folderValue).startsWith('http')) {
+                  folderEl.innerHTML = `<a href="${folderValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Folder</a>`;
+                } else {
+                  folderEl.textContent = folderValue;
+                }
                 document.getElementById('sel-detail-remarks').textContent = rowData.Remarks || rowData.remarks || '-';
 
                 // Clear PM name input and set up folder button
