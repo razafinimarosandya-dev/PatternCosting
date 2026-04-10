@@ -1145,7 +1145,12 @@
             <div
               style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #bbf7d0;">
               <div style="width: 6px; height: 6px; background: #16a34a; border-radius: 50%;"></div>
-              Complete Status: <span id="stat-complete-count-pill" style="font-weight: 800;">0</span>
+              Assign: <span id="stat-complete-count-pill" style="font-weight: 800;">0</span>
+            </div>
+            <div
+              style="display: flex; align-items: center; gap: 6px; background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #bfdbfe;">
+              <div style="width: 6px; height: 6px; background: #2563eb; border-radius: 50%;"></div>
+              Complete: <span id="stat-conso-count-pill" style="font-weight: 800;">0</span>
             </div>
           </div>
         </div>
@@ -1400,7 +1405,8 @@
           <input type="text" id="pm-name-input" list="pm-list" placeholder="Enter Pattern Maker Name..."
             style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit;" />
           <datalist id="pm-list">
-            <option value="CADcosnsoteam@tropicknits.com"></option>
+            <option value="John D. Patternist"></option>
+            <option value="Sarah Jenkins"></option>
           </datalist>
         </div>
 
@@ -1670,10 +1676,15 @@
         function updateStats() {
           const uploadCount = allRequests.filter(r => normalizeStatus(r.status) === 'AWAITING PATTERN').length;
           const completeCount = allRequests.filter(r => isPmAssignedStatus(r.status)).length;
+          const consoCount = allRequests.filter(r => normalizeStatus(r.status) === 'AWAITING CONSO').length;
+
           const uploadEl = document.getElementById('stat-upload-count-pill');
           const completeEl = document.getElementById('stat-complete-count-pill');
+          const consoEl = document.getElementById('stat-conso-count-pill');
+
           if (uploadEl) uploadEl.textContent = uploadCount;
           if (completeEl) completeEl.textContent = completeCount;
+          if (consoEl) consoEl.textContent = consoCount;
         }
 
         function setActiveTab(id) {
@@ -2181,6 +2192,8 @@
           const firstDayIndex = new Date(year, month, 1).getDay();
           const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+          // Struct to hold counts for two types per day
+          // { day: { pmAssign: 0, awaitingConso: 0 } }
           let dayCounts = {};
 
           const globalParseSheetDate = (dateStr) => {
@@ -2200,20 +2213,31 @@
             return isNaN(fallback) ? null : fallback;
           };
 
-          const getCalendarDateStr = (row) => {
-            // In Pattern, calendar is for assigned items ("PM ASSIGN") so we anchor on PM_Uploaded_Date.
-            return row.PM_Uploaded_Date || row.PM_Date || row.PL_Uploaded_Date || row.createdDate;
-          };
-
-          // Pattern calendar should show assigned pattern tasks.
-          const calendarRows = allRequests.filter(r => isPmAssignedStatus(r.status));
+          // Filter rows for the two statuses
+          const calendarRows = allRequests.filter(r => {
+            const s = normalizeStatus(r.status);
+            return s === 'PM ASSIGN' || s === 'PM ASSIGNED' || s === 'AWAITING CONSO';
+          });
 
           calendarRows.forEach(row => {
-            const d = globalParseSheetDate(getCalendarDateStr(row));
+            const status = normalizeStatus(row.status);
+            let dateStr = '';
+            let type = '';
+
+            if (status === 'PM ASSIGN' || status === 'PM ASSIGNED') {
+              dateStr = row.PL_Uploaded_Date || row.Uploaded_Date;
+              type = 'pmAssign';
+            } else if (status === 'AWAITING CONSO') {
+              dateStr = row.PM_Uploaded_Date || row.PM_Date;
+              type = 'awaitingConso';
+            }
+
+            const d = globalParseSheetDate(dateStr);
             if (d && !isNaN(d)) {
               if (d.getFullYear() === year && d.getMonth() === month) {
                 let day = d.getDate();
-                dayCounts[day] = (dayCounts[day] || 0) + 1;
+                if (!dayCounts[day]) dayCounts[day] = { pmAssign: 0, awaitingConso: 0 };
+                dayCounts[day][type]++;
               }
             }
           });
@@ -2232,6 +2256,7 @@
             dayCell.style.padding = '8px';
             dayCell.style.display = 'flex';
             dayCell.style.flexDirection = 'column';
+            dayCell.style.gap = '4px';
             dayCell.style.backgroundColor = '#ffffff';
 
             let dateNumber = document.createElement('strong');
@@ -2239,101 +2264,135 @@
             dateNumber.textContent = i;
             dayCell.appendChild(dateNumber);
 
-            if (dayCounts[i]) {
-              let countBadge = document.createElement('div');
-              countBadge.style.marginTop = 'auto';
-              countBadge.style.backgroundColor = 'var(--primary-color)';
-              countBadge.style.color = '#fff';
-              countBadge.style.padding = '4px 8px';
-              countBadge.style.borderRadius = '4px';
-              countBadge.style.fontSize = '12px';
-              countBadge.style.fontWeight = 'bold';
-              countBadge.style.textAlign = 'center';
-              countBadge.style.cursor = 'pointer';
-              countBadge.textContent = `${dayCounts[i]} Assignment${dayCounts[i] > 1 ? 's' : ''}`;
-
-              countBadge.addEventListener('mouseenter', () => countBadge.style.opacity = '0.8');
-              countBadge.addEventListener('mouseleave', () => countBadge.style.opacity = '1');
-
-              countBadge.addEventListener('click', () => {
-                const dailyReqs = calendarRows.filter(r => {
-                  const rd = globalParseSheetDate(getCalendarDateStr(r));
-                  return rd && !isNaN(rd) && rd.getFullYear() === year && rd.getMonth() === month && rd.getDate() === i;
-                });
-
-                const modal = document.getElementById('calendar-day-modal');
-                const title = document.getElementById('calendar-day-title');
-                const content = document.getElementById('calendar-day-content');
-
-                if (modal && title && content) {
-                  title.textContent = `Assignments on ${monthNames[month]} ${i}, ${year}`;
-                  content.innerHTML = dailyReqs.map(r => `
-                    <div style="padding: 10px 8px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                       <div style="display:flex; flex-direction: column;">
-                           <span style="font-weight: 500; color: var(--text-main);">${r.id || 'Unknown ID'}</span>
-                           <span style="font-size: 12px; color: var(--text-muted);">${r.customer || r.Customer || 'No Customer'}</span>
-                       </div>
-                       <button class="btn-outline calendar-details-btn" data-id="${r.id || ''}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
-                    </div>
-                 `).join('');
-
-                  // Bind per-day "Details" buttons to open the full details modal (with folder path).
-                  const calDetailsBtns = content.querySelectorAll('.calendar-details-btn');
-                  calDetailsBtns.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                      const id = e.currentTarget.getAttribute('data-id');
-                      const rowData = allRequests.find((r, idx) => (r.id || `REQ-${idx + 1}`) === id);
-                      if (!rowData) return;
-
-                      const detailsContent = document.getElementById('details-content');
-                      const displayFields = [
-                        { label: 'Request ID', value: rowData.id || rowData.C_Number },
-                        { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
-                        { label: 'Customer', value: rowData.Customer || rowData.customer },
-                        { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
-                        { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
-                        { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
-                        { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
-                        { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || rowData.PM_Name || rowData.Pattern_Maker },
-                        { label: 'Status', value: rowData.Status || rowData.status },
-                        { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
-                        { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
-                        { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
-                        { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
-                      ];
-
-                      detailsContent.innerHTML = displayFields.map(field => {
-                        let displayValue = field.value || '-';
-                        if (field.label === 'Created' && displayValue !== '-') {
-                          displayValue = formatToDDMMYYYY(displayValue);
-                        } else if (field.label === 'Status') {
-                          displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
-                        } else if (field.label === 'Folder Path' && field.value !== '-') {
-                          if (String(field.value).startsWith('http')) {
-                            displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
-                          } else {
-                            displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
-                          }
-                        }
-
-                        return `
-                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;">
-                      <strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong>
-                      <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
-                    </div>
-                  `;
-                      }).join('');
-
-                      document.getElementById('details-modal').style.display = 'flex';
-                    });
-                  });
-                  modal.style.display = 'flex';
-                }
-              });
-
-              dayCell.appendChild(countBadge);
+            const counts = dayCounts[i];
+            if (counts) {
+              // PM Assign Badge (Blue)
+              if (counts.pmAssign > 0) {
+                let b = document.createElement('div');
+                b.style.backgroundColor = 'var(--primary-color)';
+                b.style.color = '#fff';
+                b.style.padding = '2px 4px';
+                b.style.borderRadius = '4px';
+                b.style.fontSize = '10px';
+                b.style.fontWeight = 'bold';
+                b.style.textAlign = 'center';
+                b.style.cursor = 'pointer';
+                b.textContent = `${counts.pmAssign} PM Assign`;
+                b.onclick = () => showDayModal(i, 'pmAssign');
+                dayCell.appendChild(b);
+              }
+              // Awaiting Conso Badge (Green)
+              if (counts.awaitingConso > 0) {
+                let b = document.createElement('div');
+                b.style.backgroundColor = '#10b981'; // Emerald/Green
+                b.style.color = '#fff';
+                b.style.padding = '2px 4px';
+                b.style.borderRadius = '4px';
+                b.style.fontSize = '10px';
+                b.style.fontWeight = 'bold';
+                b.style.textAlign = 'center';
+                b.style.cursor = 'pointer';
+                b.textContent = `${counts.awaitingConso} Conso`;
+                b.onclick = () => showDayModal(i, 'awaitingConso');
+                dayCell.appendChild(b);
+              }
             }
             grid.appendChild(dayCell);
+          }
+
+          function showDayModal(day, filterType) {
+            const dailyReqs = calendarRows.filter(r => {
+              const status = normalizeStatus(r.status);
+              let ds = '';
+              let t = '';
+              if (status === 'PM ASSIGN' || status === 'PM ASSIGNED') {
+                 ds = r.PL_Uploaded_Date || r.Uploaded_Date;
+                 t = 'pmAssign';
+              } else if (status === 'AWAITING CONSO') {
+                 ds = r.PM_Uploaded_Date || r.PM_Date;
+                 t = 'awaitingConso';
+              }
+              const rd = globalParseSheetDate(ds);
+              const dateMatch = rd && !isNaN(rd) && rd.getFullYear() === year && rd.getMonth() === month && rd.getDate() === day;
+              return dateMatch && (filterType ? t === filterType : true);
+            });
+
+            const modal = document.getElementById('calendar-day-modal');
+            const title = document.getElementById('calendar-day-title');
+            const content = document.getElementById('calendar-day-content');
+
+            if (modal && title && content) {
+              title.textContent = `Tasks on ${monthNames[month]} ${day}, ${year}`;
+              content.innerHTML = dailyReqs.map(r => {
+                const s = normalizeStatus(r.status);
+                const isConso = s === 'AWAITING CONSO';
+                const color = isConso ? '#10b981' : 'var(--primary-color)';
+                const label = isConso ? 'Conso' : 'PM Assign';
+                
+                return `
+                <div style="padding: 10px 8px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                   <div style="display:flex; flex-direction: column;">
+                       <div style="display:flex; align-items:center; gap:6px;">
+                           <span style="width:8px; height:8px; border-radius:50%; background-color:${color};"></span>
+                           <span style="font-weight: 500; color: var(--text-main);">${r.id || 'Unknown ID'}</span>
+                       </div>
+                       <span style="font-size: 11px; color: var(--text-muted); padding-left:14px;">${label} • ${r.customer || r.Customer || 'No Customer'}</span>
+                   </div>
+                   <button class="btn-outline calendar-details-btn" data-id="${r.id || ''}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
+                </div>
+              `}).join('');
+
+              content.querySelectorAll('.calendar-details-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                  const id = e.currentTarget.getAttribute('data-id');
+                  const rowData = allRequests.find((r, idx) => (r.id || `REQ-${idx + 1}`) === id);
+                  if (rowData) {
+                    // Re-use main details logic
+                    const detailsContent = document.getElementById('details-content');
+                    const displayFields = [
+                      { label: 'Request ID', value: rowData.id || rowData.C_Number },
+                      { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
+                      { label: 'Customer', value: rowData.Customer || rowData.customer },
+                      { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
+                      { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
+                      { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
+                      { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
+                      { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || rowData.PM_Name || rowData.Pattern_Maker },
+                      { label: 'Status', value: rowData.Status || rowData.status },
+                      { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
+                      { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
+                      { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
+                      { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
+                    ];
+
+                    detailsContent.innerHTML = displayFields.map(field => {
+                      let displayValue = field.value || '-';
+                      if (field.label === 'Created' && displayValue !== '-') {
+                        displayValue = formatToDDMMYYYY(displayValue);
+                      } else if (field.label === 'Status') {
+                        displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
+                      } else if (field.label === 'Folder Path' && field.value !== '-') {
+                        if (field.value.startsWith('http')) {
+                          displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
+                        } else {
+                          displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
+                        }
+                      }
+                      return `
+                        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;">
+                          <strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong>
+                          <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
+                        </div>
+                      `;
+                    }).join('');
+
+                    document.getElementById('details-modal').style.display = 'flex';
+                  }
+                });
+              });
+
+              modal.style.display = 'flex';
+            }
           }
         }
 
