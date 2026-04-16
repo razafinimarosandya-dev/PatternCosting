@@ -304,13 +304,14 @@
   /* Futuristic PM Chips */
   #pm-checkbox-container {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px !important;
-    padding: 16px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    padding: 12px !important;
     background: rgba(255, 255, 255, 0.6) !important;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(37, 99, 235, 0.1) !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
+    max-width: 600px;
   }
 
   .pm-pill {
@@ -368,7 +369,7 @@
     pointer-events: none;
   }
 
-  .pm-pill input:checked ~ .pm-name {
+  .pm-pill input:checked~.pm-name {
     color: var(--primary-color);
     font-weight: 600;
   }
@@ -1411,36 +1412,45 @@
                     -</div>
                 </div>
                 <div class="detail-item" style="grid-column: span 2;">
-                  <label
-                    style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks</label>
-                  <div id="sel-detail-remarks"
-                    style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
-                </div>
+                   <label
+                     style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks</label>
+                   <div id="sel-detail-remarks"
+                     style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
+                 </div>
+                 <div class="detail-item" style="grid-column: span 2;">
+                   <label
+                     style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks Techpack</label>
+                   <div id="sel-detail-remarks-techpack"
+                     style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
+                 </div>
               </div>
             </div>
 
             <div style="background: #ffffff; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px;">
               <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end;">
-                <div style="flex: 1; min-width: 250px;">
+                <div style="flex: 0 0 600px; min-width: 350px;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <label style="font-weight: 600; font-size: 14px; color: #334155; margin: 0;">Assignment Target (PM Name)</label>
+                    <label style="font-weight: 600; font-size: 14px; color: #334155; margin: 0;">Assignment Target (PM
+                      Name)</label>
                     <div style="position: relative; width: 180px;">
-                      <input type="text" id="pm-search-input" placeholder="Search PM..." 
+                      <input type="text" id="pm-search-input" placeholder="Search PM..."
                         style="width: 100%; padding: 6px 12px 6px 32px; font-size: 12px; border: 1px solid #e2e8f0; border-radius: 20px; outline: none; transition: all 0.2s;"
                         onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37,99,235,0.1)'"
                         onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                       </svg>
                     </div>
                   </div>
                   <div id="pm-checkbox-container"
-                    style="width: 100%; max-height: 120px; overflow-y: auto; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; font-size: 14px; display: flex; flex-direction: column; gap: 8px;">
+                    style="width: 100%; max-height: 140px; overflow-y: auto;">
                     <span style="color: #94a3b8; font-style: italic;">Loading Pattern Makers...</span>
                   </div>
                 </div>
-                <div style="display: flex; gap: 12px; margin-top: auto;">
+                <div style="display: flex; gap: 12px; margin-top: auto; margin-left: auto;">
                   <button class="btn-outline" id="action-browse-files-btn"
                     style="padding: 12px 20px; font-weight: 600; height: 45px;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1807,45 +1817,50 @@
         const navCalendar = document.getElementById('nav-calendar');
         const tableSection = document.querySelector('.pattern-tasks');
         const calendarSection = document.getElementById('calendar-section');
+        const assignmentCard = document.getElementById('pattern-assignment-card');
 
-        if (navPattern && navComplete && navCalendar) {
+        function hideAllSections() {
+          if (tableSection) tableSection.style.display = 'none';
+          if (calendarSection) calendarSection.style.display = 'none';
+          if (assignmentCard) assignmentCard.style.display = 'none';
+        }
+
+        if (navPattern && navComplete && navList && navCalendar) {
           navPattern.addEventListener('click', (e) => {
             e.preventDefault();
+            hideAllSections();
             currentTab = 'AWAITING PATTERN';
             setActiveTab('nav-pattern');
             tableSection.style.display = 'block';
-            calendarSection.style.display = 'none';
             document.getElementById('table-header-title').textContent = 'Active Pattern Tasks';
             renderTable();
           });
 
           navComplete.addEventListener('click', (e) => {
             e.preventDefault();
+            hideAllSections();
             currentTab = 'PM ASSIGN';
             setActiveTab('nav-complete');
             tableSection.style.display = 'block';
-            calendarSection.style.display = 'none';
             document.getElementById('table-header-title').textContent = 'Assigned Pattern';
             renderTable();
           });
 
-          if (navList) {
-            navList.addEventListener('click', (e) => {
-              e.preventDefault();
-              currentTab = 'LIST_VIEW';
-              setActiveTab('nav-list');
-              tableSection.style.display = 'block';
-              calendarSection.style.display = 'none';
-              document.getElementById('table-header-title').textContent = 'Awaiting Conso';
-              renderTable();
-            });
-          }
+          navList.addEventListener('click', (e) => {
+            e.preventDefault();
+            hideAllSections();
+            currentTab = 'LIST_VIEW';
+            setActiveTab('nav-list');
+            tableSection.style.display = 'block';
+            document.getElementById('table-header-title').textContent = 'Awaiting Conso';
+            renderTable();
+          });
 
           navCalendar.addEventListener('click', (e) => {
             e.preventDefault();
+            hideAllSections();
             currentTab = 'CALENDAR';
             setActiveTab('nav-calendar');
-            tableSection.style.display = 'none';
             calendarSection.style.display = 'block';
             renderCalendar();
           });
@@ -2053,6 +2068,7 @@
                   folderEl.textContent = folderValue;
                 }
                 document.getElementById('sel-detail-remarks').textContent = rowData.Remarks || rowData.remarks || '-';
+                document.getElementById('sel-detail-remarks-techpack').textContent = rowData.Remarks_Techpack || rowData.remarks_techpack || '-';
 
                 // Clear PM selections, search input and set up folder button
                 const pmSearchInput = document.getElementById('pm-search-input');
@@ -2107,6 +2123,7 @@
                   { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
                   { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
                   { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
+                  { label: 'Remarks Techpack', value: rowData.Remarks_Techpack || rowData.remarks_techpack || '-' },
                   { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
                 ];
 
@@ -2291,7 +2308,7 @@
         if (confirmAssignBtn) {
           confirmAssignBtn.addEventListener('click', async () => {
             const reqId = document.getElementById('sel-detail-id-pill').textContent;
-            
+
             // 1. Get all selected PM names
             const selectedPms = Array.from(document.querySelectorAll('input[name="pm-selection"]:checked'))
               .map(cb => cb.value);
@@ -2311,7 +2328,7 @@
             const rowData = allRequests.find(r => (r.id || r.requestId || r.C_Number) === reqId);
             const plDueDate = rowData ? (rowData.due || '-') : '-';
             const plName = rowData ? (rowData.PL_Name || rowData.assignee || '-') : '-';
-            
+
             // 2. Build email recipients list (Selected PMs + Assigned PL)
             const recipients = [];
             // Add PM emails
@@ -2324,7 +2341,7 @@
             if (plName !== '-' && systemSettings.plEmails && systemSettings.plEmails[plName]) {
               recipients.push(systemSettings.plEmails[plName]);
             }
-            
+
             const emailTo = [...new Set(recipients)].join(',');
 
             const todayStamp = new Date().toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '');
@@ -2362,7 +2379,7 @@
               const assignPmModal = document.getElementById('assign-pm-modal');
               if (assignmentCard) assignmentCard.style.display = 'none';
               if (assignPmModal) assignPmModal.style.display = 'none';
-              
+
               // Clear checkboxes and search
               const pmSearchInput = document.getElementById('pm-search-input');
               if (pmSearchInput) pmSearchInput.value = '';
@@ -2376,7 +2393,7 @@
               // Move user directly to Assigned screen after sync.
               currentTab = 'PM ASSIGN';
               if (typeof setActiveTab === 'function') setActiveTab('nav-complete');
-              
+
               const titleEl = document.getElementById('table-header-title');
               if (titleEl) titleEl.textContent = 'Assigned Pattern';
               renderTable();
@@ -2595,6 +2612,7 @@
                       { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
                       { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
                       { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
+                      { label: 'Remarks Techpack', value: rowData.Remarks_Techpack || rowData.remarks_techpack || '-' },
                       { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
                     ];
 
@@ -2739,6 +2757,7 @@
             { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
             { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
             { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
+            { label: 'Remarks Techpack', value: rowData.Remarks_Techpack || rowData.remarks_techpack || '-' },
             { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
           ];
           detailsContent.innerHTML = displayFields.map(field => {
