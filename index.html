@@ -301,110 +301,6 @@
     box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
   }
 
-  /* Futuristic PM Chips */
-  #pm-checkbox-container {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
-    padding: 12px !important;
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(37, 99, 235, 0.1) !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02) !important;
-    max-width: 600px;
-  }
-
-  .pm-pill {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 14px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-    overflow: hidden;
-  }
-
-  .pm-pill:hover {
-    background: #ffffff;
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
-  }
-
-  .pm-pill input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  .pm-pill .pm-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: #475569;
-    z-index: 2;
-    transition: all 0.3s;
-    text-align: center;
-    width: 100%;
-    line-height: 1.2;
-    display: block;
-  }
-
-  .pm-pill .pm-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    transition: width 0.4s, height 0.4s;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .pm-pill input:checked~.pm-name {
-    color: var(--primary-color);
-    font-weight: 600;
-  }
-
-  .pm-pill input:checked {
-    background: #eff6ff;
-  }
-
-  .pm-pill.active {
-    background: #eff6ff;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(37, 99, 235, 0.12);
-  }
-
-  .pm-pill.active .pm-glow {
-    width: 200%;
-    height: 200%;
-  }
-
-  .pm-pill::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .pm-pill.active::before {
-    opacity: 1;
-  }
-
   .btn-primary:active {
     transform: translateY(1px);
     box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
@@ -1102,7 +998,7 @@
   .pattern-gallery-row {
     display: grid;
     grid-template-columns:
-      minmax(88px, 1fr) minmax(100px, 1.35fr) minmax(90px, 1fr) minmax(120px, 1.2fr) minmax(88px, 0.95fr) minmax(104px, 1fr) minmax(88px, 1fr) minmax(148px, auto);
+      minmax(88px, 1fr) minmax(100px, 1.35fr) minmax(90px, 1fr) minmax(120px, 1.2fr) minmax(88px, 0.95fr) minmax(104px, 1fr) minmax(148px, auto);
     gap: 12px 16px;
     align-items: center;
     padding: 16px 20px;
@@ -1244,7 +1140,7 @@
             <div
               style="display: flex; align-items: center; gap: 6px; background: #ecfdf5; color: #059669; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #d1fae5;">
               <div style="width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></div>
-              Upload Action: <span id="stat-upload-count-pill" style="font-weight: 800;">0</span>
+              Unassign pattern: <span id="stat-upload-count-pill" style="font-weight: 800;">0</span>
             </div>
             <div
               style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #bbf7d0;">
@@ -1300,11 +1196,11 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>Request ID</th>
-                      <th>Style</th>
+                      <th>C Number</th>
+                      <th>Customer Reference</th>
                       <th>Customer</th>
-                      <th>Assigned PL</th>
-                      <th>Costing Ready Date</th>
+                      <th id="th-owner-name">PL Name</th>
+                      <th>Costing Expected Date</th>
                       <th>Status</th>
                       <th id="th-dynamic">PL Overdue</th>
                       <th style="text-align: center;">Action</th>
@@ -1412,45 +1308,24 @@
                     -</div>
                 </div>
                 <div class="detail-item" style="grid-column: span 2;">
-                   <label
-                     style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks</label>
-                   <div id="sel-detail-remarks"
-                     style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
-                 </div>
-                 <div class="detail-item" style="grid-column: span 2;">
-                   <label
-                     style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks Techpack</label>
-                   <div id="sel-detail-remarks-techpack"
-                     style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
-                 </div>
+                  <label
+                    style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Remarks</label>
+                  <div id="sel-detail-remarks"
+                    style="font-weight: 600; color: #0f172a; margin-top: 4px; white-space: pre-wrap;">-</div>
+                </div>
               </div>
             </div>
 
             <div style="background: #ffffff; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px;">
               <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end;">
-                <div style="flex: 0 0 600px; min-width: 350px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <label style="font-weight: 600; font-size: 14px; color: #334155; margin: 0;">Assignment Target (PM
-                      Name)</label>
-                    <div style="position: relative; width: 180px;">
-                      <input type="text" id="pm-search-input" placeholder="Search PM..."
-                        style="width: 100%; padding: 6px 12px 6px 32px; font-size: 12px; border: 1px solid #e2e8f0; border-radius: 20px; outline: none; transition: all 0.2s;"
-                        onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37,99,235,0.1)'"
-                        onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round"
-                        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </div>
-                  </div>
-                  <div id="pm-checkbox-container"
-                    style="width: 100%; max-height: 140px; overflow-y: auto;">
-                    <span style="color: #94a3b8; font-style: italic;">Loading Pattern Makers...</span>
-                  </div>
+                <div style="flex: 1; min-width: 250px;">
+                  <label
+                    style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #334155;">Assignment
+                    Target (PM Name)</label>
+                  <input type="text" id="action-pm-name" list="pm-list" placeholder="Enter or select Pattern Maker..."
+                    style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; font-size: 14px;" />
                 </div>
-                <div style="display: flex; gap: 12px; margin-top: auto; margin-left: auto;">
+                <div style="display: flex; gap: 12px; margin-top: auto;">
                   <button class="btn-outline" id="action-browse-files-btn"
                     style="padding: 12px 20px; font-weight: 600; height: 45px;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1517,7 +1392,7 @@
       style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
       <div class="card" style="width: 400px; padding: 24px; background: white; border-radius: 8px;">
         <h3 style="margin-bottom: 16px;">Assign Pattern Maker</h3>
-        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">Request ID: <strong id="assign-pm-req-id"
+        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">C Number: <strong id="assign-pm-req-id"
             style="color: #1f2937;">-</strong></p>
         <p style="margin-bottom: 16px; font-size: 12px; color: #6b7280;">Folder Path:
           <span id="assign-pm-folder-path"
@@ -1577,17 +1452,17 @@
         <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
           <div>
             <label
-              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">REQUEST
-              ID</label>
+              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">C
+              NUMBER</label>
             <input type="text" id="filter-id" list="id-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select ID..." />
+              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select C Number..." />
             <datalist id="id-list-pat"></datalist>
           </div>
           <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STYLE
-              NAME</label>
+            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER
+              REFERENCE</label>
             <input type="text" id="filter-style" list="style-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Style..." />
+              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Customer Reference..." />
             <datalist id="style-list-pat"></datalist>
           </div>
           <div>
@@ -1599,10 +1474,16 @@
           </div>
           <div>
             <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">PM
-              NAME / PL NAME</label>
-            <input type="text" id="filter-pl" list="pl-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select PL..." />
-            <datalist id="pl-list-pat"></datalist>
+              NAME</label>
+            <input type="text" id="filter-pm" list="pm-list-pat" class="btn-outline"
+              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select PM Name..." />
+            <datalist id="pm-list-pat"></datalist>
+          </div>
+          <div>
+            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STATUS</label>
+            <input type="text" id="filter-status" list="status-list-pat" class="btn-outline"
+              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Status..." />
+            <datalist id="status-list-pat"></datalist>
           </div>
         </div>
         <div style="display: flex; justify-content: flex-end; gap: 12px;">
@@ -1624,7 +1505,7 @@
           style="display: none; margin-bottom: 12px; font-size: 13px; color: #64748b; line-height: 1.45;">
           Saving runs the usual update and opens the folder path in a new tab so you can upload files.
         </p>
-        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">Request ID: <strong id="remarks-req-id"
+        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">C Number: <strong id="remarks-req-id"
             style="color: #1f2937;">-</strong></p>
 
         <div style="margin-bottom: 16px;">
@@ -1647,16 +1528,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSdyx3uNKZPhbhwg_eIc_VmRTvUNF8-Q5z9hunbr7seSuz2nNdO-awDI8qserEQHkr/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbZ4f9sdtoTb2Ps0E5Q8NX1FV7qhfJXEx-AzazDqZLfsnkfKhV3xqEMBPVGdTYuWh8TSg/exec';
         const tableBody = document.getElementById('table-body');
 
         let allRequests = [];
-        let systemSettings = {};
         let currentTab = 'AWAITING PATTERN';
         let searchText = '';
-        let advFilter = { id: '', style: '', customer: '', pl: '' };
-        let calCurrentDate = new Date();
-        const confirmAssignBtn = document.getElementById('action-confirm-assign-btn');
+        let advFilter = { id: '', style: '', customer: '', pm: '', status: '' };
 
         const normalizeStatus = (s) => String(s || '').toUpperCase().replace(/\s+/g, ' ').trim();
 
@@ -1673,27 +1551,19 @@
           return `${day}/${month}/${year}`;
         }
 
-        function formatToYYYYMMDD(dateStr) {
-          if (!dateStr || dateStr === '-') return '-';
-          const d = new Date(dateStr);
-          if (isNaN(d)) return dateStr;
-          const day = String(d.getDate()).padStart(2, '0');
-          const month = String(d.getMonth() + 1).padStart(2, '0');
-          const year = d.getFullYear();
-          return `${year}-${month}-${day}`;
-        }
-
         function populateDatalists() {
-          const ids = [...new Set(allRequests.map(r => r.id).filter(Boolean))];
-          const styles = [...new Set(allRequests.map(r => r.style || r.Style).filter(Boolean))];
-          const customers = [...new Set(allRequests.map(r => r.customer || r.Customer).filter(Boolean))];
-          const pls = [...new Set(allRequests.map(r => r.assignee || r.PL_Name || r.PM_Name || r.Pattern_Maker).filter(Boolean))];
+          const ids = [...new Set(allRequests.map(r => r.C_Number || r.id).filter(Boolean))];
+          const styles = [...new Set(allRequests.map(r => r.Customer_Ref || r.style || r.Style).filter(Boolean))];
+          const customers = [...new Set(allRequests.map(r => r.Customer || r.customer).filter(Boolean))];
+          const pms = [...new Set(allRequests.map(r => r.PM_Name || r.Pattern_Maker).filter(Boolean))];
+          const statuses = [...new Set(allRequests.map(r => r.Status || r.status).filter(Boolean))];
 
           const fills = [
             { id: 'id-list-pat', vals: ids },
             { id: 'style-list-pat', vals: styles },
             { id: 'cust-list-pat', vals: customers },
-            { id: 'pl-list-pat', vals: pls }
+            { id: 'pm-list-pat', vals: pms },
+            { id: 'status-list-pat', vals: statuses }
           ];
 
           fills.forEach(f => {
@@ -1702,41 +1572,13 @@
           });
         }
 
-        function renderPmCheckboxes() {
-          const container = document.getElementById('pm-checkbox-container');
-          if (!container) return;
-          if (!systemSettings.pm || systemSettings.pm.length === 0) {
-            container.innerHTML = '<span style="color: #94a3b8; font-style: italic;">No Pattern Makers found in settings.</span>';
-            return;
-          }
-          container.innerHTML = systemSettings.pm.map(pm => `
-            <label class="pm-pill">
-              <input type="checkbox" name="pm-selection" value="${pm}" onchange="this.parentElement.classList.toggle('active', this.checked)" />
-              <span class="pm-glow"></span>
-              <span class="pm-name">${pm}</span>
-            </label>
-          `).join('');
-        }
-
         async function loadPatternTasks() {
           try {
-            // Load Data & Settings in parallel
-            const [dataResp, settingsResp] = await Promise.all([
-              fetch(`${GOOGLE_SCRIPT_URL}?t=${new Date().getTime()}`),
-              fetch(`${GOOGLE_SCRIPT_URL}?action=getSettings&t=${new Date().getTime()}`)
-            ]);
-
-            if (!dataResp.ok) throw new Error(`Data fetch failed: ${dataResp.status}`);
-            if (!settingsResp.ok) throw new Error(`Settings fetch failed: ${settingsResp.status}`);
-
-            const data = await dataResp.json();
-            const settings = await settingsResp.json();
-
+            const response = await fetch(`${GOOGLE_SCRIPT_URL}?t=${new Date().getTime()}`);
+            if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
+            const data = await response.json();
             allRequests = data;
-            systemSettings = settings;
-
             populateDatalists();
-            renderPmCheckboxes();
             renderTable();
           } catch (error) {
             console.error("Failed to load data:", error);
@@ -1757,11 +1599,13 @@
             document.getElementById('filter-id').value = '';
             document.getElementById('filter-style').value = '';
             document.getElementById('filter-cust').value = '';
-            document.getElementById('filter-pl').value = '';
+            document.getElementById('filter-pm').value = '';
+            document.getElementById('filter-status').value = '';
             advFilter.id = '';
             advFilter.style = '';
             advFilter.customer = '';
-            advFilter.pl = '';
+            advFilter.pm = '';
+            advFilter.status = '';
             renderTable();
             document.getElementById('filter-modal').style.display = 'none';
           });
@@ -1771,7 +1615,8 @@
             advFilter.id = document.getElementById('filter-id').value.trim();
             advFilter.style = document.getElementById('filter-style').value.trim();
             advFilter.customer = document.getElementById('filter-cust').value.trim();
-            advFilter.pl = document.getElementById('filter-pl').value.trim();
+            advFilter.pm = document.getElementById('filter-pm').value.trim();
+            advFilter.status = document.getElementById('filter-status').value.trim();
             renderTable();
             document.getElementById('filter-modal').style.display = 'none';
           });
@@ -1817,50 +1662,45 @@
         const navCalendar = document.getElementById('nav-calendar');
         const tableSection = document.querySelector('.pattern-tasks');
         const calendarSection = document.getElementById('calendar-section');
-        const assignmentCard = document.getElementById('pattern-assignment-card');
 
-        function hideAllSections() {
-          if (tableSection) tableSection.style.display = 'none';
-          if (calendarSection) calendarSection.style.display = 'none';
-          if (assignmentCard) assignmentCard.style.display = 'none';
-        }
-
-        if (navPattern && navComplete && navList && navCalendar) {
+        if (navPattern && navComplete && navCalendar) {
           navPattern.addEventListener('click', (e) => {
             e.preventDefault();
-            hideAllSections();
             currentTab = 'AWAITING PATTERN';
             setActiveTab('nav-pattern');
             tableSection.style.display = 'block';
+            calendarSection.style.display = 'none';
             document.getElementById('table-header-title').textContent = 'Active Pattern Tasks';
             renderTable();
           });
 
           navComplete.addEventListener('click', (e) => {
             e.preventDefault();
-            hideAllSections();
             currentTab = 'PM ASSIGN';
             setActiveTab('nav-complete');
             tableSection.style.display = 'block';
+            calendarSection.style.display = 'none';
             document.getElementById('table-header-title').textContent = 'Assigned Pattern';
             renderTable();
           });
 
-          navList.addEventListener('click', (e) => {
-            e.preventDefault();
-            hideAllSections();
-            currentTab = 'LIST_VIEW';
-            setActiveTab('nav-list');
-            tableSection.style.display = 'block';
-            document.getElementById('table-header-title').textContent = 'Awaiting Conso';
-            renderTable();
-          });
+          if (navList) {
+            navList.addEventListener('click', (e) => {
+              e.preventDefault();
+              currentTab = 'LIST_VIEW';
+              setActiveTab('nav-list');
+              tableSection.style.display = 'block';
+              calendarSection.style.display = 'none';
+              document.getElementById('table-header-title').textContent = 'Awaiting Conso';
+              renderTable();
+            });
+          }
 
           navCalendar.addEventListener('click', (e) => {
             e.preventDefault();
-            hideAllSections();
             currentTab = 'CALENDAR';
             setActiveTab('nav-calendar');
+            tableSection.style.display = 'none';
             calendarSection.style.display = 'block';
             renderCalendar();
           });
@@ -1908,9 +1748,13 @@
           tableBody.innerHTML = '';
 
           const thDynamic = document.getElementById('th-dynamic');
+          const thOwnerName = document.getElementById('th-owner-name');
           if (thDynamic) {
             thDynamic.style.display = (currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? 'table-cell' : 'none';
             if (thDynamic.style.display !== 'none') thDynamic.textContent = 'PM Name';
+          }
+          if (thOwnerName) {
+            thOwnerName.textContent = currentTab === 'AWAITING PATTERN' ? 'PL Name' : 'PM Name';
           }
 
           // Filter logic
@@ -1927,17 +1771,18 @@
             // Search Text (Matches vanilla)
             if (searchText) {
               const query = searchText.toLowerCase();
-              const idVal = (row.id || '').toLowerCase();
-              const styleVal = (row.style || '').toLowerCase();
-              const custVal = (row.customer || '').toLowerCase();
+              const idVal = (row.C_Number || row.id || '').toLowerCase();
+              const styleVal = (row.Customer_Ref || row.style || '').toLowerCase();
+              const custVal = (row.Customer || row.customer || '').toLowerCase();
               if (!idVal.includes(query) && !styleVal.includes(query) && !custVal.includes(query)) return false;
             }
 
             // Advanced Filter
-            if (advFilter.id && !(row.id || '').includes(advFilter.id)) return false;
-            if (advFilter.style && !(row.style || row.Style || '').includes(advFilter.style)) return false;
-            if (advFilter.customer && !(row.customer || row.Customer || '').includes(advFilter.customer)) return false;
-            if (advFilter.pl && !(row.assignee || row.PL_Name || row.PM_Name || '').includes(advFilter.pl)) return false;
+            if (advFilter.id && !(row.C_Number || row.id || '').includes(advFilter.id)) return false;
+            if (advFilter.style && !(row.Customer_Ref || row.style || row.Style || '').includes(advFilter.style)) return false;
+            if (advFilter.customer && !(row.Customer || row.customer || '').includes(advFilter.customer)) return false;
+            if (advFilter.pm && !(row.PM_Name || row.Pattern_Maker || '').includes(advFilter.pm)) return false;
+            if (advFilter.status && !(row.Status || row.Status || '').toLowerCase().includes(advFilter.status.toLowerCase())) return false;
 
             return true;
           });
@@ -1951,8 +1796,11 @@
           }
 
           filtered.forEach((row, index) => {
-            const safeId = row.id || `REQ-${index + 1}`;
+            const safeId = row.C_Number || row.id || `REQ-${index + 1}`;
             const tr = document.createElement('tr');
+            const ownerName = currentTab === 'AWAITING PATTERN'
+              ? (row.PL_Name || row.assignee || 'Unassigned')
+              : (row.PM_Name || row.Pattern_Maker || row.assignee || 'Unknown');
 
             const parseSheetDate = (dateStr) => {
               if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
@@ -1993,15 +1841,15 @@
 
             tr.innerHTML = `
         <td class="req-id" style="color: var(--primary-color); font-weight: 600;">${safeId}</td>
-        <td class="style-name" style="font-weight: 500;">${row.style || '-'}</td>
-        <td class="customer-name" style="color: var(--text-muted);">${row.customer || '-'}</td>
+        <td class="style-name" style="font-weight: 500;">${row.Customer_Ref || row.style || '-'}</td>
+        <td class="customer-name" style="color: var(--text-muted);">${row.Customer || row.customer || '-'}</td>
         <td>
           <div class="assignee" style="display: flex; align-items: center; gap: 8px;">
-            <img class="assignee-avatar" src="${row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId)}" alt="${row.assignee || 'User'}" style="width: 24px; height: 24px; border-radius: 50%;" />
-            ${row.assignee || 'Unassigned'}
+            <img class="assignee-avatar" src="${row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId)}" alt="${ownerName}" style="width: 24px; height: 24px; border-radius: 50%;" />
+            ${ownerName}
           </div>
         </td>
-        <td>${formatToDDMMYYYY(row.due)}</td>
+        <td>${formatToDDMMYYYY(row.Costing_Expected_Date || row.due)}</td>
         <td>
           <span class="status-badge ${currentTab === 'AWAITING PATTERN' ? 'pending-badge' : 'success-badge'}">
             ${row.status || 'PENDING'}
@@ -2048,37 +1896,29 @@
 
               if (rowData) {
                 // Populate the 12-field grid
-                document.getElementById('sel-detail-id-pill').textContent = id;
-                document.getElementById('sel-detail-title').textContent = rowData.style || rowData.Style || '-';
-                document.getElementById('sel-detail-cust').textContent = rowData.customer || rowData.Customer || '-';
-                document.getElementById('sel-detail-dept').textContent = rowData.Cus_Dept || rowData.cusDept || '-';
-                document.getElementById('sel-detail-season').textContent = rowData.TKL_Season || rowData.tklSeason || '-';
-                document.getElementById('sel-detail-fabric').textContent = rowData.Main_Fabric || rowData.mainFabric || '-';
-                document.getElementById('sel-detail-header').textContent = rowData.Fabric_Header || rowData.fabricHeader || '-';
-                document.getElementById('sel-detail-pl').textContent = rowData.assignee || rowData.PL_Name || '-';
-                document.getElementById('sel-detail-status').textContent = rowData.status || rowData.Status || '-';
+                document.getElementById('sel-detail-id-pill').textContent = safeId;
+                document.getElementById('sel-detail-title').textContent = rowData.Customer_Ref || rowData.style || '-';
+                document.getElementById('sel-detail-cust').textContent = rowData.Customer || rowData.customer || '-';
+                document.getElementById('sel-detail-dept').textContent = rowData.Customer_Department || rowData.Cus_Dept || '-';
+                document.getElementById('sel-detail-season').textContent = rowData.Season || rowData.TKL_Season || '-';
+                document.getElementById('sel-detail-fabric').textContent = rowData['Fabric Add Ons'] || '-';
+                document.getElementById('sel-detail-header').textContent = '-'; // Replaced by Fabric Details
+                document.getElementById('sel-detail-pl').textContent = rowData.PL_Name || rowData.assignee || '-';
+                document.getElementById('sel-detail-status').textContent = rowData.Status || rowData.status || '-';
                 document.getElementById('sel-detail-created').textContent = rowData.PL_Uploaded_Date || rowData.Uploaded_Date || '-';
-                document.getElementById('sel-detail-created-by').textContent = rowData.plAlias || rowData.PL_Name || 'System';
+                document.getElementById('sel-detail-created-by').textContent = rowData.Created_By || rowData.plAlias || 'System';
 
-                const folderValue = rowData.folderLink || rowData.folder_link || '-';
+                const folderValue = rowData['Folder Path'] || rowData.folderLink || '-';
                 const folderEl = document.getElementById('sel-detail-folder');
                 if (folderValue !== '-' && String(folderValue).startsWith('http')) {
                   folderEl.innerHTML = `<a href="${folderValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Folder</a>`;
                 } else {
                   folderEl.textContent = folderValue;
                 }
-                document.getElementById('sel-detail-remarks').textContent = rowData.Remarks || rowData.remarks || '-';
-                document.getElementById('sel-detail-remarks-techpack').textContent = rowData.Remarks_Techpack || rowData.remarks_techpack || '-';
+                document.getElementById('sel-detail-remarks').textContent = rowData.Req_Remarks || rowData.Remarks || '-';
 
-                // Clear PM selections, search input and set up folder button
-                const pmSearchInput = document.getElementById('pm-search-input');
-                if (pmSearchInput) pmSearchInput.value = '';
-                document.querySelectorAll('.pm-pill').forEach(pill => pill.style.display = 'flex');
-
-                document.querySelectorAll('input[name="pm-selection"]').forEach(cb => {
-                  cb.checked = false;
-                  cb.parentElement.classList.remove('active');
-                });
+                // Clear PM name input and set up folder button
+                document.getElementById('action-pm-name').value = '';
                 const browseBtn = document.getElementById('action-browse-files-btn');
                 if (browseBtn) browseBtn.dataset.link = folderValue;
 
@@ -2109,28 +1949,25 @@
 
               if (rowData) {
                 const detailsContent = document.getElementById('details-content');
-                const displayFields = [
-                  { label: 'Request ID', value: rowData.id || rowData.C_Number },
-                  { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
-                  { label: 'Customer', value: rowData.Customer || rowData.customer },
-                  { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
-                  { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
-                  { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
-                  { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
-                  { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || '-' },
-                  { label: 'PM Name', value: rowData.PM_Name || rowData.Pattern_Maker || '-' },
-                  { label: 'Status', value: rowData.Status || rowData.status },
-                  { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
-                  { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
-                  { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
-                  { label: 'Remarks Techpack', value: rowData.Remarks_Techpack || rowData.remarks_techpack || '-' },
-                  { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
-                ];
+                  const displayFields = [
+                    { label: 'C Number', value: rowData.C_Number || rowData.id },
+                    { label: 'Customer Reference', value: rowData.Customer_Ref || rowData.style },
+                    { label: 'Customer', value: rowData.Customer || rowData.customer },
+                    { label: 'Customer Department', value: rowData.Customer_Department || rowData.Cus_Dept },
+                    { label: 'Season', value: rowData.Season || rowData.TKL_Season },
+                    { label: 'Fabric Details', value: rowData['Fabric Add Ons'] || '-' },
+                    { label: 'PM Name', value: rowData.PM_Name || rowData.PL_Name || '-' },
+                    { label: 'Status', value: rowData.Status || rowData.status },
+                    { label: 'Expected Date', value: rowData.Costing_Expected_Date || rowData.due },
+                    { label: 'Created By', value: rowData.Created_By || rowData.createdBy },
+                    { label: 'Remarks', value: rowData.Req_Remarks || rowData.Remarks || '-' },
+                    { label: 'Folder Path', value: rowData['Folder Path'] || rowData.folderLink || '-' }
+                  ];
 
                 detailsContent.innerHTML = displayFields.map(field => {
                   let displayValue = field.value || '-';
                   if (field.label === 'Created' && displayValue !== '-') {
-                    displayValue = formatToYYYYMMDD(displayValue);
+                    displayValue = formatToDDMMYYYY(displayValue);
                   } else if (field.label === 'Status') {
                     displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
                   } else if (field.label === 'Folder Path' && field.value !== '-') {
@@ -2238,8 +2075,8 @@
                 Status: 'Awaiting Conso',
                 nextStatus: 'Awaiting Conso',
                 moveToFolder: 'Conso', // PD Folder requirement
-                currentRef: rowData ? (rowData.style || '-') : '-',
-                currentCustomer: rowData ? (rowData.customer || '-') : '-',
+                currentRef: rowData ? (rowData.Customer_Ref || '-') : '-',
+                currentCustomer: rowData ? (rowData.Customer || '-') : '-',
                 appLink: window.location.origin + window.location.pathname,
                 timestamp: new Date().toISOString()
               };
@@ -2259,7 +2096,7 @@
               if (rowData) {
                 rowData.status = 'Awaiting Conso';
                 rowData.Status = 'Awaiting Conso';
-                rowData.Remarks = value;
+                rowData.Req_Remarks = value;
               }
 
               alert(isPmAssignContext
@@ -2305,64 +2142,52 @@
           });
         }
 
+        // --- Inline Assign PM Card Logic ---
+        const pmNameInput = document.getElementById('action-pm-name');
+        const confirmAssignBtn = document.getElementById('action-confirm-assign-btn');
+
+        // Auto-fill or Logic for PM could be added here
+        if (pmNameInput) {
+          // Optional logic if needed
+        }
+
         if (confirmAssignBtn) {
           confirmAssignBtn.addEventListener('click', async () => {
             const reqId = document.getElementById('sel-detail-id-pill').textContent;
+            const pmName = pmNameInput.value.trim();
 
-            // 1. Get all selected PM names
-            const selectedPms = Array.from(document.querySelectorAll('input[name="pm-selection"]:checked'))
-              .map(cb => cb.value);
-
-            if (selectedPms.length === 0) {
-              alert("Please select at least one Pattern Maker.");
+            if (!pmName || pmName === '-') {
+              alert("Please enter or select a Pattern Maker Name.");
               return;
             }
-
-            const pmNamesString = selectedPms.join(', ');
 
             const originalText = confirmAssignBtn.textContent;
             confirmAssignBtn.textContent = 'Saving...';
             confirmAssignBtn.style.opacity = '0.7';
             confirmAssignBtn.style.pointerEvents = 'none';
 
-            const rowData = allRequests.find(r => (r.id || r.requestId || r.C_Number) === reqId);
+            const rowData = allRequests.find(r => (r.id || r.requestId) === reqId);
             const plDueDate = rowData ? (rowData.due || '-') : '-';
-            const plName = rowData ? (rowData.PL_Name || rowData.assignee || '-') : '-';
-
-            // 2. Build email recipients list (Selected PMs + Assigned PL)
-            const recipients = [];
-            // Add PM emails
-            selectedPms.forEach(name => {
-              if (systemSettings.pmEmails && systemSettings.pmEmails[name]) {
-                recipients.push(systemSettings.pmEmails[name]);
-              }
-            });
-            // Add PL email
-            if (plName !== '-' && systemSettings.plEmails && systemSettings.plEmails[plName]) {
-              recipients.push(systemSettings.plEmails[plName]);
-            }
-
-            const emailTo = [...new Set(recipients)].join(',');
-
+            let plLeadtime = '-';
             const todayStamp = new Date().toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '');
 
             const payload = {
               requestId: reqId,
               status: 'PM Assign', // Legacy status compatible with sheet
               PL_Due_Date: plDueDate,
-              PL_Leadtime: '-',
-              PM_Name: pmNamesString,
+              PL_Leadtime: plLeadtime,
+              PM_Name: pmName,
               PM_Uploaded_Date: todayStamp,
               PM_Date: todayStamp,
               PM_Due_Date: '-',
               processRoute: 'N/A',
-              plAlias: pmNamesString,
-              currentRef: rowData ? (rowData.style || rowData.Title || '-') : '-',
-              currentCustomer: rowData ? (rowData.customer || rowData.Customer || '-') : '-',
+              plAlias: pmName,
+              currentRef: rowData ? (rowData.Customer_Ref || '-') : '-',
+              currentCustomer: rowData ? (rowData.Customer || '-') : '-',
               appLink: window.location.origin + window.location.pathname,
-              emailTo: emailTo,
-              emailSubject: `Assigned PM: ${reqId} for ${rowData ? (rowData.style || rowData.Title) : 'Ref'}`,
-              emailBody: `Hello,\n\nPattern Maker(s) [${pmNamesString}] have been assigned to Request ${reqId}.\n\nRegards,\nGarmentCost System`,
+              emailTo: 'YTeeluck@tropicknits.com', // Fixed notification recipient
+              emailSubject: `Assigned PM: ${reqId} for ${rowData ? rowData.Customer_Ref : 'Ref'}`,
+              emailBody: `Hi,\n\nPattern Maker ${pmName} has been assigned to Request ${reqId}.\n\nRegards,\nPortal`,
               timestamp: new Date().toISOString()
             };
 
@@ -2379,26 +2204,18 @@
               const assignPmModal = document.getElementById('assign-pm-modal');
               if (assignmentCard) assignmentCard.style.display = 'none';
               if (assignPmModal) assignPmModal.style.display = 'none';
-
-              // Clear checkboxes and search
-              const pmSearchInput = document.getElementById('pm-search-input');
-              if (pmSearchInput) pmSearchInput.value = '';
-              document.querySelectorAll('.pm-pill').forEach(pill => pill.style.display = 'flex');
-
-              document.querySelectorAll('input[name="pm-selection"]').forEach(cb => {
-                cb.checked = false;
-                cb.parentElement.classList.remove('active');
-              });
+              if (pmNameInput) pmNameInput.value = '';
 
               // Move user directly to Assigned screen after sync.
               currentTab = 'PM ASSIGN';
               if (typeof setActiveTab === 'function') setActiveTab('nav-complete');
-
+              if (tableSection) tableSection.style.display = 'block';
+              if (calendarSection) calendarSection.style.display = 'none';
               const titleEl = document.getElementById('table-header-title');
               if (titleEl) titleEl.textContent = 'Assigned Pattern';
               renderTable();
 
-              alert(`✅ Assigned to: ${pmNamesString}\nNotifications sent to recipients.`);
+              alert('✅ Pattern Maker successfully assigned!');
               await loadPatternTasks();
             } catch (err) {
               console.error("Error saving PM data:", err);
@@ -2411,21 +2228,10 @@
           });
         }
 
-        // --- PM Search Logic ---
-        document.addEventListener('input', (e) => {
-          if (e.target && e.target.id === 'pm-search-input') {
-            const query = e.target.value.toLowerCase().trim();
-            const pills = document.querySelectorAll('.pm-pill');
-            pills.forEach(pill => {
-              const name = pill.querySelector('.pm-name').textContent.toLowerCase();
-              pill.style.display = name.includes(query) ? 'flex' : 'none';
-            });
-          }
-        });
-
         loadPatternTasks();
 
         // --- Calendar GUI Rendering Logic ---
+        let calCurrentDate = new Date();
 
         function renderCalendar() {
           const grid = document.getElementById('calendar-grid');
@@ -2599,20 +2405,18 @@
                     // Re-use main details logic
                     const detailsContent = document.getElementById('details-content');
                     const displayFields = [
-                      { label: 'Request ID', value: rowData.id || rowData.C_Number },
-                      { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
+                      { label: 'C Number', value: rowData.id || rowData.C_Number },
+                      { label: 'Customer Reference', value: rowData.Title || rowData.Style || rowData.style },
                       { label: 'Customer', value: rowData.Customer || rowData.customer },
                       { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
                       { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
                       { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
                       { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
-                      { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || '-' },
-                      { label: 'PM Name', value: rowData.PM_Name || rowData.Pattern_Maker || '-' },
+                      { label: 'PM Name', value: rowData.PM_Name || rowData.Pattern_Maker || rowData.PL_Name || rowData.assignee || '-' },
                       { label: 'Status', value: rowData.Status || rowData.status },
                       { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
                       { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
                       { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
-                      { label: 'Remarks Techpack', value: rowData.Remarks_Techpack || rowData.remarks_techpack || '-' },
                       { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
                     ];
 
@@ -2658,6 +2462,7 @@
           const gallery = document.getElementById('gallery-container');
           if (!gallery) return;
           gallery.innerHTML = '';
+          const usePlName = currentTab === 'AWAITING PATTERN';
 
           // Same filter rules as the table for PM ASSIGN (aligned with Techpack Completed gallery behaviour)
           const filtered = allRequests.filter(row => {
@@ -2675,7 +2480,8 @@
             if (advFilter.id && !(row.id || '').includes(advFilter.id)) return false;
             if (advFilter.style && !(row.style || row.Style || '').includes(advFilter.style)) return false;
             if (advFilter.customer && !(row.customer || row.Customer || '').includes(advFilter.customer)) return false;
-            if (advFilter.pl && !(row.assignee || row.PL_Name || row.PM_Name || '').includes(advFilter.pl)) return false;
+            if (advFilter.pm && !(row.PM_Name || row.Pattern_Maker || '').includes(advFilter.pm)) return false;
+            if (advFilter.status && !(row.status || row.Status || '').toLowerCase().includes(advFilter.status.toLowerCase())) return false;
 
             return true;
           });
@@ -2691,13 +2497,12 @@
           const head = document.createElement('div');
           head.className = 'pattern-gallery-row pattern-gallery-row--head';
           head.innerHTML = `
-      <span>Request ID</span>
-      <span>Style</span>
+      <span>C Number</span>
+      <span>Customer Reference</span>
       <span>Customer</span>
-      <span>Assigned PL</span>
-      <span>Costing ready</span>
+      <span>${usePlName ? 'PL Name' : 'PM Name'}</span>
+      <span>Costing expected</span>
       <span>Status</span>
-      <span>PM name</span>
       <span class="pattern-gallery-row__actions">Action</span>
     `;
           gallery.appendChild(head);
@@ -2709,10 +2514,11 @@
 
             const styleDisp = row.style || row.Style || '-';
             const customerDisp = row.customer || row.Customer || '-';
-            const plDisp = row.assignee || 'Unassigned';
+            const plDisp = usePlName
+              ? (row.assignee || row.PL_Name || 'Unassigned')
+              : (row.PM_Name || row.Pattern_Maker || 'Unknown');
             const dueDisp = row.due || '-';
             const statusDisp = row.status || 'PENDING';
-            const pmDisp = row.PM_Name || row.Pattern_Maker || 'Unknown';
             const av = row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId);
 
             line.innerHTML = `
@@ -2725,7 +2531,6 @@
         </span>
         <span class="pattern-gallery-cell">${dueDisp}</span>
         <span class="pattern-gallery-cell"><span class="status-badge success-badge">${statusDisp}</span></span>
-        <span class="pattern-gallery-cell pattern-gallery-cell--truncate">${pmDisp}</span>
         <span class="pattern-gallery-row__actions">
           <button type="button" class="btn-outline details-btn" data-id="${safeId}">Details</button>
           <button type="button" class="btn-outline remarks-btn" data-id="${safeId}">Upload</button>
@@ -2744,27 +2549,22 @@
           if (!rowData) return;
           const detailsContent = document.getElementById('details-content');
           const displayFields = [
-            { label: 'Request ID', value: rowData.id || rowData.C_Number },
-            { label: 'Title', value: rowData.Title || rowData.Style || rowData.style },
+            { label: 'C Number', value: rowData.id || rowData.C_Number },
+            { label: 'Customer Reference', value: rowData.Title || rowData.Style || rowData.style },
             { label: 'Customer', value: rowData.Customer || rowData.customer },
             { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
             { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
             { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
             { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
-            { label: 'PL Name', value: rowData.PL_Name || rowData.assignee || '-' },
-            { label: 'PM Name', value: rowData.PM_Name || rowData.Pattern_Maker || '-' },
+            { label: 'PM Name', value: rowData.PM_Name || rowData.Pattern_Maker || rowData.PL_Name || rowData.assignee || '-' },
             { label: 'Status', value: rowData.Status || rowData.status },
             { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
             { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
             { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
-            { label: 'Remarks Techpack', value: rowData.Remarks_Techpack || rowData.remarks_techpack || '-' },
             { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
           ];
           detailsContent.innerHTML = displayFields.map(field => {
             let displayValue = field.value || '-';
-            if (field.label === 'Created' && displayValue !== '-') {
-              displayValue = formatToYYYYMMDD(displayValue);
-            }
             if (field.label === 'Status') displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
             else if (field.label === 'Folder Path' && field.value !== '-' && field.value.startsWith('http')) displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Open Folder</a>`;
             return `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;"><strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong><span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span></div>`;
@@ -2831,13 +2631,12 @@
               }
               return true;
             }).map(row => ({
-              "Request ID": row.id || '',
-              "Style Name": row.style || '',
+              "C Number": row.id || '',
+              "Customer Reference": row.style || '',
               "Customer": row.customer || '',
-              "Assigned PL": row.assignee || '',
-              "Costing Ready Date": row.due || '',
+              "PM Name": row.PM_Name || row.Pattern_Maker || row.assignee || '',
+              "Costing Expected Date": row.due || '',
               "Status": row.status || '',
-              "PM Name": row.PM_Name || row.Pattern_Maker || '',
               "Assigned PM Date": row.PM_Uploaded_Date || '',
               "Remarks": row.remarks || row.Remarks || ''
             }));
