@@ -1271,11 +1271,12 @@
                   <div id="sel-detail-season" style="font-weight: 600; color: #0f172a; margin-top: 4px;">-</div>
                 </div>
                 <div class="detail-item">
-                  <label style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Main
-                    Fabric</label>
+                  <label style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Fabric
+                    Details</label>
                   <div id="sel-detail-fabric" style="font-weight: 600; color: #0f172a; margin-top: 4px;">-</div>
                 </div>
-                <div class="detail-item">
+                <!-- Hidden Header as requested Unified -->
+                <div class="detail-item" style="display:none;">
                   <label style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase;">Fabric
                     Header</label>
                   <div id="sel-detail-header" style="font-weight: 600; color: #0f172a; margin-top: 4px;">-</div>
@@ -1552,11 +1553,11 @@
         }
 
         function populateDatalists() {
-          const ids = [...new Set(allRequests.map(r => r.C_Number || r.id).filter(Boolean))];
-          const styles = [...new Set(allRequests.map(r => r.Customer_Ref || r.style || r.Style).filter(Boolean))];
-          const customers = [...new Set(allRequests.map(r => r.Customer || r.customer).filter(Boolean))];
-          const pms = [...new Set(allRequests.map(r => r.PM_Name || r.Pattern_Maker).filter(Boolean))];
-          const statuses = [...new Set(allRequests.map(r => r.Status || r.status).filter(Boolean))];
+          const ids = [...new Set(allRequests.map(r => r.c_number || r.id).filter(Boolean))];
+          const styles = [...new Set(allRequests.map(r => r.customer_ref || r.style).filter(Boolean))];
+          const customers = [...new Set(allRequests.map(r => r.customer).filter(Boolean))];
+          const pms = [...new Set(allRequests.map(r => r.pm_name || r.pattern_maker).filter(Boolean))];
+          const statuses = [...new Set(allRequests.map(r => r.status).filter(Boolean))];
 
           const fills = [
             { id: 'id-list-pat', vals: ids },
@@ -1574,15 +1575,32 @@
 
         async function loadPatternTasks() {
           try {
-            const response = await fetch(`${GOOGLE_SCRIPT_URL}?t=${new Date().getTime()}`);
-            if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
-            const data = await response.json();
-            allRequests = data;
-            populateDatalists();
-            renderTable();
+            if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px;">⏳ Loading pattern tasks...</td></tr>`;
+
+            // Use JSONP to bypass CORS issues on some environments
+            const cbName = 'gp_cb_' + Date.now();
+            window[cbName] = (data) => {
+              allRequests = data;
+              populateDatalists();
+              renderTable();
+              delete window[cbName];
+            };
+
+            const script = document.createElement('script');
+            const glue = GOOGLE_SCRIPT_URL.includes('?') ? '&' : '?';
+            script.src = `${GOOGLE_SCRIPT_URL}${glue}callback=${cbName}&t=${Date.now()}`;
+            script.onerror = () => {
+              console.error("JSONP Script load failed");
+              if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Connection Error: Web App unreachable.</td></tr>`;
+            };
+            document.body.appendChild(script);
+            
+            // Cleanup script after 10 seconds
+            setTimeout(() => { if (script.parentNode) script.parentNode.removeChild(script); }, 10000);
+
           } catch (error) {
             console.error("Failed to load data:", error);
-            if (tableBody) tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #dc2626; padding: 40px;">❌ Failed to load data: <b>${error.message}</b></td></tr>`;
+            if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Failed to load data: <b>${error.message}</b></td></tr>`;
           }
         }
 
@@ -1796,11 +1814,11 @@
           }
 
           filtered.forEach((row, index) => {
-            const safeId = row.C_Number || row.id || `REQ-${index + 1}`;
+            const safeId = row.c_number || row.id || `REQ-${index + 1}`;
             const tr = document.createElement('tr');
             const ownerName = currentTab === 'AWAITING PATTERN'
-              ? (row.PL_Name || row.assignee || 'Unassigned')
-              : (row.PM_Name || row.Pattern_Maker || row.assignee || 'Unknown');
+              ? (row.pl_name || row.assignee || 'Unassigned')
+              : (row.pm_name || row.pattern_maker || row.assignee || 'Unknown');
 
             const parseSheetDate = (dateStr) => {
               if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
@@ -1841,15 +1859,15 @@
 
             tr.innerHTML = `
         <td class="req-id" style="color: var(--primary-color); font-weight: 600;">${safeId}</td>
-        <td class="style-name" style="font-weight: 500;">${row.Customer_Ref || row.style || '-'}</td>
-        <td class="customer-name" style="color: var(--text-muted);">${row.Customer || row.customer || '-'}</td>
+        <td class="style-name" style="font-weight: 500;">${row.customer_ref || row.style || '-'}</td>
+        <td class="customer-name" style="color: var(--text-muted);">${row.customer || '-'}</td>
         <td>
           <div class="assignee" style="display: flex; align-items: center; gap: 8px;">
             <img class="assignee-avatar" src="${row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId)}" alt="${ownerName}" style="width: 24px; height: 24px; border-radius: 50%;" />
             ${ownerName}
           </div>
         </td>
-        <td>${formatToDDMMYYYY(row.Costing_Expected_Date || row.due)}</td>
+        <td>${formatToDDMMYYYY(row.costing_expected_date || row.due)}</td>
         <td>
           <span class="status-badge ${currentTab === 'AWAITING PATTERN' ? 'pending-badge' : 'success-badge'}">
             ${row.status || 'PENDING'}
@@ -1897,25 +1915,25 @@
               if (rowData) {
                 // Populate the 12-field grid
                 document.getElementById('sel-detail-id-pill').textContent = safeId;
-                document.getElementById('sel-detail-title').textContent = rowData.Customer_Ref || rowData.style || '-';
-                document.getElementById('sel-detail-cust').textContent = rowData.Customer || rowData.customer || '-';
-                document.getElementById('sel-detail-dept').textContent = rowData.Customer_Department || rowData.Cus_Dept || '-';
-                document.getElementById('sel-detail-season').textContent = rowData.Season || rowData.TKL_Season || '-';
-                document.getElementById('sel-detail-fabric').textContent = rowData['Fabric Add Ons'] || '-';
+                document.getElementById('sel-detail-title').textContent = rowData.customer_ref || rowData.style || '-';
+                document.getElementById('sel-detail-cust').textContent = rowData.customer || '-';
+                document.getElementById('sel-detail-dept').textContent = rowData.customer_department || rowData.cus_dept || '-';
+                document.getElementById('sel-detail-season').textContent = rowData.season || rowData.tkl_season || '-';
+                document.getElementById('sel-detail-fabric').textContent = rowData.fabric_add_ons || '-';
                 document.getElementById('sel-detail-header').textContent = '-'; // Replaced by Fabric Details
-                document.getElementById('sel-detail-pl').textContent = rowData.PL_Name || rowData.assignee || '-';
-                document.getElementById('sel-detail-status').textContent = rowData.Status || rowData.status || '-';
-                document.getElementById('sel-detail-created').textContent = rowData.PL_Uploaded_Date || rowData.Uploaded_Date || '-';
-                document.getElementById('sel-detail-created-by').textContent = rowData.Created_By || rowData.plAlias || 'System';
+                document.getElementById('sel-detail-pl').textContent = rowData.pl_name || rowData.assignee || '-';
+                document.getElementById('sel-detail-status').textContent = rowData.status || '-';
+                document.getElementById('sel-detail-created').textContent = rowData.pl_uploaded_date || rowData.uploaded_date || '-';
+                document.getElementById('sel-detail-created-by').textContent = rowData.created_by || rowData.plalias || 'System';
 
-                const folderValue = rowData['Folder Path'] || rowData.folderLink || '-';
+                const folderValue = rowData.folder_path || rowData.folder_link || '-';
                 const folderEl = document.getElementById('sel-detail-folder');
                 if (folderValue !== '-' && String(folderValue).startsWith('http')) {
                   folderEl.innerHTML = `<a href="${folderValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Folder</a>`;
                 } else {
                   folderEl.textContent = folderValue;
                 }
-                document.getElementById('sel-detail-remarks').textContent = rowData.Req_Remarks || rowData.Remarks || '-';
+                document.getElementById('sel-detail-remarks').textContent = rowData.req_remarks || rowData.remarks || '-';
 
                 // Clear PM name input and set up folder button
                 document.getElementById('action-pm-name').value = '';
@@ -1950,18 +1968,18 @@
               if (rowData) {
                 const detailsContent = document.getElementById('details-content');
                   const displayFields = [
-                    { label: 'C Number', value: rowData.C_Number || rowData.id },
-                    { label: 'Customer Reference', value: rowData.Customer_Ref || rowData.style },
-                    { label: 'Customer', value: rowData.Customer || rowData.customer },
-                    { label: 'Customer Department', value: rowData.Customer_Department || rowData.Cus_Dept },
-                    { label: 'Season', value: rowData.Season || rowData.TKL_Season },
-                    { label: 'Fabric Details', value: rowData['Fabric Add Ons'] || '-' },
-                    { label: 'PM Name', value: rowData.PM_Name || rowData.PL_Name || '-' },
-                    { label: 'Status', value: rowData.Status || rowData.status },
-                    { label: 'Expected Date', value: rowData.Costing_Expected_Date || rowData.due },
-                    { label: 'Created By', value: rowData.Created_By || rowData.createdBy },
-                    { label: 'Remarks', value: rowData.Req_Remarks || rowData.Remarks || '-' },
-                    { label: 'Folder Path', value: rowData['Folder Path'] || rowData.folderLink || '-' }
+                    { label: 'C Number', value: rowData.c_number || rowData.id },
+                    { label: 'Customer Reference', value: rowData.customer_ref || rowData.style },
+                    { label: 'Customer', value: rowData.customer },
+                    { label: 'Customer Department', value: rowData.customer_department || rowData.cus_dept },
+                    { label: 'Season', value: rowData.season || rowData.tkl_season },
+                    { label: 'Fabric Details', value: rowData.fabric_add_ons || '-' },
+                    { label: 'PM Name', value: rowData.pm_name || rowData.pl_name || '-' },
+                    { label: 'Status', value: rowData.status },
+                    { label: 'Expected Date', value: rowData.costing_expected_date || rowData.due },
+                    { label: 'Created By', value: rowData.created_by || rowData.createdBy },
+                    { label: 'Remarks', value: rowData.req_remarks || rowData.remarks || '-' },
+                    { label: 'Folder Path', value: rowData.folder_path || rowData.folder_link || '-' }
                   ];
 
                 detailsContent.innerHTML = displayFields.map(field => {
@@ -2075,8 +2093,8 @@
                 Status: 'Awaiting Conso',
                 nextStatus: 'Awaiting Conso',
                 moveToFolder: 'Conso', // PD Folder requirement
-                currentRef: rowData ? (rowData.Customer_Ref || '-') : '-',
-                currentCustomer: rowData ? (rowData.Customer || '-') : '-',
+                currentRef: rowData ? (rowData.customer_ref || '-') : '-',
+                currentCustomer: rowData ? (rowData.customer || '-') : '-',
                 appLink: window.location.origin + window.location.pathname,
                 timestamp: new Date().toISOString()
               };
@@ -2095,8 +2113,8 @@
               // Optimistically update status so the item leaves "PM Assigned" immediately.
               if (rowData) {
                 rowData.status = 'Awaiting Conso';
-                rowData.Status = 'Awaiting Conso';
-                rowData.Req_Remarks = value;
+                rowData.status = 'Awaiting Conso';
+                rowData.req_remarks = value;
               }
 
               alert(isPmAssignContext
@@ -2182,11 +2200,11 @@
               PM_Due_Date: '-',
               processRoute: 'N/A',
               plAlias: pmName,
-              currentRef: rowData ? (rowData.Customer_Ref || '-') : '-',
-              currentCustomer: rowData ? (rowData.Customer || '-') : '-',
+              currentRef: rowData ? (rowData.customer_ref || '-') : '-',
+              currentCustomer: rowData ? (rowData.customer || '-') : '-',
               appLink: window.location.origin + window.location.pathname,
               emailTo: 'YTeeluck@tropicknits.com', // Fixed notification recipient
-              emailSubject: `Assigned PM: ${reqId} for ${rowData ? rowData.Customer_Ref : 'Ref'}`,
+              emailSubject: `Assigned PM: ${reqId} for ${rowData ? rowData.customer_ref : 'Ref'}`,
               emailBody: `Hi,\n\nPattern Maker ${pmName} has been assigned to Request ${reqId}.\n\nRegards,\nPortal`,
               timestamp: new Date().toISOString()
             };
