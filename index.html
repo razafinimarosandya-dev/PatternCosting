@@ -1452,18 +1452,19 @@
         <h3 style="margin-bottom: 20px;">Advanced Filter</h3>
         <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
           <div>
-            <label
-              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">C
+            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">C
               NUMBER</label>
             <input type="text" id="filter-id" list="id-list-pat" class="btn-outline"
               style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select C Number..." />
             <datalist id="id-list-pat"></datalist>
           </div>
           <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER
+            <label
+              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER
               REFERENCE</label>
             <input type="text" id="filter-style" list="style-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Customer Reference..." />
+              style="width: 100%; text-align: left; padding: 10px;"
+              placeholder="Search or select Customer Reference..." />
             <datalist id="style-list-pat"></datalist>
           </div>
           <div>
@@ -1481,7 +1482,8 @@
             <datalist id="pm-list-pat"></datalist>
           </div>
           <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STATUS</label>
+            <label
+              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STATUS</label>
             <input type="text" id="filter-status" list="status-list-pat" class="btn-outline"
               style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Status..." />
             <datalist id="status-list-pat"></datalist>
@@ -1594,7 +1596,7 @@
               if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Connection Error: Web App unreachable.</td></tr>`;
             };
             document.body.appendChild(script);
-            
+
             // Cleanup script after 10 seconds
             setTimeout(() => { if (script.parentNode) script.parentNode.removeChild(script); }, 10000);
 
@@ -1967,20 +1969,20 @@
 
               if (rowData) {
                 const detailsContent = document.getElementById('details-content');
-                  const displayFields = [
-                    { label: 'C Number', value: rowData.c_number || rowData.id },
-                    { label: 'Customer Reference', value: rowData.customer_ref || rowData.style },
-                    { label: 'Customer', value: rowData.customer },
-                    { label: 'Customer Department', value: rowData.customer_department || rowData.cus_dept },
-                    { label: 'Season', value: rowData.season || rowData.tkl_season },
-                    { label: 'Fabric Details', value: rowData.fabric_add_ons || '-' },
-                    { label: 'PM Name', value: rowData.pm_name || rowData.pl_name || '-' },
-                    { label: 'Status', value: rowData.status },
-                    { label: 'Expected Date', value: rowData.costing_expected_date || rowData.due },
-                    { label: 'Created By', value: rowData.created_by || rowData.createdBy },
-                    { label: 'Remarks', value: rowData.req_remarks || rowData.remarks || '-' },
-                    { label: 'Folder Path', value: rowData.folder_path || rowData.folder_link || '-' }
-                  ];
+                const displayFields = [
+                  { label: 'C Number', value: rowData.c_number || rowData.id },
+                  { label: 'Customer Reference', value: rowData.customer_ref || rowData.style },
+                  { label: 'Customer', value: rowData.customer },
+                  { label: 'Customer Department', value: rowData.customer_department || rowData.cus_dept },
+                  { label: 'Season', value: rowData.season || rowData.tkl_season },
+                  { label: 'Fabric Details', value: rowData.fabric_add_ons || '-' },
+                  { label: 'PM Name', value: rowData.pm_name || rowData.pl_name || '-' },
+                  { label: 'Status', value: rowData.status },
+                  { label: 'Expected Date', value: rowData.costing_expected_date || rowData.due },
+                  { label: 'Created By', value: rowData.created_by || rowData.createdBy },
+                  { label: 'Remarks', value: rowData.req_remarks || rowData.remarks || '-' },
+                  { label: 'Folder Path', value: rowData.folder_path || rowData.folder_link || '-' }
+                ];
 
                 detailsContent.innerHTML = displayFields.map(field => {
                   let displayValue = field.value || '-';
