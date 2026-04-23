@@ -2027,6 +2027,9 @@
             const assignmentCard = document.getElementById('pattern-assignment-card');
             
             // Populate Details Grid
+            const idPill = document.getElementById('sel-detail-id-pill');
+            if (idPill) idPill.textContent = id;
+
             const fieldMap = {
               'sel-detail-id': id,
               'sel-detail-title': rowData.customer_ref || rowData.style || '-',
