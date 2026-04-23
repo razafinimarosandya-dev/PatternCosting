@@ -1121,6 +1121,76 @@
       color: #1e293b;
       word-break: break-word;
     }
+
+    /* Fabric Table Styling (Synced with Techpack) */
+    .fabric-table-wrap {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .fabric-table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f1f5f9;
+    }
+
+    .fabric-table-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .fabric-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .fabric-table th, .fabric-table td {
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    .fabric-table th {
+      background: #f8fafc;
+      color: #64748b;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+
+    .fabric-table td {
+      background: #fff;
+      color: #1e293b;
+    }
+
+    .fabric-table tr:last-child td { border-bottom: none; }
+    .fabric-table th:last-child, .fabric-table td:last-child { border-right: none; }
+
+    .fabric-opt-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--primary-color);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
   </style>
 
 <body>
@@ -1310,15 +1380,6 @@
                   <div class="detail-value" id="sel-detail-season">-</div>
                 </div>
                 <div class="detail-card">
-                  <span class="detail-label">Fabric Details</span>
-                  <div class="detail-value" id="sel-detail-fabric">-</div>
-                </div>
-                <!-- Hidden Header as requested Unified -->
-                <div class="detail-card" style="display:none;">
-                  <span class="detail-label">Fabric Header</span>
-                  <div class="detail-value" id="sel-detail-header">-</div>
-                </div>
-                <div class="detail-card">
                   <span class="detail-label">Assigned PL</span>
                   <div class="detail-value" id="sel-detail-pl">-</div>
                 </div>
@@ -1334,13 +1395,17 @@
                   <span class="detail-label">Uploaded By</span>
                   <div class="detail-value" id="sel-detail-created-by">-</div>
                 </div>
-                <div class="detail-card" style="grid-column: span 2;">
+                <div class="detail-card" style="grid-column: span 3;">
                   <span class="detail-label">Folder Link</span>
                   <div class="detail-value" id="sel-detail-folder">-</div>
                 </div>
                 <div class="detail-card" style="grid-column: 1 / -1;">
                   <span class="detail-label">Remarks</span>
                   <div class="detail-value" id="sel-detail-remarks" style="white-space: pre-wrap;">-</div>
+                </div>
+                <!-- Fabric Details Table Below -->
+                <div id="sel-detail-fabric-container" style="grid-column: 1 / -1; margin-top: 12px;">
+                  <!-- Table injected via JS -->
                 </div>
               </div>
             </div>
@@ -1981,6 +2046,9 @@
               if (el) el.textContent = val;
             }
 
+            // --- Render Fabric Table (Synced with Techpack) ---
+            renderFabricDetails(rowData);
+
             const folderValue = rowData.folder_path || rowData.folder_link || '-';
             const folderEl = document.getElementById('sel-detail-folder');
             if (folderEl) {
@@ -2071,6 +2139,86 @@
           closeRemarksBtn.addEventListener('click', () => {
             if (remarksModal) remarksModal.style.display = 'none';
           });
+        }
+
+        // --- Fabric Details Table Logic (Synced with Techpack) ---
+        function renderFabricDetails(row, targetContainerId = 'sel-detail-fabric-container') {
+          const container = document.getElementById(targetContainerId);
+          if (!container) return;
+          container.innerHTML = '';
+
+          // Support both backend naming conventions
+          const rawAddOns = row['fabric_add_ons'] || row.fabric_add_ons || row['Fabric Add Ons'] || row.Fabric_Add_Ons || '';
+          let fabricRows = [];
+
+          if (rawAddOns && String(rawAddOns).startsWith('[')) {
+            try {
+              fabricRows = JSON.parse(rawAddOns);
+            } catch (e) {
+              console.error("Fabric JSON parse error", e);
+            }
+          }
+
+          // Fallback if not JSON or empty
+          if (!Array.isArray(fabricRows) || fabricRows.length === 0) {
+            const mainFabric = row.main_fabric || row.fabric_add_ons || row.Fabric_Add_Ons || '';
+            if (mainFabric && mainFabric !== '-' && mainFabric !== '') {
+              fabricRows = [{ opt: 'A', fabric: mainFabric, type: '', gms: '', composition: '', width: '', header: '' }];
+            }
+          }
+
+          if (!Array.isArray(fabricRows) || fabricRows.length === 0) {
+            container.innerHTML = '<div style="color: var(--text-muted); font-style: italic; font-size: 11px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">No fabric details available</div>';
+            return;
+          }
+
+          const columns = [
+            { key: "opt", label: "OPT", width: "45px" },
+            { key: "type", label: "Type", width: "" },
+            { key: "fabric", label: "Fabric Name", width: "" },
+            { key: "gms", label: "GMS", width: "70px" },
+            { key: "composition", label: "Composition", width: "" },
+            { key: "width", width: "70px" },
+            { key: "header", label: "Header", width: "" }
+          ];
+
+          const activeCols = columns.filter(col => {
+            if (col.key === 'opt' || col.key === 'fabric') return true;
+            return fabricRows.some(r => r[col.key] && String(r[col.key]).trim() !== '' && String(r[col.key]).trim() !== '-');
+          });
+
+          const tableHtml = `
+            <div class="fabric-table-wrap">
+              <div class="fabric-table-toolbar">
+                <span class="fabric-table-title">Fabric Details</span>
+              </div>
+              <div style="overflow-x: auto;">
+                <table class="fabric-table">
+                  <thead>
+                    <tr>
+                      ${activeCols.map(col => `<th ${col.width ? `style="width: ${col.width};"` : ''}>${col.label}</th>`).join('')}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${fabricRows.map((item, idx) => `
+                      <tr>
+                        ${activeCols.map(col => {
+                          let val = item[col.key] || (col.key === 'opt' ? String.fromCharCode(65 + idx) : '-');
+                          let displayVal = val;
+                          if (String(val).startsWith('http')) {
+                            displayVal = `<a href="${val}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: underline;">Open Folder</a>`;
+                          }
+                          if (col.key === 'opt') return `<td><div class="fabric-opt-chip">${val}</div></td>`;
+                          return `<td ${col.key === 'fabric' ? 'style="font-weight: 600;"' : ''}>${displayVal}</td>`;
+                        }).join('')}
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+          container.innerHTML = tableHtml;
         }
 
         if (saveRemarksBtn) {
