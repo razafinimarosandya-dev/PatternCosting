@@ -2019,106 +2019,106 @@
               } else if (btn.classList.contains('remarks-btn')) {
                 handleRemarksClick(id, rowData);
               }
-            });
+            }
+          }
+        }
+
+        function handleAssignClick(id, rowData) {
+          if (!rowData) return;
+          const assignmentCard = document.getElementById('pattern-assignment-card');
+          
+          // Populate Details Grid
+          const idPill = document.getElementById('sel-detail-id-pill');
+          if (idPill) idPill.textContent = id;
+
+          const fieldMap = {
+            'sel-detail-id': id,
+            'sel-detail-title': rowData.customer_ref || rowData.style || '-',
+            'sel-detail-cust': rowData.customer || '-',
+            'sel-detail-dept': rowData.customer_department || rowData.cus_dept || '-',
+            'sel-detail-season': rowData.season || rowData.tkl_season || '-',
+            'sel-detail-fabric': rowData.fabric_add_ons || '-',
+            'sel-detail-pl': rowData.pl_name || rowData.assignee || '-',
+            'sel-detail-status': rowData.status || '-',
+            'sel-detail-created': rowData.pl_uploaded_date || rowData.uploaded_date || '-',
+            'sel-detail-created-by': rowData.created_by || rowData.plalias || 'System',
+            'sel-detail-remarks': rowData.req_remarks || rowData.remarks || '-'
+          };
+
+          for (const [eid, val] of Object.entries(fieldMap)) {
+            const el = document.getElementById(eid);
+            if (el) el.textContent = val;
           }
 
-          function handleAssignClick(id, rowData) {
-            if (!rowData) return;
-            const assignmentCard = document.getElementById('pattern-assignment-card');
-            
-            // Populate Details Grid
-            const idPill = document.getElementById('sel-detail-id-pill');
-            if (idPill) idPill.textContent = id;
+          // --- Render Fabric Table (Synced with Techpack) ---
+          renderFabricDetails(rowData);
 
-            const fieldMap = {
-              'sel-detail-id': id,
-              'sel-detail-title': rowData.customer_ref || rowData.style || '-',
-              'sel-detail-cust': rowData.customer || '-',
-              'sel-detail-dept': rowData.customer_department || rowData.cus_dept || '-',
-              'sel-detail-season': rowData.season || rowData.tkl_season || '-',
-              'sel-detail-fabric': rowData.fabric_add_ons || '-',
-              'sel-detail-pl': rowData.pl_name || rowData.assignee || '-',
-              'sel-detail-status': rowData.status || '-',
-              'sel-detail-created': rowData.pl_uploaded_date || rowData.uploaded_date || '-',
-              'sel-detail-created-by': rowData.created_by || rowData.plalias || 'System',
-              'sel-detail-remarks': rowData.req_remarks || rowData.remarks || '-'
-            };
-
-            for (const [eid, val] of Object.entries(fieldMap)) {
-              const el = document.getElementById(eid);
-              if (el) el.textContent = val;
+          const folderValue = rowData.folder_path || rowData.folder_link || '-';
+          const folderEl = document.getElementById('sel-detail-folder');
+          if (folderEl) {
+            if (folderValue !== '-' && String(folderValue).startsWith('http')) {
+              folderEl.innerHTML = `<a href="${folderValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Folder</a>`;
+            } else {
+              folderEl.textContent = folderValue;
             }
+          }
 
-            // --- Render Fabric Table (Synced with Techpack) ---
-            renderFabricDetails(rowData);
+          const pmNameInput = document.getElementById('action-pm-name');
+          if (pmNameInput) pmNameInput.value = '';
+          
+          const browseBtn = document.getElementById('action-browse-files-btn');
+          if (browseBtn) browseBtn.dataset.link = folderValue;
 
-            const folderValue = rowData.folder_path || rowData.folder_link || '-';
-            const folderEl = document.getElementById('sel-detail-folder');
-            if (folderEl) {
-              if (folderValue !== '-' && String(folderValue).startsWith('http')) {
-                folderEl.innerHTML = `<a href="${folderValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Folder</a>`;
-              } else {
-                folderEl.textContent = folderValue;
+          if (assignmentCard) {
+            assignmentCard.style.display = 'block';
+            assignmentCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+
+        function handleDetailsClick(id, rowData) {
+          if (!rowData) return;
+          const detailsContent = document.getElementById('details-content');
+          const displayFields = [
+            { label: 'C Number', value: id },
+            { label: 'Customer Reference', value: rowData.customer_ref || rowData.style },
+            { label: 'Customer', value: rowData.customer },
+            { label: 'Season', value: rowData.season || rowData.tkl_season },
+            { label: 'Fabric Details', value: rowData.fabric_add_ons || '-' },
+            { label: 'PM Name', value: rowData.pm_name || rowData.pl_name || '-' },
+            { label: 'Status', value: rowData.status },
+            { label: 'Expected Date', value: rowData.costing_expected_date || rowData.due },
+            { label: 'Remarks', value: rowData.req_remarks || rowData.remarks || '-' },
+            { label: 'Folder Path', value: rowData.folder_path || rowData.folder_link || '-' }
+          ];
+
+          if (detailsContent) {
+            detailsContent.innerHTML = displayFields.map(field => {
+              let displayValue = field.value || '-';
+              if (field.label === 'Status') {
+                displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
+              } else if (field.label === 'Folder Path' && displayValue !== '-' && String(displayValue).startsWith('http')) {
+                displayValue = `<a href="${displayValue}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Open Folder</a>`;
               }
-            }
-
-            const pmNameInput = document.getElementById('action-pm-name');
-            if (pmNameInput) pmNameInput.value = '';
-            
-            const browseBtn = document.getElementById('action-browse-files-btn');
-            if (browseBtn) browseBtn.dataset.link = folderValue;
-
-            if (assignmentCard) {
-              assignmentCard.style.display = 'block';
-              assignmentCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+              return `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;"><strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong><span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span></div>`;
+            }).join('');
+            document.getElementById('details-modal').style.display = 'flex';
           }
+        }
 
-          function handleDetailsClick(id, rowData) {
-            if (!rowData) return;
-            const detailsContent = document.getElementById('details-content');
-            const displayFields = [
-              { label: 'C Number', value: id },
-              { label: 'Customer Reference', value: rowData.customer_ref || rowData.style },
-              { label: 'Customer', value: rowData.customer },
-              { label: 'Season', value: rowData.season || rowData.tkl_season },
-              { label: 'Fabric Details', value: rowData.fabric_add_ons || '-' },
-              { label: 'PM Name', value: rowData.pm_name || rowData.pl_name || '-' },
-              { label: 'Status', value: rowData.status },
-              { label: 'Expected Date', value: rowData.costing_expected_date || rowData.due },
-              { label: 'Remarks', value: rowData.req_remarks || rowData.remarks || '-' },
-              { label: 'Folder Path', value: rowData.folder_path || rowData.folder_link || '-' }
-            ];
+        function handleRemarksClick(id, rowData) {
+          currentRemarksReqId = id;
+          const ridEl = document.getElementById('remarks-req-id');
+          const txt = document.getElementById('remarks-textarea');
+          const statusEl = document.getElementById('remarks-status');
+          const modal = document.getElementById('remarks-modal');
 
-            if (detailsContent) {
-              detailsContent.innerHTML = displayFields.map(field => {
-                let displayValue = field.value || '-';
-                if (field.label === 'Status') {
-                  displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
-                } else if (field.label === 'Folder Path' && displayValue !== '-' && String(displayValue).startsWith('http')) {
-                  displayValue = `<a href="${displayValue}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Open Folder</a>`;
-                }
-                return `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;"><strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong><span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span></div>`;
-              }).join('');
-              document.getElementById('details-modal').style.display = 'flex';
-            }
-          }
-
-          function handleRemarksClick(id, rowData) {
-            currentRemarksReqId = id;
-            const ridEl = document.getElementById('remarks-req-id');
-            const txt = document.getElementById('remarks-textarea');
-            const statusEl = document.getElementById('remarks-status');
-            const modal = document.getElementById('remarks-modal');
-
-            if (ridEl) ridEl.textContent = id;
-            if (txt) txt.value = localStorage.getItem(`patternRemarks:${id}`) || '';
-            if (statusEl) statusEl.style.display = 'none';
-            
-            syncRemarksModalMode();
-            if (modal) modal.style.display = 'flex';
-            if (txt) setTimeout(() => txt.focus(), 0);
-          }
+          if (ridEl) ridEl.textContent = id;
+          if (txt) txt.value = localStorage.getItem(`patternRemarks:${id}`) || '';
+          if (statusEl) statusEl.style.display = 'none';
+          
+          syncRemarksModalMode();
+          if (modal) modal.style.display = 'flex';
+          if (txt) setTimeout(() => txt.focus(), 0);
         }
 
         // --- Modals Logic ---
