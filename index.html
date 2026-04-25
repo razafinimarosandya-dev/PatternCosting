@@ -1901,9 +1901,23 @@
         const tableSection = document.querySelector('.pattern-tasks');
         const calendarSection = document.getElementById('calendar-section');
 
+        function closeActivePanels() {
+          // Hide Assignment Card
+          const assignmentCard = document.getElementById('pattern-assignment-card');
+          if (assignmentCard) assignmentCard.style.display = 'none';
+
+          // Hide Modals
+          const modals = ['details-modal', 'remarks-modal', 'filter-modal'];
+          modals.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+          });
+        }
+
         if (navPattern && navComplete && navCalendar) {
           navPattern.addEventListener('click', (e) => {
             e.preventDefault();
+            closeActivePanels();
             currentTab = 'AWAITING PATTERN';
             setActiveTab('nav-pattern');
             tableSection.style.display = 'block';
@@ -1914,6 +1928,7 @@
 
           navComplete.addEventListener('click', (e) => {
             e.preventDefault();
+            closeActivePanels();
             currentTab = 'PM ASSIGN';
             setActiveTab('nav-complete');
             tableSection.style.display = 'block';
@@ -1925,6 +1940,7 @@
           if (navList) {
             navList.addEventListener('click', (e) => {
               e.preventDefault();
+              closeActivePanels();
               currentTab = 'LIST_VIEW';
               setActiveTab('nav-list');
               tableSection.style.display = 'block';
@@ -1936,6 +1952,7 @@
 
           navCalendar.addEventListener('click', (e) => {
             e.preventDefault();
+            closeActivePanels();
             currentTab = 'CALENDAR';
             setActiveTab('nav-calendar');
             tableSection.style.display = 'none';
