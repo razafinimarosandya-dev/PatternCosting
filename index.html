@@ -2759,46 +2759,7 @@
                   const id = e.currentTarget.getAttribute('data-id');
                   const rowData = allRequests.find((r, idx) => (r.id || `REQ-${idx + 1}`) === id);
                   if (rowData) {
-                    // Re-use main details logic
-                    const detailsContent = document.getElementById('details-content');
-                    const displayFields = [
-                      { label: 'C Number', value: rowData.id || rowData.C_Number },
-                      { label: 'Customer Reference', value: rowData.Title || rowData.Style || rowData.style },
-                      { label: 'Customer', value: rowData.Customer || rowData.customer },
-                      { label: 'Cus Dept', value: rowData.Cus_Dept || rowData.cusDept || rowData['Customer Department'] },
-                      { label: 'TKL Season', value: rowData.TKL_Season || rowData.tklSeason },
-                      { label: 'Main Fabric', value: rowData.Main_Fabric || rowData.mainFabric },
-                      { label: 'Fabric Header', value: rowData.Fabric_Header || rowData.fabricHeader },
-                      { label: 'PM Name', value: rowData.PM_Name || rowData.Pattern_Maker || rowData.PL_Name || rowData.assignee || '-' },
-                      { label: 'Status', value: rowData.Status || rowData.status },
-                      { label: 'Created', value: rowData.Created || rowData.createdDate || rowData.Requested_Date || rowData.PM_Uploaded_Date || rowData.Uploaded_Date },
-                      { label: 'Created By', value: rowData['Created By'] || rowData.createdBy },
-                      { label: 'Remarks', value: rowData.remarks || rowData.Remarks || '-' },
-                      { label: 'Folder Path', value: rowData.Folder_Path || rowData.folderLink || rowData.folder_link || '-' }
-                    ];
-
-                    detailsContent.innerHTML = displayFields.map(field => {
-                      let displayValue = field.value || '-';
-                      if (field.label === 'Created' && displayValue !== '-') {
-                        displayValue = formatToDDMMYYYY(displayValue);
-                      } else if (field.label === 'Status') {
-                        displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
-                      } else if (field.label === 'Folder Path' && field.value !== '-') {
-                        if (field.value.startsWith('http')) {
-                          displayValue = `<a href="${field.value}" target="_blank" style="color: var(--primary-color); text-decoration: underline; word-break: break-all;">Open Folder</a>`;
-                        } else {
-                          displayValue = `<span style="word-break: break-all; font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 4px 6px; border-radius: 4px;">${field.value}</span>`;
-                        }
-                      }
-                      return `
-                        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;">
-                          <strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong>
-                          <span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span>
-                        </div>
-                      `;
-                    }).join('');
-
-                    document.getElementById('details-modal').style.display = 'flex';
+                    handleDetailsClick(id, rowData);
                   }
                 });
               });
