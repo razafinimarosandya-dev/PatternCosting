@@ -1514,8 +1514,16 @@
                   <div class="detail-value" id="sel-detail-folder">-</div>
                 </div>
                 <div class="detail-card" style="grid-column: 1 / -1;">
-                  <span class="detail-label">Remarks</span>
+                  <span class="detail-label">Remarks Request</span>
                   <div class="detail-value" id="sel-detail-remarks" style="white-space: pre-wrap;">-</div>
+                </div>
+                <div class="detail-card" style="grid-column: 1 / -1;">
+                  <span class="detail-label">Remarks Techpack</span>
+                  <div class="detail-value" id="sel-detail-remarks-tp" style="white-space: pre-wrap;">-</div>
+                </div>
+                <div class="detail-card" style="grid-column: 1 / -1;">
+                  <span class="detail-label">Remarks Pattern</span>
+                  <div class="detail-value" id="sel-detail-remarks-pm" style="white-space: pre-wrap;">-</div>
                 </div>
                 <!-- Fabric Details Table Below -->
                 <div id="sel-detail-fabric-container" style="grid-column: 1 / -1; margin-top: 12px;">
@@ -2159,7 +2167,9 @@
             'sel-detail-status': rowData.Status || rowData.status || '-',
             'sel-detail-created': rowData.PL_Uploaded_Date || rowData.pl_uploaded_date || rowData.uploaded_date || '-',
             'sel-detail-created-by': rowData.Created_By || rowData.created_by || rowData.plalias || 'System',
-            'sel-detail-remarks': rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-'
+            'sel-detail-remarks': rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-',
+            'sel-detail-remarks-tp': rowData.Techpack_Remarks || rowData.techpack_remarks || '-',
+            'sel-detail-remarks-pm': rowData.Pattern_Remarks || rowData.pattern_remarks || '-'
           };
 
           for (const [eid, val] of Object.entries(fieldMap)) {
@@ -2206,7 +2216,9 @@
             { label: 'PM Name', key: 'PM_Name', value: rowData.PM_Name || rowData.pm_name || rowData.pattern_maker || '-' },
             { label: 'Status', key: 'Status', value: rowData.Status || rowData.status },
             { label: 'Expected Date', key: 'Costing_Expected_Date', value: formatToDDMMYYYY(rowData.Costing_Expected_Date || rowData.costing_expected_date || rowData.due) },
-            { label: 'Remarks', key: 'Req_Remarks', value: rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-' }
+            { label: 'Remarks Request', key: 'Req_Remarks', value: rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-' },
+            { label: 'Remarks Techpack', key: 'Techpack_Remarks', value: rowData.Techpack_Remarks || rowData.techpack_remarks || '-' },
+            { label: 'Remarks Pattern', key: 'Pattern_Remarks', value: rowData.Pattern_Remarks || rowData.pattern_remarks || '-' }
           ];
 
           let html = `<div class="form-grid">`;
