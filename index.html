@@ -1909,11 +1909,11 @@
           }
 
           filtered.forEach((row, index) => {
-            const safeId = row.c_number || row.id || `REQ-${index + 1}`;
+            const safeId = row.C_Number || row.c_number || row.id || `REQ-${index + 1}`;
             const tr = document.createElement('tr');
             const ownerName = currentTab === 'AWAITING PATTERN'
-              ? (row.pl_name || row.assignee || 'Unassigned')
-              : (row.pm_name || row.pattern_maker || row.assignee || 'Unknown');
+              ? (row.PL_Name || row.pl_name || row.assignee || 'Unassigned')
+              : (row.PM_Name || row.pm_name || row.pattern_maker || row.assignee || 'Unknown');
 
             const parseSheetDate = (dateStr) => {
               if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
@@ -1962,14 +1962,14 @@
             ${ownerName}
           </div>
         </td>
-        <td>${formatToDDMMYYYY(row.costing_expected_date || row.due)}</td>
+        <td>${formatToDDMMYYYY(row.Costing_Expected_Date || row.costing_expected_date || row.due)}</td>
         <td>
           <span class="status-badge ${currentTab === 'AWAITING PATTERN' ? 'pending-badge' : 'success-badge'}">
             ${row.status || 'PENDING'}
           </span>
         </td>
         <td style="display: ${(currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? 'table-cell' : 'none'}; font-weight: 500; color: var(--text-main);">
-          ${(currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? (row.PM_Name || row.Pattern_Maker || 'Unknown') : ''}
+          ${(currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? (row.PM_Name || row.pm_name || row.Pattern_Maker || 'Unknown') : ''}
         </td>
         <td style="text-align: center;">
              ${currentTab === 'AWAITING PATTERN'
@@ -2033,16 +2033,16 @@
 
           const fieldMap = {
             'sel-detail-id': id,
-            'sel-detail-title': rowData.customer_ref || rowData.style || '-',
-            'sel-detail-cust': rowData.customer || '-',
-            'sel-detail-dept': rowData.customer_department || rowData.cus_dept || '-',
-            'sel-detail-season': rowData.season || rowData.tkl_season || '-',
-            'sel-detail-fabric': rowData.fabric_add_ons || '-',
-            'sel-detail-pl': rowData.pl_name || rowData.assignee || '-',
-            'sel-detail-status': rowData.status || '-',
-            'sel-detail-created': rowData.pl_uploaded_date || rowData.uploaded_date || '-',
-            'sel-detail-created-by': rowData.created_by || rowData.plalias || 'System',
-            'sel-detail-remarks': rowData.req_remarks || rowData.remarks || '-'
+            'sel-detail-title': rowData.Customer_Ref || rowData.customer_ref || rowData.style || '-',
+            'sel-detail-cust': rowData.Customer || rowData.customer || '-',
+            'sel-detail-dept': rowData.Customer_Department || rowData.customer_department || rowData.cus_dept || '-',
+            'sel-detail-season': rowData.Season || rowData.season || rowData.tkl_season || '-',
+            'sel-detail-fabric': rowData.Fabric_Add_Ons || rowData.fabric_add_ons || '-',
+            'sel-detail-pl': rowData.PL_Name || rowData.pl_name || rowData.assignee || '-',
+            'sel-detail-status': rowData.Status || rowData.status || '-',
+            'sel-detail-created': rowData.PL_Uploaded_Date || rowData.pl_uploaded_date || rowData.uploaded_date || '-',
+            'sel-detail-created-by': rowData.Created_By || rowData.created_by || rowData.plalias || 'System',
+            'sel-detail-remarks': rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-'
           };
 
           for (const [eid, val] of Object.entries(fieldMap)) {
@@ -2080,15 +2080,15 @@
           const detailsContent = document.getElementById('details-content');
           const displayFields = [
             { label: 'C Number', value: id },
-            { label: 'Customer Reference', value: rowData.customer_ref || rowData.style },
-            { label: 'Customer', value: rowData.customer },
-            { label: 'Season', value: rowData.season || rowData.tkl_season },
-            { label: 'Fabric Details', value: rowData.fabric_add_ons || '-' },
-            { label: 'PM Name', value: rowData.pm_name || rowData.pl_name || '-' },
-            { label: 'Status', value: rowData.status },
-            { label: 'Expected Date', value: rowData.costing_expected_date || rowData.due },
-            { label: 'Remarks', value: rowData.req_remarks || rowData.remarks || '-' },
-            { label: 'Folder Path', value: rowData.folder_path || rowData.folder_link || '-' }
+            { label: 'Customer Reference', value: rowData.Customer_Ref || rowData.customer_ref || rowData.style },
+            { label: 'Customer', value: rowData.Customer || rowData.customer },
+            { label: 'Season', value: rowData.Season || rowData.season || rowData.tkl_season },
+            { label: 'Fabric Details', value: rowData.Fabric_Add_Ons || rowData.fabric_add_ons || '-' },
+            { label: 'PM Name', value: rowData.PM_Name || rowData.pm_name || rowData.pattern_maker || '-' },
+            { label: 'Status', value: rowData.Status || rowData.status },
+            { label: 'Expected Date', value: rowData.Costing_Expected_Date || rowData.costing_expected_date || rowData.due },
+            { label: 'Remarks', value: rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-' },
+            { label: 'Folder Path', value: rowData.Folder_Path || rowData.folder_path || rowData.folder_link || '-' }
           ];
 
           if (detailsContent) {
@@ -2692,12 +2692,12 @@
             const line = document.createElement('div');
             line.className = 'pattern-gallery-row';
 
-            const styleDisp = row.style || row.Style || '-';
-            const customerDisp = row.customer || row.Customer || '-';
+            const styleDisp = row.Customer_Ref || row.customer_ref || row.style || row.Style || '-';
+            const customerDisp = row.Customer || row.customer || row.Customer || '-';
             const plDisp = usePlName
-              ? (row.assignee || row.PL_Name || 'Unassigned')
-              : (row.PM_Name || row.Pattern_Maker || 'Unknown');
-            const dueDisp = row.due || '-';
+              ? (row.PL_Name || row.assignee || row.PL_Name || 'Unassigned')
+              : (row.PM_Name || row.pm_name || row.Pattern_Maker || 'Unknown');
+            const dueDisp = formatToDDMMYYYY(row.Costing_Expected_Date || row.costing_expected_date || row.due || '-');
             const statusDisp = row.status || 'PENDING';
             const av = row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId);
 
