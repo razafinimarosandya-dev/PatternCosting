@@ -2625,10 +2625,10 @@
             return isNaN(fallback) ? null : fallback;
           };
 
-          // Filter rows for the two statuses
+          // Filter rows for the relevant statuses
           const calendarRows = allRequests.filter(r => {
             const s = normalizeStatus(r.status);
-            return s === 'PM ASSIGN' || s === 'PM ASSIGNED' || s === 'AWAITING CONSO';
+            return s === 'PM ASSIGN' || s === 'PM ASSIGNED' || s === 'AWAITING CONSO' || s === 'AWAITING PATTERN';
           });
 
           calendarRows.forEach(row => {
@@ -2636,11 +2636,11 @@
             let dateStr = '';
             let type = '';
 
-            if (status === 'PM ASSIGN' || status === 'PM ASSIGNED') {
-              dateStr = row.PL_Uploaded_Date || row.Uploaded_Date;
+            if (status === 'PM ASSIGN' || status === 'PM ASSIGNED' || status === 'AWAITING PATTERN') {
+              dateStr = row.PL_Uploaded_Date || row.pl_uploaded_date || row.Uploaded_Date || row.uploaded_date;
               type = 'pmAssign';
             } else if (status === 'AWAITING CONSO') {
-              dateStr = row.PM_Uploaded_Date || row.PM_Date;
+              dateStr = row.PM_Uploaded_Date || row.pm_uploaded_date || row.PM_Date || row.pm_date;
               type = 'awaitingConso';
             }
 
@@ -2717,11 +2717,11 @@
               const status = normalizeStatus(r.status);
               let ds = '';
               let t = '';
-              if (status === 'PM ASSIGN' || status === 'PM ASSIGNED') {
-                ds = r.PL_Uploaded_Date || r.Uploaded_Date;
+              if (status === 'PM ASSIGN' || status === 'PM ASSIGNED' || status === 'AWAITING PATTERN') {
+                ds = r.PL_Uploaded_Date || r.pl_uploaded_date || r.Uploaded_Date || r.uploaded_date;
                 t = 'pmAssign';
               } else if (status === 'AWAITING CONSO') {
-                ds = r.PM_Uploaded_Date || r.PM_Date;
+                ds = r.PM_Uploaded_Date || r.pm_uploaded_date || r.PM_Date || r.pm_date;
                 t = 'awaitingConso';
               }
               const rd = globalParseSheetDate(ds);
