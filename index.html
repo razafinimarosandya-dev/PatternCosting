@@ -1191,7 +1191,121 @@
       font-size: 0.75rem;
       font-weight: 700;
     }
-  </style>
+    /* Modal Backdrop (Premium Design) */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.42);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2500;
+    backdrop-filter: blur(2px);
+  }
+
+  .modal-window {
+    background: white;
+    width: 920px;
+    max-width: 96vw;
+    max-height: 90vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    animation: modalFadeUp 0.3s ease-out;
+  }
+
+  @keyframes modalFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-header {
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-header h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: color 0.2s;
+  }
+
+  .close-btn:hover { color: #475569; }
+
+  .modal-body {
+    padding: 1.75rem;
+    overflow-y: auto;
+    flex: 1;
+    background: #fff;
+  }
+
+  .modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    background: #f8fafc;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .detail-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: var(--transition);
+  }
+
+  .detail-card:hover { border-color: #cbd5e1; background: #f1f5f9; }
+
+  .detail-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: capitalize;
+    margin-bottom: 2px;
+  }
+
+  .detail-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    word-break: break-word;
+  }
+
+  .status-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+</style>
 
 <body>
   <div class="app-container">
@@ -1523,17 +1637,20 @@
       </div>
     </div>
 
-    <!-- Details Modal -->
-    <div class="modal" id="details-modal"
-      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
-      <div class="card"
-        style="width: 500px; padding: 24px; background: white; border-radius: 8px; max-height: 80vh; overflow-y: auto;">
-        <h3 style="margin-bottom: 16px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">Request Details</h3>
-        <div id="details-content" style="line-height: 1.6; font-size: 14px; margin-bottom: 24px;">
-          <!-- Populated via JS -->
+    <!-- Details Modal (Premium Techpack Style) -->
+    <div class="modal-backdrop" id="details-modal">
+      <div class="modal-window">
+        <div class="modal-header">
+          <h2>Request Details</h2>
+          <button class="close-btn" id="close-details-btn">&times;</button>
         </div>
-        <div style="display: flex; justify-content: flex-end;">
-          <button class="btn-secondary" id="close-details-btn" style="padding: 8px 16px;">Close</button>
+        <div class="modal-body">
+          <div id="details-content">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="document.getElementById('details-modal').style.display='none';">Close</button>
         </div>
       </div>
     </div>
@@ -2078,31 +2195,62 @@
         function handleDetailsClick(id, rowData) {
           if (!rowData) return;
           const detailsContent = document.getElementById('details-content');
+          if (!detailsContent) return;
+
           const displayFields = [
-            { label: 'C Number', value: id },
-            { label: 'Customer Reference', value: rowData.Customer_Ref || rowData.customer_ref || rowData.style },
-            { label: 'Customer', value: rowData.Customer || rowData.customer },
-            { label: 'Season', value: rowData.Season || rowData.season || rowData.tkl_season },
-            { label: 'Fabric Details', value: rowData.Fabric_Add_Ons || rowData.fabric_add_ons || '-' },
-            { label: 'PM Name', value: rowData.PM_Name || rowData.pm_name || rowData.pattern_maker || '-' },
-            { label: 'Status', value: rowData.Status || rowData.status },
-            { label: 'Expected Date', value: rowData.Costing_Expected_Date || rowData.costing_expected_date || rowData.due },
-            { label: 'Remarks', value: rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-' },
-            { label: 'Folder Path', value: rowData.Folder_Path || rowData.folder_path || rowData.folder_link || '-' }
+            { label: 'C Number', key: 'C_Number', value: id },
+            { label: 'Customer Reference', key: 'Customer_Ref', value: rowData.Customer_Ref || rowData.customer_ref || rowData.style },
+            { label: 'Customer', key: 'Customer', value: rowData.Customer || rowData.customer },
+            { label: 'Cus Dept', key: 'Customer_Department', value: rowData.Customer_Department || rowData.customer_department || rowData.cus_dept },
+            { label: 'Season', key: 'Season', value: rowData.Season || rowData.season || rowData.tkl_season },
+            { label: 'PM Name', key: 'PM_Name', value: rowData.PM_Name || rowData.pm_name || rowData.pattern_maker || '-' },
+            { label: 'Status', key: 'Status', value: rowData.Status || rowData.status },
+            { label: 'Expected Date', key: 'Costing_Expected_Date', value: formatToDDMMYYYY(rowData.Costing_Expected_Date || rowData.costing_expected_date || rowData.due) },
+            { label: 'Remarks', key: 'Req_Remarks', value: rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-' }
           ];
 
-          if (detailsContent) {
-            detailsContent.innerHTML = displayFields.map(field => {
-              let displayValue = field.value || '-';
-              if (field.label === 'Status') {
-                displayValue = `<span class="badge" style="background-color: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 11px;">${displayValue}</span>`;
-              } else if (field.label === 'Folder Path' && displayValue !== '-' && String(displayValue).startsWith('http')) {
-                displayValue = `<a href="${displayValue}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Open Folder</a>`;
-              }
-              return `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #f3f4f6; padding: 10px 4px; align-items: flex-start; gap: 16px;"><strong style="color: var(--text-muted); font-weight: 500; min-width: 120px;">${field.label}</strong><span style="color: var(--text-main); font-weight: 500; text-align: right; word-break: break-word;">${displayValue}</span></div>`;
-            }).join('');
-            document.getElementById('details-modal').style.display = 'flex';
+          let html = `<div class="form-grid">`;
+          displayFields.forEach(field => {
+            let displayValue = field.value || '-';
+            if (field.label === 'Status') {
+              displayValue = `<span class="status-pill success-badge" style="background-color: #d1fae5; color: #059669;">${displayValue}</span>`;
+            }
+            html += `
+              <div class="detail-card">
+                <span class="detail-label">${field.label}</span>
+                <div class="detail-value">${displayValue}</div>
+              </div>`;
+          });
+          html += `</div>`;
+
+          // Add Fabric Details Container
+          html += `
+            <div style="margin-top: 24px;">
+              <h3 style="font-size: 14px; color: #1e293b; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                Fabric Details
+              </h3>
+              <div id="modal-fabric-container"></div>
+            </div>`;
+
+          // Add Folder Path
+          const folderValue = rowData.Folder_Path || rowData.folder_path || rowData.folder_link || '-';
+          let folderDisplay = folderValue;
+          if (folderValue !== '-' && String(folderValue).startsWith('http')) {
+            folderDisplay = `<a href="${folderValue}" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Open Folder</a>`;
           }
+          
+          html += `
+            <div class="detail-card" style="margin-top: 16px;">
+              <span class="detail-label">Folder Path</span>
+              <div class="detail-value">${folderDisplay}</div>
+            </div>`;
+
+          detailsContent.innerHTML = html;
+
+          // Render Fabric Details in the modal
+          renderFabricDetails(rowData, 'modal-fabric-container');
+
+          document.getElementById('details-modal').style.display = 'flex';
         }
 
         function handleRemarksClick(id, rowData) {
