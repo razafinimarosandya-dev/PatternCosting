@@ -2358,13 +2358,16 @@
             { key: "fabric", label: "Fabric Name", width: "" },
             { key: "gms", label: "GMS", width: "70px" },
             { key: "composition", label: "Composition", width: "" },
-            { key: "width", width: "70px" },
+            { key: "width", label: "Width", width: "70px" },
             { key: "header", label: "Header", width: "" }
           ];
 
           const activeCols = columns.filter(col => {
             if (col.key === 'opt' || col.key === 'fabric') return true;
-            return fabricRows.some(r => r[col.key] && String(r[col.key]).trim() !== '' && String(r[col.key]).trim() !== '-');
+            return fabricRows.some(r => {
+              const v = r[col.key];
+              return v != null && String(v).trim() !== '' && String(v).trim() !== '-' && String(v).trim().toLowerCase() !== 'undefined';
+            });
           });
 
           const tableHtml = `
@@ -2383,7 +2386,8 @@
                     ${fabricRows.map((item, idx) => `
                       <tr>
                         ${activeCols.map(col => {
-                          let val = item[col.key] || (col.key === 'opt' ? String.fromCharCode(65 + idx) : '-');
+                          let raw = item[col.key];
+                          let val = (raw != null && String(raw).trim() !== '' && String(raw).trim().toLowerCase() !== 'undefined') ? raw : (col.key === 'opt' ? String.fromCharCode(65 + idx) : '-');
                           let displayVal = val;
                           if (String(val).startsWith('http')) {
                             displayVal = `<a href="${val}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: underline;">Open Folder</a>`;
@@ -2625,10 +2629,10 @@
             return isNaN(fallback) ? null : fallback;
           };
 
-          // Filter rows for the relevant statuses
+          // Filter rows for the relevant statuses (Strictly PM ASSIGNED and AWAITING CONSO)
           const calendarRows = allRequests.filter(r => {
             const s = normalizeStatus(r.status);
-            return s === 'PM ASSIGN' || s === 'PM ASSIGNED' || s === 'AWAITING CONSO' || s === 'AWAITING PATTERN';
+            return s === 'PM ASSIGNED' || s === 'AWAITING CONSO';
           });
 
           calendarRows.forEach(row => {
@@ -2636,7 +2640,7 @@
             let dateStr = '';
             let type = '';
 
-            if (status === 'PM ASSIGN' || status === 'PM ASSIGNED' || status === 'AWAITING PATTERN') {
+            if (status === 'PM ASSIGNED') {
               dateStr = row.PL_Uploaded_Date || row.pl_uploaded_date || row.Uploaded_Date || row.uploaded_date;
               type = 'pmAssign';
             } else if (status === 'AWAITING CONSO') {
@@ -2689,7 +2693,7 @@
                 b.style.fontWeight = 'bold';
                 b.style.textAlign = 'center';
                 b.style.cursor = 'pointer';
-                b.textContent = `${counts.pmAssign} PM Assign`;
+                b.textContent = `${counts.pmAssign} Assigned`;
                 b.onclick = () => showDayModal(i, 'pmAssign');
                 dayCell.appendChild(b);
               }
@@ -2717,7 +2721,7 @@
               const status = normalizeStatus(r.status);
               let ds = '';
               let t = '';
-              if (status === 'PM ASSIGN' || status === 'PM ASSIGNED' || status === 'AWAITING PATTERN') {
+              if (status === 'PM ASSIGNED') {
                 ds = r.PL_Uploaded_Date || r.pl_uploaded_date || r.Uploaded_Date || r.uploaded_date;
                 t = 'pmAssign';
               } else if (status === 'AWAITING CONSO') {
@@ -2739,7 +2743,7 @@
                 const s = normalizeStatus(r.status);
                 const isConso = s === 'AWAITING CONSO';
                 const color = isConso ? '#10b981' : 'var(--primary-color)';
-                const label = isConso ? 'Conso' : 'PM Assign';
+                const label = isConso ? 'Conso' : 'PM Assigned';
 
                 return `
                 <div style="padding: 10px 8px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
