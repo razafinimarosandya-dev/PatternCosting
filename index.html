@@ -1075,123 +1075,131 @@
     text-align: center;
   }
 
-    .pattern-gallery-empty {
-      padding: 48px 20px;
-      text-align: center;
-      color: #64748b;
-    }
+  .pattern-gallery-empty {
+    padding: 48px 20px;
+    text-align: center;
+    color: #64748b;
+  }
 
-    /* Premium Detail Grid Styles (Synced with Techpack) */
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
+  /* Premium Detail Grid Styles (Synced with Techpack) */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
 
-    .detail-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      transition: all 0.2s ease;
-    }
+  .detail-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all 0.2s ease;
+  }
 
-    .detail-card:hover {
-      border-color: #cbd5e1;
-      background: #f1f5f9;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    }
+  .detail-card:hover {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
 
-    .detail-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #64748b;
-      text-transform: capitalize;
-      letter-spacing: 0.01em;
-      margin-bottom: 2px;
-    }
+  .detail-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: capitalize;
+    letter-spacing: 0.01em;
+    margin-bottom: 2px;
+  }
 
-    .detail-value {
-      font-size: 14px;
-      font-weight: 700;
-      color: #1e293b;
-      word-break: break-word;
-    }
+  .detail-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    word-break: break-word;
+  }
 
-    /* Fabric Table Styling (Synced with Techpack) */
-    .fabric-table-wrap {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-top: 12px;
-      margin-bottom: 24px;
-      overflow: hidden;
-      background: #f8fafc;
-    }
+  /* Fabric Table Styling (Synced with Techpack) */
+  .fabric-table-wrap {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    background: #f8fafc;
+  }
 
-    .fabric-table-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      border-bottom: 1px solid #e2e8f0;
-      background: #f1f5f9;
-    }
+  .fabric-table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f1f5f9;
+  }
 
-    .fabric-table-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--primary-color);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
+  .fabric-table-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
 
-    .fabric-table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
+  .fabric-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
 
-    .fabric-table th, .fabric-table td {
-      border-right: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 10px 12px;
-      font-size: 0.82rem;
-      text-align: left;
-    }
+  .fabric-table th,
+  .fabric-table td {
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    text-align: left;
+  }
 
-    .fabric-table th {
-      background: #f8fafc;
-      color: #64748b;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-    }
+  .fabric-table th {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
 
-    .fabric-table td {
-      background: #fff;
-      color: #1e293b;
-    }
+  .fabric-table td {
+    background: #fff;
+    color: #1e293b;
+  }
 
-    .fabric-table tr:last-child td { border-bottom: none; }
-    .fabric-table th:last-child, .fabric-table td:last-child { border-right: none; }
+  .fabric-table tr:last-child td {
+    border-bottom: none;
+  }
 
-    .fabric-opt-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: var(--primary-color);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    /* Modal Backdrop (Premium Design) */
+  .fabric-table th:last-child,
+  .fabric-table td:last-child {
+    border-right: none;
+  }
+
+  .fabric-opt-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* Modal Backdrop (Premium Design) */
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -1217,8 +1225,15 @@
   }
 
   @keyframes modalFadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .modal-header {
@@ -1245,7 +1260,9 @@
     transition: color 0.2s;
   }
 
-  .close-btn:hover { color: #475569; }
+  .close-btn:hover {
+    color: #475569;
+  }
 
   .modal-body {
     padding: 1.75rem;
@@ -1281,7 +1298,10 @@
     transition: var(--transition);
   }
 
-  .detail-card:hover { border-color: #cbd5e1; background: #f1f5f9; }
+  .detail-card:hover {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+  }
 
   .detail-label {
     font-size: 11px;
@@ -1410,7 +1430,8 @@
       </div>
       <div class="nav-right">
         <div class="profile-container" id="profile-trigger">
-          <img class="avatar" id="user-avatar" src="https://ui-avatars.com/api/?name=User&background=ed8936&color=fff&bold=true" alt="User Profile" />
+          <img class="avatar" id="user-avatar"
+            src="https://ui-avatars.com/api/?name=User&background=ed8936&color=fff&bold=true" alt="User Profile" />
           <div class="user-dropdown" id="user-dropdown">
             <div class="dropdown-header">
               <span id="dropdown-name" style="font-weight: 700; font-size: 14px;">User Name</span>
@@ -1418,7 +1439,12 @@
             </div>
             <div class="dropdown-divider"></div>
             <button class="sign-out-btn" id="sign-out-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
               Sign Out
             </button>
           </div>
@@ -1723,7 +1749,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn-secondary" onclick="document.getElementById('details-modal').style.display='none';">Close</button>
+          <button class="btn-secondary"
+            onclick="document.getElementById('details-modal').style.display='none';">Close</button>
         </div>
       </div>
     </div>
@@ -1735,18 +1762,19 @@
         <h3 style="margin-bottom: 20px;">Advanced Filter</h3>
         <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
           <div>
-            <label
-              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">C
+            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">C
               NUMBER</label>
             <input type="text" id="filter-id" list="id-list-pat" class="btn-outline"
               style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select C Number..." />
             <datalist id="id-list-pat"></datalist>
           </div>
           <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER
+            <label
+              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER
               REFERENCE</label>
             <input type="text" id="filter-style" list="style-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Customer Reference..." />
+              style="width: 100%; text-align: left; padding: 10px;"
+              placeholder="Search or select Customer Reference..." />
             <datalist id="style-list-pat"></datalist>
           </div>
           <div>
@@ -1764,7 +1792,8 @@
             <datalist id="pm-list-pat"></datalist>
           </div>
           <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STATUS</label>
+            <label
+              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STATUS</label>
             <input type="text" id="filter-status" list="status-list-pat" class="btn-outline"
               style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Status..." />
             <datalist id="status-list-pat"></datalist>
@@ -1905,7 +1934,7 @@
               if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Connection Error: Web App unreachable.</td></tr>`;
             };
             document.body.appendChild(script);
-            
+
             // Cleanup script after 10 seconds
             setTimeout(() => { if (script.parentNode) script.parentNode.removeChild(script); }, 10000);
 
@@ -2259,7 +2288,7 @@
         function handleAssignClick(id, rowData) {
           if (!rowData) return;
           const assignmentCard = document.getElementById('pattern-assignment-card');
-          
+
           // Populate Details Grid
           const idPill = document.getElementById('sel-detail-id-pill');
           if (idPill) idPill.textContent = id;
@@ -2299,7 +2328,7 @@
 
           const pmNameInput = document.getElementById('action-pm-name');
           if (pmNameInput) pmNameInput.value = '';
-          
+
           const browseBtn = document.getElementById('action-browse-files-btn');
           if (browseBtn) browseBtn.dataset.link = folderValue;
 
@@ -2357,7 +2386,7 @@
           if (folderValue !== '-' && String(folderValue).startsWith('http')) {
             folderDisplay = `<a href="${folderValue}" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Open Folder</a>`;
           }
-          
+
           html += `
             <div class="detail-card" style="margin-top: 16px;">
               <span class="detail-label">Folder Path</span>
@@ -2382,7 +2411,7 @@
           if (ridEl) ridEl.textContent = id;
           if (txt) txt.value = localStorage.getItem(`patternRemarks:${id}`) || '';
           if (statusEl) statusEl.style.display = 'none';
-          
+
           syncRemarksModalMode();
           if (modal) modal.style.display = 'flex';
           if (txt) setTimeout(() => txt.focus(), 0);
@@ -2476,15 +2505,15 @@
                     ${fabricRows.map((item, idx) => `
                       <tr>
                         ${activeCols.map(col => {
-                          let raw = item[col.key];
-                          let val = (raw != null && String(raw).trim() !== '' && String(raw).trim().toLowerCase() !== 'undefined') ? raw : (col.key === 'opt' ? String.fromCharCode(65 + idx) : '-');
-                          let displayVal = val;
-                          if (String(val).startsWith('http')) {
-                            displayVal = `<a href="${val}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: underline;">Open Folder</a>`;
-                          }
-                          if (col.key === 'opt') return `<td><div class="fabric-opt-chip">${val}</div></td>`;
-                          return `<td ${col.key === 'fabric' ? 'style="font-weight: 600;"' : ''}>${displayVal}</td>`;
-                        }).join('')}
+            let raw = item[col.key];
+            let val = (raw != null && String(raw).trim() !== '' && String(raw).trim().toLowerCase() !== 'undefined') ? raw : (col.key === 'opt' ? String.fromCharCode(65 + idx) : '-');
+            let displayVal = val;
+            if (String(val).startsWith('http')) {
+              displayVal = `<a href="${val}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: underline;">Open Folder</a>`;
+            }
+            if (col.key === 'opt') return `<td><div class="fabric-opt-chip">${val}</div></td>`;
+            return `<td ${col.key === 'fabric' ? 'style="font-weight: 600;"' : ''}>${displayVal}</td>`;
+          }).join('')}
                       </tr>
                     `).join('')}
                   </tbody>
@@ -2595,11 +2624,22 @@
 
         // --- Inline Assign PM Card Logic ---
         const pmNameInput = document.getElementById('action-pm-name');
+        const modalPmNameInput = document.getElementById('pm-name-input');
+        const pmEmailInput = document.getElementById('pm-email-input');
         const confirmAssignBtn = document.getElementById('action-confirm-assign-btn');
 
-        // Auto-fill or Logic for PM could be added here
+        function handlePmNameChange(e) {
+          const name = e.target.value.trim();
+          if (name && allSettings && allSettings.pmEmails && allSettings.pmEmails[name]) {
+            if (pmEmailInput) pmEmailInput.value = allSettings.pmEmails[name];
+          }
+        }
+
         if (pmNameInput) {
-          // Optional logic if needed
+          pmNameInput.addEventListener('input', handlePmNameChange);
+        }
+        if (modalPmNameInput) {
+          modalPmNameInput.addEventListener('input', handlePmNameChange);
         }
 
         if (confirmAssignBtn) {
@@ -2623,24 +2663,29 @@
             const todayStamp = new Date().toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '');
 
             // Handle dynamic recipients
-            let pmEmail = '';
-            if (allSettings && allSettings.pmEmails && allSettings.pmEmails[pmName]) {
-              pmEmail = allSettings.pmEmails[pmName];
-            }
-
             const sessionData = JSON.parse(localStorage.getItem('ACC_REMEMBERED_USER') || 'null');
-            const userEmail = sessionData ? (sessionData.email || sessionData.loginId || '') : '';
-
+            const pmEmail = allSettings.pmEmails ? allSettings.pmEmails[pmName] : '';
+            const userEmail = sessionData ? sessionData.email : '';
+            
+            // Inclusion de l'email du créateur (Created By)
+            let creatorEmail = '';
+            const creatorName = rowData ? (rowData.Created_By || rowData.created_by) : '';
+            if (creatorName && allSettings) {
+              creatorEmail = (allSettings.plEmails && allSettings.plEmails[creatorName]) || 
+                             (allSettings.pmEmails && allSettings.pmEmails[creatorName]) || '';
+            }
+            
             let recipients = [];
             if (pmEmail) recipients.push(pmEmail);
             if (userEmail) recipients.push(userEmail);
+            if (creatorEmail) recipients.push(creatorEmail);
             
             const finalTo = recipients.filter(e => e && e.includes('@')).join(',');
 
             const payload = {
               requestId: reqId,
               action: 'assign_pm',
-              status: 'PM Assigned', 
+              status: 'PM Assigned',
               PL_Due_Date: plDueDate,
               PL_Leadtime: plLeadtime,
               PM_Name: pmName,
@@ -2652,7 +2697,7 @@
               currentRef: rowData ? (rowData.customer_ref || '-') : '-',
               currentCustomer: rowData ? (rowData.customer || '-') : '-',
               appLink: window.location.origin + window.location.pathname,
-              emailTo: finalTo || 'YTeeluck@tropicknits.com', 
+              emailTo: finalTo || 'YTeeluck@tropicknits.com',
               emailSubject: `Assigned PM: ${reqId} for ${rowData ? rowData.customer_ref : 'Ref'}`,
               emailBody: `Hi,\n\nPattern Maker ${pmName} has been assigned to Request ${reqId}.\n\nRegards,\nPortal`,
               timestamp: new Date().toISOString()
@@ -3129,4 +3174,5 @@
       });
     </script>
 </body>
+
 </html>
