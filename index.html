@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pattern Tasks</title>
+  <title>Techpack Upload & Config</title>
 </head>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -197,40 +197,6 @@
     display: flex;
     align-items: center;
     gap: 16px;
-  }
-
-  .icon-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    background-color: transparent;
-    transition: var(--transition);
-  }
-
-  .icon-btn:hover {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    transform: scale(1.05);
-  }
-
-  .avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-    box-shadow: var(--shadow-sm);
-    cursor: pointer;
-    transition: var(--transition);
-  }
-
-  .avatar:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-md);
   }
 
   /* Main Content */
@@ -807,574 +773,6 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
-
-  /* Custom Additions for Pattern Table */
-  .pattern-tasks {
-    background: white;
-    border-radius: 12px;
-    padding: 32px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.02);
-    border: 1px solid var(--border-color);
-  }
-
-  .pattern-tasks h2 {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 4px;
-  }
-
-  .pattern-tasks .subtitle-text {
-    color: var(--text-muted);
-    font-size: 14px;
-  }
-
-  .header-actions {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .segmented-control {
-    display: flex;
-    background-color: #f3f4f6;
-    border-radius: 8px;
-    padding: 4px;
-  }
-
-  .segment {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-  }
-
-  .segment.active {
-    background-color: white;
-    color: var(--primary-color);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-
-  .export-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-main);
-    border-color: #e5e7eb;
-    font-weight: 600;
-  }
-
-  .export-btn:hover {
-    background-color: #8ceabb1a;
-    /* slight green tint */
-  }
-
-  /* Table Enhancements */
-  .pattern-tasks table {
-    margin-top: 16px;
-  }
-
-  .pattern-tasks th {
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .pattern-tasks td {
-    padding: 16px 20px;
-    vertical-align: middle;
-    border-bottom: 1px solid #f9fafb;
-  }
-
-  .status-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11.5px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 20px;
-    white-space: nowrap;
-  }
-
-  .pending-badge {
-    background-color: #ecfdf5;
-    color: #059669;
-  }
-
-  .success-badge {
-    background-color: #ecfdf5;
-    color: #059669;
-  }
-
-  .neutral-badge {
-    background-color: #f3f4f6;
-    color: #4b5563;
-  }
-
-  .danger-badge {
-    background-color: #fef2f2;
-    color: #dc2626;
-  }
-
-  .inprogress-badge {
-    background-color: #eff6ff;
-    color: #2563eb;
-  }
-
-  /* Actions */
-  .assign-btn {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
-  }
-
-  .assign-btn:hover {
-    background-color: var(--primary-hover);
-  }
-
-  .details-link {
-    color: var(--primary-color);
-    font-weight: 600;
-    font-size: 13px;
-  }
-
-  .details-link:hover {
-    text-decoration: underline;
-  }
-
-  .icon-btn-small {
-    color: var(--text-muted);
-    font-size: 18px;
-    line-height: 1;
-    padding: 0 4px;
-    font-weight: bold;
-  }
-
-  .icon-btn-small:hover {
-    color: var(--text-main);
-  }
-
-  .pattern-tasks tbody tr:hover {
-    background-color: #f8fafc;
-  }
-
-  .pattern-due-danger {
-    color: #dc2626;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* Table footer pagination */
-  .pattern-footer-text {
-    color: #9ca3af;
-    font-size: 13px;
-  }
-
-  /* PM Assigned: full-width rows (table-like), not card tiles */
-  .pattern-gallery-grid {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    background: #fff;
-    overflow-x: auto;
-  }
-
-  .pattern-gallery-row {
-    display: grid;
-    grid-template-columns:
-      minmax(88px, 1fr) minmax(100px, 1.35fr) minmax(90px, 1fr) minmax(120px, 1.2fr) minmax(88px, 0.95fr) minmax(104px, 1fr) minmax(148px, auto);
-    gap: 12px 16px;
-    align-items: center;
-    padding: 16px 20px;
-    border-bottom: 1px solid #f9fafb;
-    font-size: 14px;
-  }
-
-  .pattern-gallery-row:last-child {
-    border-bottom: none;
-  }
-
-  .pattern-gallery-row--head {
-    background: #fafafa;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-  }
-
-  .pattern-gallery-row:not(.pattern-gallery-row--head):hover {
-    background: #f8fafc;
-  }
-
-  .pattern-gallery-cell {
-    min-width: 0;
-  }
-
-  .pattern-gallery-cell--id {
-    color: var(--primary-color);
-    font-weight: 600;
-  }
-
-  .pattern-gallery-cell--mute {
-    color: var(--text-muted);
-  }
-
-  .pattern-gallery-cell--truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .pattern-gallery-cell--pl {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    color: var(--text-main);
-  }
-
-  .pattern-gallery-row__avatar {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .pattern-gallery-row__actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .pattern-gallery-row__actions .btn-outline {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-
-  .pattern-gallery-row--head .pattern-gallery-row__actions {
-    text-align: center;
-  }
-
-    .pattern-gallery-empty {
-      padding: 48px 20px;
-      text-align: center;
-      color: #64748b;
-    }
-
-    /* Premium Detail Grid Styles (Synced with Techpack) */
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .detail-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      transition: all 0.2s ease;
-    }
-
-    .detail-card:hover {
-      border-color: #cbd5e1;
-      background: #f1f5f9;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    }
-
-    .detail-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #64748b;
-      text-transform: capitalize;
-      letter-spacing: 0.01em;
-      margin-bottom: 2px;
-    }
-
-    .detail-value {
-      font-size: 14px;
-      font-weight: 700;
-      color: #1e293b;
-      word-break: break-word;
-    }
-
-    /* Fabric Table Styling (Synced with Techpack) */
-    .fabric-table-wrap {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      margin-top: 12px;
-      margin-bottom: 24px;
-      overflow: hidden;
-      background: #f8fafc;
-    }
-
-    .fabric-table-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      border-bottom: 1px solid #e2e8f0;
-      background: #f1f5f9;
-    }
-
-    .fabric-table-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--primary-color);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .fabric-table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-    }
-
-    .fabric-table th, .fabric-table td {
-      border-right: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 10px 12px;
-      font-size: 0.82rem;
-      text-align: left;
-    }
-
-    .fabric-table th {
-      background: #f8fafc;
-      color: #64748b;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-    }
-
-    .fabric-table td {
-      background: #fff;
-      color: #1e293b;
-    }
-
-    .fabric-table tr:last-child td { border-bottom: none; }
-    .fabric-table th:last-child, .fabric-table td:last-child { border-right: none; }
-
-    .fabric-opt-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: var(--primary-color);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    /* Modal Backdrop (Premium Design) */
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.42);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2500;
-    backdrop-filter: blur(2px);
-  }
-
-  .modal-window {
-    background: white;
-    width: 920px;
-    max-width: 96vw;
-    max-height: 90vh;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    overflow: hidden;
-    animation: modalFadeUp 0.3s ease-out;
-  }
-
-  @keyframes modalFadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .modal-header {
-    padding: 1.25rem 1.75rem;
-    border-bottom: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .modal-header h2 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 0;
-  }
-
-  .close-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #94a3b8;
-    transition: color 0.2s;
-  }
-
-  .close-btn:hover { color: #475569; }
-
-  .modal-body {
-    padding: 1.75rem;
-    overflow-y: auto;
-    flex: 1;
-    background: #fff;
-  }
-
-  .modal-footer {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    background: #f8fafc;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .detail-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    transition: var(--transition);
-  }
-
-  .detail-card:hover { border-color: #cbd5e1; background: #f1f5f9; }
-
-  .detail-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #64748b;
-    text-transform: capitalize;
-    margin-bottom: 2px;
-  }
-
-  .detail-value {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1e293b;
-    word-break: break-word;
-  }
-
-  .status-pill {
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 6px;
-    display: inline-block;
-  }
-
-  /* User Dropdown Menu (Meeting Style) */
-  .profile-container {
-    position: relative;
-    cursor: pointer;
-  }
-
-  .user-dropdown {
-    position: absolute;
-    top: calc(100% + 12px);
-    right: 0;
-    width: 240px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    padding: 8px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .user-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .dropdown-header {
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .user-email {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #0f172a;
-    word-break: break-all;
-  }
-
-  .dropdown-divider {
-    height: 1px;
-    background-color: #e2e8f0;
-    margin: 4px 0;
-  }
-
-  .sign-out-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: transparent;
-    border: none;
-    border-radius: 8px;
-    color: #ef4444;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .sign-out-btn:hover {
-    background: rgba(239, 68, 68, 0.1);
-  }
 </style>
 
 <body>
@@ -1390,7 +788,7 @@
               <path d="m4 6 8-4 8 4"></path>
             </svg>
           </div>
-          Pattern
+          Techpack Upload
         </div>
         <div class="search-bar">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1398,27 +796,43 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="search-input" placeholder="Search Style or Customer..." />
+          <input type="text" id="search-input" placeholder="Search C Number or Customer..." />
         </div>
         <div class="nav-links">
           <a href="https://costing-home.vercel.app/">Home</a>
-          <a href="#" class="active" id="nav-pattern">Unassigned</a>
-          <a href="#" id="nav-complete">Assigned</a>
-          <a href="#" id="nav-list">Completed</a>
+          <a href="#" class="active" id="nav-uploads">Pending</a>
+          <a href="#" id="nav-completed">Completed</a>
           <a href="#" id="nav-calendar">Calendar</a>
         </div>
       </div>
       <div class="nav-right">
+        <button class="icon-btn"
+          style="width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); background: transparent; transition: var(--transition);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+
+        <!-- Updated Profile Container -->
         <div class="profile-container" id="profile-trigger">
-          <img class="avatar" id="user-avatar" src="https://ui-avatars.com/api/?name=User&background=ed8936&color=fff&bold=true" alt="User Profile" />
+          <img id="user-avatar"
+            style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: var(--shadow-sm);"
+            src="https://ui-avatars.com/api/?name=User&background=cbd5e1&color=fff" alt="User Profile" />
+
           <div class="user-dropdown" id="user-dropdown">
             <div class="dropdown-header">
-              <span id="dropdown-name" style="font-weight: 700; font-size: 14px;">User Name</span>
-              <span class="user-email" id="dropdown-email">user@example.com</span>
+              <span class="user-email" id="dropdown-email">Loading...</span>
             </div>
             <div class="dropdown-divider"></div>
             <button class="sign-out-btn" id="sign-out-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
               Sign Out
             </button>
           </div>
@@ -1429,410 +843,994 @@
     <!-- Main Container -->
     <main class="main-content" style="max-width: 1440px; padding: 40px 24px;">
 
-      <!-- Page Header -->
       <div class="page-header" style="margin-bottom: 24px;">
         <div class="page-title">
           <span class="subtitle"
             style="text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; font-size: 11px; font-weight: 700;">Production
             Hub</span>
-          <h1 style="margin: 4px 0;">Pattern</h1>
+          <h1 style="margin: 4px 0;">Techpack</h1>
           <!-- Small Overview Stats -->
           <div style="display: flex; gap: 12px; margin-top: 12px;">
             <div
               style="display: flex; align-items: center; gap: 6px; background: #ecfdf5; color: #059669; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #d1fae5;">
               <div style="width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></div>
-              Unassign pattern: <span id="stat-upload-count-pill" style="font-weight: 800;">0</span>
+              Awaiting Techpack: <span id="stat-upload-count-pill" style="font-weight: 800;">0</span>
             </div>
             <div
               style="display: flex; align-items: center; gap: 6px; background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #bbf7d0;">
               <div style="width: 6px; height: 6px; background: #16a34a; border-radius: 50%;"></div>
-              Assign: <span id="stat-complete-count-pill" style="font-weight: 800;">0</span>
-            </div>
-            <div
-              style="display: flex; align-items: center; gap: 6px; background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #bfdbfe;">
-              <div style="width: 6px; height: 6px; background: #2563eb; border-radius: 50%;"></div>
-              Complete: <span id="stat-conso-count-pill" style="font-weight: 800;">0</span>
+              Complete Status: <span id="stat-complete-count-pill" style="font-weight: 800;">0</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <!-- Content Area -->
-        <div>
-          <div class="pattern-tasks">
-            <div id="table-container">
-              <div class="table-header">
-                <div>
-                  <h2 id="table-header-title">Active Pattern Tasks</h2>
-                  <p class="subtitle-text">Managing current production pattern deliverables</p>
-                </div>
-                <div style="display: flex; gap: 8px; align-items: center;">
-                  <button class="btn-ghost" id="open-filter"
-                    style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #64748b;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                    </svg>
-                    Filter Data
-                  </button>
-                  <button class="btn-outline export-btn" id="export-excel-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="7 10 12 15 17 10"></polyline>
-                      <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Export
-                  </button>
-                </div>
-              </div>
+      <!-- Selection handled in detailed grid below -->
 
-              <!-- PM Assigned: same shell as table; cards mirror table columns -->
-              <div id="gallery-container" class="pattern-gallery-grid">
-                <!-- Rendered via JS -->
-              </div>
+      <!-- Upload History & Queue (table for Uploads and Completed) -->
+      <div class="table-section" style="margin-bottom: 32px;">
+        <div class="table-header">
+          <div>
+            <h2>Upload History & Queue</h2>
+            <p class="subtitle-text" style="color: #64748b; font-size: 13px; margin-top: 4px;">Managing current techpack
+              deliverables</p>
+          </div>
+          <div>
+            <button class="btn-ghost" id="open-filter" style="display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </polygon>
+              </svg>
+              Filter Data
+            </button>
+            <button class="btn-ghost" id="export-excel-btn" style="display: none; align-items: center;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export to Excel
+            </button>
+          </div>
+        </div>
 
-              <div id="pattern-table-surface">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>C Number</th>
-                      <th>Customer Reference</th>
-                      <th>Customer</th>
-                      <th id="th-owner-name">PL Name</th>
-                      <th>Costing Expected Date</th>
-                      <th>Status</th>
-                      <th id="th-dynamic">PL Overdue</th>
-                      <th style="text-align: center;">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="table-body">
-                    <tr>
-                      <td colspan="8" style="text-align: center; padding: 40px;">⏳ Loading pattern tasks from Google
-                        Sheets...</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+        <!-- Table View (Uploads and Completed) -->
+        <div id="table-container" style="width: 100%;">
+          <table>
+            <thead>
+              <tr>
+                <th>C Number</th>
+                <th>Customer Ref</th>
+                <th>Customer</th>
+                <th>PL</th>
+                <th>Costing Expected Date</th>
+                <th>Status</th>
+                <th id="th-overdue-leadtime">PL Overdue</th>
+                <th style="text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
 
-              <div class="table-footer" style="padding-top: 16px; margin-top: 8px;">
-                <span class="pattern-footer-text">Showing patterns</span>
-                <div class="pagination">
-                  <button class="page-btn" disabled>&lt;</button>
-                  <button class="page-btn">&gt;</button>
-                </div>
-              </div>
-            </div><!-- close table-container -->
-
-          </div><!-- close pattern-tasks -->
-
-          <!-- Assignment Action appears below the table when Assign is selected -->
-          <div class="card" id="pattern-assignment-card"
-            style="display: none; margin-top: 24px; margin-bottom: 32px; width: 100%;">
-            <div class="card-header"
-              style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 18px; font-weight: 700; color: #1e293b;">Assignment Action <span
-                  id="sel-detail-id-pill" class="req-id"></span></div>
-              <button class="btn-ghost" id="clear-selection-btn" style="color: #64748b;">Clear Selection</button>
-            </div>
-
-            <div style="margin-bottom: 32px;">
-              <h3
-                style="font-size: 16px; color: #1e293b; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="16" x2="12" y2="12" />
-                  <line x1="12" y1="8" x2="12.01" y2="8" />
-                </svg>
-                Detail
-              </h3>
-              <div class="form-grid">
-                <div class="detail-card">
-                  <span class="detail-label">C Number</span>
-                  <div class="detail-value" id="sel-detail-id">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">Customer Ref</span>
-                  <div class="detail-value" id="sel-detail-title">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">Customer</span>
-                  <div class="detail-value" id="sel-detail-cust">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">Cus Dept</span>
-                  <div class="detail-value" id="sel-detail-dept">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">Season</span>
-                  <div class="detail-value" id="sel-detail-season">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">Assigned PL</span>
-                  <div class="detail-value" id="sel-detail-pl">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">Status</span>
-                  <div class="detail-value" id="sel-detail-status">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">TP Upload Date</span>
-                  <div class="detail-value" id="sel-detail-created">-</div>
-                </div>
-                <div class="detail-card">
-                  <span class="detail-label">Uploaded By</span>
-                  <div class="detail-value" id="sel-detail-created-by">-</div>
-                </div>
-                <div class="detail-card" style="grid-column: span 3;">
-                  <span class="detail-label">Folder Link</span>
-                  <div class="detail-value" id="sel-detail-folder">-</div>
-                </div>
-                <div class="detail-card" style="grid-column: 1 / -1;">
-                  <span class="detail-label">Remarks Request</span>
-                  <div class="detail-value" id="sel-detail-remarks" style="white-space: pre-wrap;">-</div>
-                </div>
-                <div class="detail-card" style="grid-column: 1 / -1;">
-                  <span class="detail-label">Remarks Techpack</span>
-                  <div class="detail-value" id="sel-detail-remarks-tp" style="white-space: pre-wrap;">-</div>
-                </div>
-                <div class="detail-card" style="grid-column: 1 / -1;">
-                  <span class="detail-label">Remarks Pattern</span>
-                  <div class="detail-value" id="sel-detail-remarks-pm" style="white-space: pre-wrap;">-</div>
-                </div>
-                <!-- Fabric Details Table Below -->
-                <div id="sel-detail-fabric-container" style="grid-column: 1 / -1; margin-top: 12px;">
-                  <!-- Table injected via JS -->
-                </div>
-              </div>
-            </div>
-
-            <div style="background: #ffffff; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px;">
-              <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end;">
-                <div style="flex: 1; min-width: 250px;">
-                  <label
-                    style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #334155;">Assignment
-                    Target (PM Name)</label>
-                  <input type="text" id="action-pm-name" list="pm-list" placeholder="Enter or select Pattern Maker..."
-                    style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; font-size: 14px;" />
-                </div>
-                <div style="display: flex; gap: 12px; margin-top: auto;">
-                  <button class="btn-outline" id="action-browse-files-btn"
-                    style="padding: 12px 20px; font-weight: 600; height: 45px;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
-                      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-                    </svg>
-                    Folder Path
-                  </button>
-                  <button class="btn-primary" id="action-confirm-assign-btn"
-                    style="padding: 12px 24px; font-weight: 700; height: 45px; background: #2563eb;">
-                    Assign & Sync
-                  </button>
-                </div>
-              </div>
+          <div class="table-footer">
+            <span id="pagination-info"></span>
+            <div class="pagination">
+              <button class="page-btn" disabled>Previous</button>
+              <button class="page-btn">Next</button>
             </div>
           </div>
+        </div>
+      </div>
 
-          <!-- Calendar View Section -->
-          <div class="calendar-section" id="calendar-section"
-            style="display: none; margin-bottom: 32px; background: white; padding: 24px; border-radius: 8px; box-shadow: var(--shadow-sm);">
-            <div class="calendar-header"
-              style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-              <button class="btn-outline" id="cal-prev-btn" style="padding: 6px 12px;">&lt; Previous</button>
-              <h2 id="cal-month-title" style="margin: 0; font-size: 20px;">Month Year</h2>
-              <button class="btn-outline" id="cal-next-btn" style="padding: 6px 12px;">Next &gt;</button>
+      <!-- Upload Techpack -->
+      <div class="card upload-config" id="upload-config-section" style="display: none; width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <div class="card-title" style="font-size: 18px; margin: 0;">Upload Techpack <span id="config-req-id"
+              class="req-id"></span></div>
+          <button id="close-upload-config-btn" title="Close"
+            style="background: none; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; cursor: pointer; color: #64748b; font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background 0.15s;"
+            onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='none'">&times;</button>
+        </div>
+
+        <!-- Comprehensive Request Detail -->
+        <div style="margin-bottom: 32px;">
+          <h3
+            style="font-size: 16px; color: #1e293b; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+            Detail
+          </h3>
+          <div id="selection-details-grid" class="form-grid">
+            <div class="detail-card">
+              <span class="detail-label">C Number</span>
+              <div class="detail-value" id="sel-detail-id">-</div>
             </div>
-            <div
-              style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: bold; margin-bottom: 10px; color: var(--text-muted); padding-bottom: 8px; border-bottom: 1px solid var(--border-color);">
-              <div>Sun</div>
-              <div>Mon</div>
-              <div>Tue</div>
-              <div>Wed</div>
-              <div>Thu</div>
-              <div>Fri</div>
-              <div>Sat</div>
+            <div class="detail-card">
+              <span class="detail-label">Customer Ref</span>
+              <div class="detail-value" id="sel-detail-title">-</div>
             </div>
-            <div id="calendar-grid"
-              style="display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 100px; gap: 8px; text-align: left;">
-              <!-- Calendar cells rendered here via JS -->
+            <div class="detail-card">
+              <span class="detail-label">Customer</span>
+              <div class="detail-value" id="sel-detail-cust">-</div>
             </div>
-          </div> <!-- Close Calendar Section -->
-        </div><!-- Close Right Content -->
-      </div><!-- Close Flex Container -->
+            <div class="detail-card">
+              <span class="detail-label">Cus Dept</span>
+              <div class="detail-value" id="sel-detail-dept">-</div>
+            </div>
+            <div class="detail-card">
+              <span class="detail-label">TKL Season</span>
+              <div class="detail-value" id="sel-detail-season">-</div>
+            </div>
+            <div class="detail-card">
+              <span class="detail-label">PL Name</span>
+              <div class="detail-value" id="sel-detail-pl">-</div>
+            </div>
+            <div class="detail-card">
+              <span class="detail-label">Status</span>
+              <div class="detail-value" id="sel-detail-status">-</div>
+            </div>
+            <div class="detail-card">
+              <span class="detail-label">Created</span>
+              <div class="detail-value" id="sel-detail-created">-</div>
+            </div>
+            <div class="detail-card">
+              <span class="detail-label">Created By</span>
+              <div class="detail-value" id="sel-detail-created-by">-</div>
+            </div>
+
+            <div style="grid-column: 1 / -1; margin-top: 8px;">
+              <div id="sel-detail-fabric-container" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                <div style="color: var(--text-muted); font-style: italic; font-size: 12px;">No fabric details available</div>
+              </div>
+            </div>
+            
+            <div class="detail-card" style="grid-column: 1 / -1;">
+              <span class="detail-label">Folder Path</span>
+              <div class="detail-value" id="sel-detail-folder"> - </div>
+            </div>
+          </div>
+        </div>
+
+        <style>
+          .detail-item label {
+            display: block;
+            font-size: 10px;
+            font-weight: 800;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+          }
+
+          .detail-item div {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 13.5px;
+            line-height: 1.4;
+          }
+
+
+          /* Modal System from Meeting Module */
+          .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.42);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2500;
+            backdrop-filter: blur(2px);
+          }
+
+          #details-modal {
+            z-index: 3000;
+          }
+
+          .modal-window {
+            background: white;
+            width: 920px;
+            max-width: 96vw;
+            max-height: 90vh;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            animation: modalFadeUp 0.3s ease-out;
+          }
+
+          @keyframes modalFadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .modal-header {
+            padding: 1.25rem 1.75rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .modal-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+          }
+
+          .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+          }
+
+          .close-btn:hover {
+            color: #475569;
+          }
+
+          .modal-body {
+            padding: 1.75rem;
+            overflow-y: auto;
+            flex: 1;
+            background: #fff;
+          }
+
+          .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: #f8fafc;
+          }
+
+          .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+          }
+
+          .detail-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: var(--transition);
+          }
+
+          .detail-card:hover {
+            border-color: #cbd5e1;
+            background: #f1f5f9;
+            box-shadow: var(--shadow-sm);
+          }
+
+          .detail-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: capitalize;
+            letter-spacing: 0.01em;
+            margin-bottom: 2px;
+          }
+
+          .detail-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+            word-break: break-word;
+          }
+
+          .status-pill {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            letter-spacing: 0.02em;
+          }
+
+          .status-pill.awaiting-techpack {
+            background: #fef9c3;
+            color: #854d0e;
+          }
+
+          .status-pill.awaiting-pattern {
+            background: #dcfce7;
+            color: #166534;
+          }
+
+          /* User Dropdown Menu (Meeting Style) */
+          .profile-container {
+            position: relative;
+            cursor: pointer;
+          }
+
+          .user-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 240px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 8px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+          }
+
+          .user-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+          }
+
+          .dropdown-header {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+          }
+
+          .user-email {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #0f172a;
+            word-break: break-all;
+          }
+
+          .dropdown-divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin: 4px 0;
+          }
+
+          .sign-out-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: #ef4444;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+          }
+
+          .sign-out-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+          }
+
+          /* Fabric Table Styling */
+          .fabric-table-wrap {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            background: #f8fafc;
+          }
+
+          .fabric-table-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            background: #f1f5f9;
+          }
+
+          .fabric-table-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+          }
+
+          .fabric-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+          }
+
+          .fabric-table th,
+          .fabric-table td {
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 12px;
+            font-size: 0.82rem;
+            text-align: left;
+          }
+
+          .fabric-table th {
+            background: #f8fafc;
+            color: #64748b;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+          }
+
+          .fabric-table td {
+            background: #fff;
+            color: #1e293b;
+          }
+
+          .fabric-table tr:last-child td {
+            border-bottom: none;
+          }
+
+          .fabric-table th:last-child,
+          .fabric-table td:last-child {
+            border-right: none;
+          }
+
+          .fabric-opt-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+          }
+        </style>
+
+        <div style="max-width: 800px; margin: 0 auto 16px auto;">
+          <label for="upload-remark-input"
+            style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">REMARK</label>
+          <textarea id="upload-remark-input" placeholder="Type your remark here..."
+            style="width: 100%; min-height: 90px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; max-width: 800px; margin: 24px auto 0 auto;">
+          <button class="btn-primary" id="submit-techpack-btn" style="padding: 12px 24px;">
+            Submit Techpack
+          </button>
+        </div>
+      </div>
+
+      <!-- Calendar View Section -->
+      <div class="calendar-section" id="calendar-section"
+        style="display: none; margin-bottom: 32px; background: white; padding: 24px; border-radius: 8px; box-shadow: var(--shadow-sm);">
+        <div class="calendar-header"
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <button class="btn-outline" id="cal-prev-btn" style="padding: 6px 12px;">&lt; Previous</button>
+          <h2 id="cal-month-title" style="margin: 0; font-size: 20px;">Month Year</h2>
+          <button class="btn-outline" id="cal-next-btn" style="padding: 6px 12px;">Next &gt;</button>
+        </div>
+        <div
+          style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: bold; margin-bottom: 10px; color: var(--text-muted); padding-bottom: 8px; border-bottom: 1px solid var(--border-color);">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+        <div id="calendar-grid"
+          style="display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 100px; gap: 8px; text-align: left;">
+          <!-- Calendar cells rendered here via JS -->
+        </div>
+      </div>
+
     </main>
+  </div>
 
-    <!-- Calendar Day Requests Modal -->
-    <div class="modal" id="calendar-day-modal"
-      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-      <div class="card"
-        style="width: 400px; padding: 24px; background: white; border-radius: 8px; max-height: 80vh; overflow-y: auto;">
-        <h3 id="calendar-day-title" style="margin-bottom: 16px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">
-          Assignments for Date</h3>
-        <div id="calendar-day-content" style="line-height: 1.6; font-size: 14px; margin-bottom: 24px;">
+  <!-- Filter Modal (Matches Pattern/Conso/Acc) -->
+  <div class="modal" id="filter-modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div class="card" style="width: 400px; padding: 24px; background: white; border-radius: 8px;">
+      <h3 style="margin-bottom: 20px;">Advanced Filter</h3>
+      <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+        <div>
+          <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">C
+            NUMBER</label>
+          <input type="text" id="filter-id" list="id-list-tp" class="btn-outline"
+            style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select C Number..." />
+          <datalist id="id-list-tp"></datalist>
+        </div>
+        <div>
+          <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER
+            REFERENCE</label>
+          <input type="text" id="filter-style" list="style-list-tp" class="btn-outline"
+            style="width: 100%; text-align: left; padding: 10px;"
+            placeholder="Search or select Customer Reference..." />
+          <datalist id="style-list-tp"></datalist>
+        </div>
+        <div>
+          <label
+            style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER</label>
+          <input type="text" id="filter-cust" list="cust-list-tp" class="btn-outline"
+            style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Customer..." />
+          <datalist id="cust-list-tp"></datalist>
+        </div>
+        <div>
+          <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">PL
+            Name</label>
+          <input type="text" id="filter-pl" list="pl-list-tp" class="btn-outline"
+            style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select PL..." />
+          <datalist id="pl-list-tp"></datalist>
+        </div>
+        <div>
+          <label
+            style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STATUS</label>
+          <input type="text" id="filter-status" list="status-list-tp" class="btn-outline"
+            style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Status..." />
+          <datalist id="status-list-tp"></datalist>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 12px;">
+        <button class="btn-outline" id="clear-filter-btn" style="padding: 8px 16px;">Clear</button>
+        <button class="btn-secondary" id="close-filter-btn" style="padding: 8px 16px;">Cancel</button>
+        <button class="btn-primary" id="apply-filter-btn" style="padding: 8px 16px;">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details Modal (Premium Meeting Design) -->
+  <div class="modal-backdrop" id="details-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h2>Request Details</h2>
+        <button class="close-btn" id="close-details-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="details-content">
+          <!-- Details injected here via JS -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="document.getElementById('details-modal').style.display='none';"
+          style="padding: 10px 20px; font-weight: 600;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar Day Requests Modal (Premium Structure) -->
+  <div class="modal-backdrop" id="calendar-day-modal">
+    <div class="modal-window" style="width: 500px;">
+      <div class="modal-header">
+        <h2 id="calendar-day-title">Requests for Date</h2>
+        <button class="close-btn" id="close-calendar-day-btn">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 0;">
+        <div id="calendar-day-content">
           <!-- Populated via JS -->
         </div>
-        <div style="display: flex; justify-content: flex-end;">
-          <button class="btn-secondary" id="close-calendar-day-btn" style="padding: 8px 16px;">Close</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="document.getElementById('calendar-day-modal').style.display='none';"
+          style="padding: 10px 20px; font-weight: 600;">Close</button>
       </div>
     </div>
+  </div>
 
-    <!-- Assign PM Modal -->
-    <div class="modal" id="assign-pm-modal"
-      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-      <div class="card" style="width: 400px; padding: 24px; background: white; border-radius: 8px;">
-        <h3 style="margin-bottom: 16px;">Assign Pattern Maker</h3>
-        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">C Number: <strong id="assign-pm-req-id"
-            style="color: #1f2937;">-</strong></p>
-        <p style="margin-bottom: 16px; font-size: 12px; color: #6b7280;">Folder Path:
-          <span id="assign-pm-folder-path"
-            style="color: #1f2937; font-family: monospace; word-break: break-all; display: inline-block;">-</span>
-        </p>
+  <!-- Remarks Modal -->
+  <div class="modal" id="remarks-modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+    <div class="card" style="width: 400px; padding: 24px; background: white; border-radius: 8px;">
+      <h3 style="margin-bottom: 16px;">Production Remarks</h3>
+      <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">C Number: <strong id="remarks-req-id"
+          style="color: #1f2937;">-</strong></p>
 
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Select or Add PM
-            Name</label>
-          <input type="text" id="pm-name-input" list="pm-list" placeholder="Enter Pattern Maker Name..."
-            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit;" />
-          <datalist id="pm-list">
-            <option value="Vik MYLAPILLIAPPADU"></option>
-            <option value="Herizo Andriamihajananahary"></option>
-            <option value="Jeshna Reeday"></option>
-            <option value="Karen Lim Yu Choy"></option>
-            <option value="Mira HEEROO"></option>
-            <option value="Razafindrabe Harison"></option>
-            <option value="Rosheema FUGURALLY"></option>
-            <option value="Tinam Rothia Naiko"></option>
-          </datalist>
-        </div>
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Add Remark</label>
+        <textarea id="remarks-input" placeholder="Type your production note here..."
+          style="width: 100%; height: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; resize: vertical;"></textarea>
+      </div>
 
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">PM Email Address</label>
-          <input type="email" id="pm-email-input" placeholder="Populated automatically or enter email..."
-            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; background-color: #f9fafb;" />
-        </div>
-
-        <div style="display: flex; justify-content: flex-end; gap: 12px;">
-          <button class="btn-secondary" id="close-pm-modal-btn" style="padding: 8px 16px;">Cancel</button>
-          <button class="btn-primary" id="confirm-pm-btn" style="padding: 8px 16px;">Assign PM</button>
-        </div>
+      <div style="display: flex; justify-content: flex-end; gap: 12px;">
+        <button class="btn-secondary" id="close-remarks-btn" style="padding: 8px 16px;">Cancel</button>
+        <button class="btn-primary" id="save-remarks-btn" style="padding: 8px 16px;">Save Remark</button>
       </div>
     </div>
+  </div>
 
-    <!-- Details Modal (Premium Techpack Style) -->
-    <div class="modal-backdrop" id="details-modal">
-      <div class="modal-window">
-        <div class="modal-header">
-          <h2>Request Details</h2>
-          <button class="close-btn" id="close-details-btn">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div id="details-content">
-            <!-- Populated via JS -->
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-secondary" onclick="document.getElementById('details-modal').style.display='none';">Close</button>
-        </div>
+  <!-- Email Preview & Confirm Modal -->
+  <div class="modal" id="email-preview-modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div class="card"
+      style="width: 600px; padding: 24px; background: white; border-radius: 8px; max-height: 90vh; overflow-y: auto;">
+      <h3 style="margin-bottom: 16px; border-bottom: 1px solid #ddd; padding-bottom: 8px; color: var(--primary-color);">
+        Confirm Email &amp; Upload</h3>
+
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; margin-bottom: 4px; font-weight: 600;">To:</label>
+        <input type="text" id="preview-email-to"
+          style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" />
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; margin-bottom: 4px; font-weight: 600;">Subject:</label>
+        <input type="text" id="preview-email-subject"
+          style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" />
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; margin-bottom: 4px; font-weight: 600;">Message Body:</label>
+        <textarea id="preview-email-body"
+          style="width: 100%; height: 200px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; margin-bottom: 4px; font-weight: 600;">Remark:</label>
+        <textarea id="preview-upload-remark" placeholder="Type upload remark..."
+          style="width: 100%; height: 100px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; resize: vertical;"></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="btn-secondary" id="cancel-email-btn" style="padding: 10px 16px;">Cancel</button>
+        <button class="btn-primary" id="confirm-upload-send-btn" style="padding: 10px 16px;">Confirm Upload &amp; Send
+          Mail</button>
       </div>
     </div>
+  </div>
 
-    <!-- Filter Modal (Matches Techpack/Acc) -->
-    <div class="modal" id="filter-modal"
-      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-      <div class="card" style="width: 400px; padding: 24px; background: white; border-radius: 8px;">
-        <h3 style="margin-bottom: 20px;">Advanced Filter</h3>
-        <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
-          <div>
-            <label
-              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">C
-              NUMBER</label>
-            <input type="text" id="filter-id" list="id-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select C Number..." />
-            <datalist id="id-list-pat"></datalist>
+  <!-- SheetJS Library for native .xlsx exports -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => {
+      // ============================================================
+      // FIX 2: Removed the broken %27 at the end of the URL.
+      //        Paste your Apps Script Web App URL below (no quotes issues).
+      // ============================================================
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZ4f9sdtoTb2Ps0E5Q8NX1FV7qhfJXEx-AzazDqZLfsnkfKhV3xqEMBPVGdTYuWh8TSg/exec';
+      const APPS_SCRIPT_URL = GOOGLE_SCRIPT_URL; // Alias for consistency
+
+      // --- Tab Interactivity Removed ---
+
+      // --- Dynamic Table Data (from Google Sheets) ---
+      let requestsRows = [];
+
+      function renderFabricDetails(row, targetContainerId = 'sel-detail-fabric-container') {
+        const container = document.getElementById(targetContainerId);
+        if (!container) return;
+        container.innerHTML = '';
+
+        const rawAddOns = row['Fabric Add Ons'] || row.Fabric_Add_Ons || '';
+        let fabricRows = [];
+
+        if (rawAddOns && String(rawAddOns).startsWith('[')) {
+          try {
+            fabricRows = JSON.parse(rawAddOns);
+          } catch (e) {
+            console.error("Fabric JSON parse error", e);
+          }
+        }
+
+        if (!Array.isArray(fabricRows) || fabricRows.length === 0) {
+          const mainFabric = row.Main_Fabric || row.mainFabric || row['Fabric Add Ons'] || '';
+          if (mainFabric && mainFabric !== '-') {
+            fabricRows = [{
+              opt: 'A',
+              fabric: mainFabric,
+              header: row.Fabric_Header || row.fabricHeader || '',
+              type: '', gms: '', composition: '', width: ''
+            }];
+          }
+        }
+
+        if (!Array.isArray(fabricRows) || fabricRows.length === 0) {
+          container.innerHTML = '<div style="color: var(--text-muted); font-style: italic; font-size: 12px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">No fabric details available</div>';
+          return;
+        }
+
+        // Define columns and check which ones have data
+        const columns = [
+          { key: "opt", label: "OPT", width: "45px" },
+          { key: "type", label: "Type", width: "" },
+          { key: "fabric", label: "Fabric Name", width: "" },
+          { key: "gms", label: "GMS", width: "70px" },
+          { key: "composition", label: "Composition", width: "" },
+          { key: "width", label: "Width", width: "70px" },
+          { key: "header", label: "Header", width: "" }
+        ];
+
+        const activeCols = columns.filter(col => {
+          if (col.key === 'opt' || col.key === 'fabric') return true; // Always show OPT and Fabric Name
+          return fabricRows.some(r => r[col.key] && String(r[col.key]).trim() !== '' && String(r[col.key]).trim() !== '-');
+        });
+
+        const tableHtml = `
+          <div class="fabric-table-wrap">
+            <div class="fabric-table-toolbar">
+              <span class="fabric-table-title">Fabric Details</span>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="fabric-table">
+                <thead>
+                  <tr>
+                    ${activeCols.map(col => `<th ${col.width ? `style="width: ${col.width};"` : ''}>${col.label}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${fabricRows.map((item, idx) => `
+                    <tr>
+                      ${activeCols.map(col => {
+          let val = item[col.key] || (col.key === 'opt' ? String.fromCharCode(65 + idx) : '-');
+          let displayVal = val;
+          if (String(val).startsWith('http')) {
+            displayVal = `<a href="${val}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: underline;">Open Folder</a>`;
+          }
+          if (col.key === 'opt') {
+            return `<td><div class="fabric-opt-chip">${val}</div></td>`;
+          }
+          return `<td ${col.key === 'fabric' ? 'style="font-weight: 600;"' : ''}>${displayVal}</td>`;
+        }).join('')}
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER
-              REFERENCE</label>
-            <input type="text" id="filter-style" list="style-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Customer Reference..." />
-            <datalist id="style-list-pat"></datalist>
-          </div>
-          <div>
-            <label
-              style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">CUSTOMER</label>
-            <input type="text" id="filter-cust" list="cust-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Customer..." />
-            <datalist id="cust-list-pat"></datalist>
-          </div>
-          <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">PM
-              NAME</label>
-            <input type="text" id="filter-pm" list="pm-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select PM Name..." />
-            <datalist id="pm-list-pat"></datalist>
-          </div>
-          <div>
-            <label style="display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px;">STATUS</label>
-            <input type="text" id="filter-status" list="status-list-pat" class="btn-outline"
-              style="width: 100%; text-align: left; padding: 10px;" placeholder="Search or select Status..." />
-            <datalist id="status-list-pat"></datalist>
-          </div>
-        </div>
-        <div style="display: flex; justify-content: flex-end; gap: 12px;">
-          <button class="btn-outline" id="clear-filter-btn" style="padding: 8px 16px;">Clear</button>
-          <button class="btn-secondary" id="close-filter-btn" style="padding: 8px 16px;">Cancel</button>
-          <button class="btn-primary" id="apply-filter-btn" style="padding: 8px 16px;">Apply Filters</button>
-        </div>
-      </div>
-    </div>
+        `;
+        container.innerHTML = tableHtml;
+      }
 
-    <!-- Remarks / PM Assign Upload Modal -->
-    <div class="modal" id="remarks-modal"
-      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
-      <div class="card"
-        style="width: 500px; padding: 24px; background: white; border-radius: 8px; max-height: 80vh; overflow-y: auto;">
-        <h3 id="remarks-modal-title" style="margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 8px;">
-          Storage Area Remarks</h3>
-        <p id="remarks-modal-hint"
-          style="display: none; margin-bottom: 12px; font-size: 13px; color: #64748b; line-height: 1.45;">
-          Saving runs the usual update and opens the folder path in a new tab so you can upload files.
-        </p>
-        <p style="margin-bottom: 16px; font-size: 14px; color: #6b7280;">C Number: <strong id="remarks-req-id"
-            style="color: #1f2937;">-</strong></p>
+      // Filter states
+      let currentTab = 'Uploads';
+      let searchText = '';
+      let advFilter = { id: '', style: '', customer: '', pl: '', status: '' };
 
-        <div style="margin-bottom: 16px;">
-          <label id="remarks-field-label" for="remarks-textarea"
-            style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Remarks</label>
-          <textarea id="remarks-textarea" rows="6" placeholder="Enter your remarks..."
-            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-family: inherit; resize: vertical;"></textarea>
-        </div>
+      const tableBody = document.getElementById('table-body');
+      const activeRequestBanner = document.getElementById('active-request-banner');
+      const uploadConfigSection = document.getElementById('upload-config-section');
 
-        <div id="remarks-status" style="font-size: 13px; color: #059669; margin-bottom: 16px; display: none;">Saved
-        </div>
+      // Load Data from Google Sheets API
+      async function loadTableData() {
+        tableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px;">⏳ Loading data...</td></tr>';
+        try {
+          console.log("[Data] Loading data from Apps Script...");
+          const response = await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+              action: 'get_all',
+              statusFilter: ['Awaiting Techpack', 'Awaiting Pattern']
+            })
+          });
+          const result = await response.json();
+          if (result.status === 'success') {
+            requestsRows = result.data;
+            window.requestsRows = requestsRows; // Expose for console debugging
+            console.log(`[Data] Loaded ${requestsRows.length} rows successfully.`);
+            populateDatalists();
+            renderTable();
+          } else {
+            throw new Error(result.message || 'Fetch failed');
+          }
+        } catch (error) {
+          console.error("[Data] Load error:", error);
+          tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Error: <b>${error.message}</b></td></tr>`;
+        }
+      }
 
-        <div style="display: flex; justify-content: flex-end; gap: 12px;">
-          <button class="btn-secondary" id="close-remarks-btn" style="padding: 8px 16px;">Cancel</button>
-          <button type="button" class="btn-primary" id="save-remarks-btn" style="padding: 8px 16px;">Save</button>
-        </div>
-      </div>
-    </div>
+      function populateDatalists() {
+        const ids = [...new Set(requestsRows.map(r => r.C_Number || r.id).filter(Boolean))];
+        const styles = [...new Set(requestsRows.map(r => r.Customer_Ref || r.style || r.Style).filter(Boolean))];
+        const pls = [...new Set(requestsRows.map(r => r.PL_Name || r.assignee).filter(Boolean))];
+        const customers = [...new Set(requestsRows.map(r => r.Customer || r.customer).filter(Boolean))];
+        const statuses = [...new Set(requestsRows.map(r => r.Status || r.status).filter(Boolean))];
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZ4f9sdtoTb2Ps0E5Q8NX1FV7qhfJXEx-AzazDqZLfsnkfKhV3xqEMBPVGdTYuWh8TSg/exec';
-        const tableBody = document.getElementById('table-body');
+        const fills = [
+          { id: 'id-list-tp', vals: ids },
+          { id: 'style-list-tp', vals: styles },
+          { id: 'pl-list-tp', vals: pls },
+          { id: 'cust-list-tp', vals: customers },
+          { id: 'status-list-tp', vals: statuses }
+        ];
 
-        let allRequests = [];
-        let allSettings = {};
-        let currentTab = 'AWAITING PATTERN';
-        let searchText = '';
-        let advFilter = { id: '', style: '', customer: '', pm: '', status: '' };
+        fills.forEach(f => {
+          const el = document.getElementById(f.id);
+          if (el) el.innerHTML = f.vals.map(v => `<option value="${v}">`).join('');
+        });
+      }
 
-        const normalizeStatus = (s) => String(s || '').toUpperCase().replace(/\s+/g, ' ').trim();
+      // Filter Modal Bindings
+      const applyFilterBtn = document.getElementById('apply-filter-btn');
+      const clearFilterBtn = document.getElementById('clear-filter-btn');
+      const closeFilterBtn = document.getElementById('close-filter-btn');
+      const openFilterBtn = document.getElementById('open-filter');
+      const exportExcelBtn = document.getElementById('export-excel-btn');
+
+      if (openFilterBtn) openFilterBtn.addEventListener('click', () => document.getElementById('filter-modal').style.display = 'flex');
+      if (closeFilterBtn) closeFilterBtn.addEventListener('click', () => document.getElementById('filter-modal').style.display = 'none');
+      if (applyFilterBtn) {
+        applyFilterBtn.addEventListener('click', () => {
+          advFilter.id = document.getElementById('filter-id').value.trim();
+          advFilter.style = document.getElementById('filter-style').value.trim();
+          advFilter.customer = document.getElementById('filter-cust').value.trim();
+          advFilter.pl = document.getElementById('filter-pl').value.trim();
+          advFilter.status = document.getElementById('filter-status').value.trim();
+          renderTable();
+          document.getElementById('filter-modal').style.display = 'none';
+        });
+      }
+      if (clearFilterBtn) {
+        clearFilterBtn.addEventListener('click', () => {
+          advFilter = { id: '', style: '', customer: '', pl: '', status: '' };
+          document.getElementById('filter-id').value = '';
+          document.getElementById('filter-style').value = '';
+          document.getElementById('filter-cust').value = '';
+          document.getElementById('filter-pl').value = '';
+          document.getElementById('filter-status').value = '';
+          renderTable();
+          document.getElementById('filter-modal').style.display = 'none';
+        });
+      }
+
+      // Close button for Upload Techpack section
+      const closeUploadConfigBtn = document.getElementById('close-upload-config-btn');
+      if (closeUploadConfigBtn) {
+        closeUploadConfigBtn.addEventListener('click', () => {
+          if (uploadConfigSection) uploadConfigSection.style.display = 'none';
+          if (activeRequestBanner) activeRequestBanner.style.display = 'none';
+        });
+      }
+
+      // Helper to globally parse Dates for Calendar
+      const globalParseSheetDate = (dateStr) => {
+        if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
+        if (dateStr instanceof Date) return dateStr;
+
+        let s = String(dateStr).trim();
+        // Handle DD/MM/YYYY HH:MM:SS
+        let parts = s.split(' ');
+        let datePart = parts[0];
+        let timePart = parts[1] || '00:00:00';
+
+        if (datePart.includes('/')) {
+          let pts = datePart.split('/');
+          if (pts.length === 3) {
+            let d = parseInt(pts[0], 10);
+            let m = parseInt(pts[1], 10) - 1;
+            let y = pts[2].length === 2 ? 2000 + parseInt(pts[2], 10) : parseInt(pts[2], 10);
+
+            let t = timePart.split(':');
+            let h = parseInt(t[0] || 0, 10);
+            let min = parseInt(t[1] || 0, 10);
+            let sec = parseInt(t[2] || 0, 10);
+
+            let finalDate = new Date(y, m, d, h, min, sec);
+            if (!isNaN(finalDate)) return finalDate;
+          }
+        }
+
+        let fallback = new Date(s);
+        return isNaN(fallback) ? null : fallback;
+      };
+
+      const formatDateOnly = (dateStr) => {
+        if (!dateStr || dateStr === '-') return '-';
+        const d = globalParseSheetDate(dateStr);
+        if (!d || isNaN(d)) {
+          // If parse fails but it looks like a date string, try to clean it
+          if (typeof dateStr === 'string' && dateStr.includes('/')) return dateStr.split(' ')[0];
+          return String(dateStr);
+        }
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        return `${day}/${month}/${year}`;
+      };
+
+      function updateStats() {
+        const uploadCount = requestsRows.filter(row => {
+          const statusUpper = (row.Status || row.status || '').toUpperCase().trim();
+          return statusUpper.includes('TECHPACK') || statusUpper.includes('TECKPACK');
+        }).length;
+
+        const completeCount = requestsRows.filter(row => {
+          const statusUpper = (row.Status || row.status || '').toUpperCase().trim();
+          return statusUpper === 'AWAITING PATTERN';
+        }).length;
+
+        const uploadEl = document.getElementById('stat-upload-count-pill');
+        const completeEl = document.getElementById('stat-complete-count-pill');
+
+        if (uploadEl) uploadEl.textContent = uploadCount;
+        if (completeEl) completeEl.textContent = completeCount;
+      }
+
+      function getFilteredRowsForCurrentTab() {
+        return requestsRows.filter(row => {
+          const statusUpper = (row.Status || row.status || '').toUpperCase().trim();
+          const isAwaitingTechpack = statusUpper.includes('TECHPACK') || statusUpper.includes('TECKPACK');
+          const isAwaitingPattern = statusUpper === 'AWAITING PATTERN';
+
+          if (currentTab === 'Uploads' && !isAwaitingTechpack) return false;
+          if (currentTab === 'Completed' && !isAwaitingPattern) return false;
+
+          if (searchText) {
+            const q = searchText.toLowerCase();
+            if (!(row.C_Number || row.id || '').toLowerCase().includes(q) &&
+              !(row.Customer_Ref || row.style || row.Style || '').toLowerCase().includes(q) &&
+              !(row.Customer || row.customer || '').toLowerCase().includes(q)) return false;
+          }
+
+          if (advFilter.id && !(row.C_Number || row.id || '').toLowerCase().includes(advFilter.id.toLowerCase())) return false;
+          if (advFilter.style && !(row.Customer_Ref || row.style || row.Style || '').toLowerCase().includes(advFilter.style.toLowerCase())) return false;
+          if (advFilter.pl && !(row.PL_Name || row.assignee || '').toLowerCase().includes(advFilter.pl.toLowerCase())) return false;
+          if (advFilter.customer && !(row.Customer || row.customer || '').toLowerCase().includes(advFilter.customer.toLowerCase())) return false;
+          if (advFilter.status && !(row.Status || row.status || '').toLowerCase().includes(advFilter.status.toLowerCase())) return false;
+
+          return true;
+        });
+      }
+
+      function parseSheetDateForExport(dateStr) {
+        if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
+        const parts = String(dateStr).trim().split(' ');
+        const datePart = parts[0];
+        const timePart = parts[1] || '00:00:00';
+        if (datePart.includes('/')) {
+          const pts = datePart.split('/');
+          if (pts.length === 3) {
+            const yr = pts[2].length === 2 ? '20' + pts[2] : pts[2];
+            const d = new Date(`${yr}-${pts[1]}-${pts[0]}T${timePart}`);
+            if (!isNaN(d)) return d;
+          }
+        }
+        const fallback = new Date(dateStr);
+        return isNaN(fallback) ? null : fallback;
+      }
+
+      // Render HTML Table
+      function renderTable() {
+        console.log(`[UI] Rendering table for tab: ${currentTab}`);
+        updateStats();
+        const tableContainer = document.getElementById('table-container');
+        const calendarSection = document.getElementById('calendar-section');
+        const tableSection = document.querySelector('.table-section');
+
+        if (currentTab === 'Calendar') {
+          if (tableSection) tableSection.style.display = 'none';
+          if (calendarSection) calendarSection.style.display = 'block';
+          if (uploadConfigSection) uploadConfigSection.style.display = 'none';
+          renderCalendar();
+          return;
+        } else {
+          if (calendarSection) calendarSection.style.display = 'none';
+          if (tableSection) tableSection.style.display = 'block';
+        }
+
+        if (tableContainer) tableContainer.style.display = 'block';
+
+        tableBody.innerHTML = '';
 
         function formatToDDMMYYYY(dateStr) {
           if (!dateStr || dateStr === '-') return '-';
@@ -1847,887 +1845,53 @@
           return `${day}/${month}/${year}`;
         }
 
-        function populateDatalists() {
-          const ids = [...new Set(allRequests.map(r => r.c_number || r.id).filter(Boolean))];
-          const styles = [...new Set(allRequests.map(r => r.customer_ref || r.style).filter(Boolean))];
-          const customers = [...new Set(allRequests.map(r => r.customer).filter(Boolean))];
-          const pms = [...new Set(allRequests.map(r => r.pm_name || r.pattern_maker).filter(Boolean))];
-          const statuses = [...new Set(allRequests.map(r => r.status).filter(Boolean))];
-
-          const fills = [
-            { id: 'id-list-pat', vals: ids },
-            { id: 'style-list-pat', vals: styles },
-            { id: 'cust-list-pat', vals: customers },
-            { id: 'pm-list-pat', vals: pms },
-            { id: 'status-list-pat', vals: statuses }
-          ];
-
-          fills.forEach(f => {
-            const el = document.getElementById(f.id);
-            if (el) el.innerHTML = f.vals.map(v => `<option value="${v}">`).join('');
-          });
+        // Update the section title so the user knows which tab they are viewing
+        const tableHeaderTitle = document.querySelector('.table-header h2');
+        if (tableHeaderTitle) {
+          tableHeaderTitle.textContent = currentTab === 'Uploads' ? 'Upload History & Queue' : 'Completed Requests';
         }
 
-        async function fetchSettings() {
-          try {
-            console.log("Loading settings from:", GOOGLE_SCRIPT_URL);
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
-              method: 'POST',
-              body: JSON.stringify({ action: 'getSettings' })
-            });
-            allSettings = await response.json();
-            console.log("Settings loaded:", allSettings);
-          } catch (e) {
-            console.error("Failed to load settings:", e);
-          }
+        const thOverdueLeadtime = document.getElementById('th-overdue-leadtime');
+        if (thOverdueLeadtime) {
+          thOverdueLeadtime.textContent = currentTab === 'Uploads' ? 'PL Overdue' : 'PL Leadtime';
         }
 
-        async function loadPatternTasks() {
-          try {
-            if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px;">⏳ Loading pattern tasks...</td></tr>`;
-            console.log("Attempting to load tasks from:", GOOGLE_SCRIPT_URL);
 
-            // Fetch settings first if empty
-            if (!allSettings || !allSettings.pm) {
-              await fetchSettings();
-            }
-
-            // Use JSONP to bypass CORS issues on some environments
-            const cbName = 'gp_cb_' + Date.now();
-            window[cbName] = (data) => {
-              console.log("Data received successfully via JSONP. Total rows:", data ? data.length : 0);
-              allRequests = data;
-              populateDatalists();
-              renderTable();
-              delete window[cbName];
-            };
-
-            const script = document.createElement('script');
-            const glue = GOOGLE_SCRIPT_URL.includes('?') ? '&' : '?';
-            script.src = `${GOOGLE_SCRIPT_URL}${glue}callback=${cbName}&t=${Date.now()}`;
-            script.onerror = () => {
-              console.error("JSONP Script load failed");
-              if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Connection Error: Web App unreachable.</td></tr>`;
-            };
-            document.body.appendChild(script);
-            
-            // Cleanup script after 10 seconds
-            setTimeout(() => { if (script.parentNode) script.parentNode.removeChild(script); }, 10000);
-
-          } catch (error) {
-            console.error("Failed to load data:", error);
-            if (tableBody) tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #dc2626; padding: 40px;">❌ Failed to load data: <b>${error.message}</b></td></tr>`;
-          }
+        if (openFilterBtn && exportExcelBtn) {
+          openFilterBtn.style.display = 'inline-flex';
+          exportExcelBtn.style.display = 'inline-flex';
+          exportExcelBtn.style.alignItems = 'center';
         }
 
-        // Filter Modal Bindings
-        const openFilterBtn = document.getElementById('open-filter');
-        const closeFilterBtn = document.getElementById('close-filter-btn');
-        const clearFilterBtn = document.getElementById('clear-filter-btn');
-        const applyFilterBtn = document.getElementById('apply-filter-btn');
+        const filteredRows = getFilteredRowsForCurrentTab();
 
-        if (openFilterBtn) openFilterBtn.addEventListener('click', () => document.getElementById('filter-modal').style.display = 'flex');
-        if (closeFilterBtn) closeFilterBtn.addEventListener('click', () => document.getElementById('filter-modal').style.display = 'none');
-        if (clearFilterBtn) {
-          clearFilterBtn.addEventListener('click', () => {
-            document.getElementById('filter-id').value = '';
-            document.getElementById('filter-style').value = '';
-            document.getElementById('filter-cust').value = '';
-            document.getElementById('filter-pm').value = '';
-            document.getElementById('filter-status').value = '';
-            advFilter.id = '';
-            advFilter.style = '';
-            advFilter.customer = '';
-            advFilter.pm = '';
-            advFilter.status = '';
-            renderTable();
-            document.getElementById('filter-modal').style.display = 'none';
-          });
-        }
-        if (applyFilterBtn) {
-          applyFilterBtn.addEventListener('click', () => {
-            advFilter.id = document.getElementById('filter-id').value.trim();
-            advFilter.style = document.getElementById('filter-style').value.trim();
-            advFilter.customer = document.getElementById('filter-cust').value.trim();
-            advFilter.pm = document.getElementById('filter-pm').value.trim();
-            advFilter.status = document.getElementById('filter-status').value.trim();
-            renderTable();
-            document.getElementById('filter-modal').style.display = 'none';
-          });
+        const paginationInfo = document.getElementById('pagination-info');
+        if (paginationInfo) {
+          paginationInfo.textContent = `Total Requests: ${filteredRows.length}`;
         }
 
-        const isPmAssignedStatus = (s) => {
-          const ns = normalizeStatus(s);
-          return ns === 'PM ASSIGN' || ns === 'PM ASSIGNED';
-        };
-
-        function getRowFolderLink(row) {
-          if (!row) return '';
-          const raw = row.folderLink || row.folder_link || row.Folder_Path || '';
-          const s = String(raw).trim();
-          if (!s || s === '-' || s.toLowerCase() === 'null') return '';
-          return s;
+        if (!filteredRows || filteredRows.length === 0) {
+          const message = currentTab === 'Uploads'
+            ? "No pending uploads found. Check the 'Completed' tab or adjust filters."
+            : "No completed requests found.";
+          tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px; color: #666;">${message}</td></tr>`;
+          return;
         }
 
-        function openFolderInNewTab(url) {
-          const u = String(url || '').trim();
-          if (!u || u === '-') return false;
-          window.open(u, '_blank', 'noopener,noreferrer');
-          return true;
-        }
+        filteredRows.forEach((row, index) => {
+          const safeId = row.C_Number || row.id || `REQ-${index + 1}`;
 
-        function syncRemarksModalMode() {
-          const isPmAssign = currentTab === 'PM ASSIGN';
-          const titleEl = document.getElementById('remarks-modal-title');
-          const hintEl = document.getElementById('remarks-modal-hint');
-          const labelEl = document.getElementById('remarks-field-label');
-          const ta = document.getElementById('remarks-textarea');
-          const saveBtn = document.getElementById('save-remarks-btn');
-          if (titleEl) titleEl.textContent = isPmAssign ? 'Upload' : 'Storage Area Remarks';
-          if (hintEl) hintEl.style.display = isPmAssign ? 'block' : 'none';
-          if (labelEl) labelEl.textContent = isPmAssign ? 'Notes' : 'Remarks';
-          if (ta) ta.placeholder = isPmAssign ? 'Optional notes after uploading files to the folder…' : 'Enter your remarks…';
-          if (saveBtn) saveBtn.textContent = isPmAssign ? 'Save & open folder' : 'Save';
-        }
+          let colValue = '-';
+          let actionButtons = '';
 
-        const navPattern = document.getElementById('nav-pattern');
-        const navComplete = document.getElementById('nav-complete');
-        const navList = document.getElementById('nav-list');
-        const navCalendar = document.getElementById('nav-calendar');
-        const tableSection = document.querySelector('.pattern-tasks');
-        const calendarSection = document.getElementById('calendar-section');
-
-        function closeActivePanels() {
-          // Hide Assignment Card
-          const assignmentCard = document.getElementById('pattern-assignment-card');
-          if (assignmentCard) assignmentCard.style.display = 'none';
-
-          // Hide Modals
-          const modals = ['details-modal', 'remarks-modal', 'filter-modal'];
-          modals.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.style.display = 'none';
-          });
-        }
-
-        if (navPattern && navComplete && navCalendar) {
-          navPattern.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeActivePanels();
-            currentTab = 'AWAITING PATTERN';
-            setActiveTab('nav-pattern');
-            tableSection.style.display = 'block';
-            calendarSection.style.display = 'none';
-            document.getElementById('table-header-title').textContent = 'Active Pattern Tasks';
-            renderTable();
-          });
-
-          navComplete.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeActivePanels();
-            currentTab = 'PM ASSIGN';
-            setActiveTab('nav-complete');
-            tableSection.style.display = 'block';
-            calendarSection.style.display = 'none';
-            document.getElementById('table-header-title').textContent = 'Assigned Pattern';
-            renderTable();
-          });
-
-          if (navList) {
-            navList.addEventListener('click', (e) => {
-              e.preventDefault();
-              closeActivePanels();
-              currentTab = 'LIST_VIEW';
-              setActiveTab('nav-list');
-              tableSection.style.display = 'block';
-              calendarSection.style.display = 'none';
-              document.getElementById('table-header-title').textContent = 'Awaiting Conso';
-              renderTable();
-            });
-          }
-
-          navCalendar.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeActivePanels();
-            currentTab = 'CALENDAR';
-            setActiveTab('nav-calendar');
-            tableSection.style.display = 'none';
-            calendarSection.style.display = 'block';
-            renderCalendar();
-          });
-        }
-
-        function updateStats() {
-          const uploadCount = allRequests.filter(r => normalizeStatus(r.status) === 'AWAITING PATTERN').length;
-          const completeCount = allRequests.filter(r => isPmAssignedStatus(r.status)).length;
-          const consoCount = allRequests.filter(r => normalizeStatus(r.status) === 'AWAITING CONSO').length;
-
-          const uploadEl = document.getElementById('stat-upload-count-pill');
-          const completeEl = document.getElementById('stat-complete-count-pill');
-          const consoEl = document.getElementById('stat-conso-count-pill');
-
-          if (uploadEl) uploadEl.textContent = uploadCount;
-          if (completeEl) completeEl.textContent = completeCount;
-          if (consoEl) consoEl.textContent = consoCount;
-        }
-
-        function setActiveTab(id) {
-          document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-          const el = document.getElementById(id);
-          if (el) el.classList.add('active');
-        }
-
-        function renderTable() {
-          updateStats();
-          if (currentTab === 'CALENDAR') return;
-
-          const tableContainer = document.getElementById('table-container');
-          const galleryContainer = document.getElementById('gallery-container');
-
-          const patternTableSurface = document.getElementById('pattern-table-surface');
-
-          if (currentTab === 'PM ASSIGN') {
-            if (tableContainer) tableContainer.style.display = 'block';
-            if (galleryContainer) galleryContainer.style.display = 'flex';
-            if (patternTableSurface) patternTableSurface.style.display = 'none';
-            renderGallery();
-            return;
-          }
-          if (galleryContainer) galleryContainer.style.display = 'none';
-          if (patternTableSurface) patternTableSurface.style.display = 'block';
-
-          tableBody.innerHTML = '';
-
-          const thDynamic = document.getElementById('th-dynamic');
-          const thOwnerName = document.getElementById('th-owner-name');
-          if (thDynamic) {
-            thDynamic.style.display = (currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? 'table-cell' : 'none';
-            if (thDynamic.style.display !== 'none') thDynamic.textContent = 'PM Name';
-          }
-          if (thOwnerName) {
-            thOwnerName.textContent = currentTab === 'AWAITING PATTERN' ? 'PL Name' : 'PM Name';
-          }
-
-          // Filter logic
-          const filtered = allRequests.filter(row => {
-            const status = normalizeStatus(row.status);      // Tab Filtering
-            if (currentTab === 'PM ASSIGN') {
-              if (!isPmAssignedStatus(status)) return false;
-            } else if (currentTab === 'AWAITING PATTERN') {
-              if (status !== 'AWAITING PATTERN') return false;
-            } else if (currentTab === 'LIST_VIEW') {
-              if (status !== 'AWAITING CONSO') return false;
-            }
-
-            // Search Text (Matches vanilla)
-            if (searchText) {
-              const query = searchText.toLowerCase();
-              const idVal = (row.C_Number || row.id || '').toLowerCase();
-              const styleVal = (row.Customer_Ref || row.style || '').toLowerCase();
-              const custVal = (row.Customer || row.customer || '').toLowerCase();
-              if (!idVal.includes(query) && !styleVal.includes(query) && !custVal.includes(query)) return false;
-            }
-
-            // Advanced Filter
-            if (advFilter.id && !(row.C_Number || row.id || '').includes(advFilter.id)) return false;
-            if (advFilter.style && !(row.Customer_Ref || row.style || row.Style || '').includes(advFilter.style)) return false;
-            if (advFilter.customer && !(row.Customer || row.customer || '').includes(advFilter.customer)) return false;
-            if (advFilter.pm && !(row.PM_Name || row.Pattern_Maker || '').includes(advFilter.pm)) return false;
-            if (advFilter.status && !(row.Status || row.Status || '').toLowerCase().includes(advFilter.status.toLowerCase())) return false;
-
-            return true;
-          });
-
-          document.querySelector('.pattern-footer-text').textContent = `Showing ${filtered.length} patterns`;
-
-          if (filtered.length === 0) {
-            const msg = currentTab === 'AWAITING PATTERN' ? 'No patterns awaiting assignment.' : 'No items found.';
-            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px; color: #6b7280;">${msg}</td></tr>`;
-            return;
-          }
-
-          filtered.forEach((row, index) => {
-            const safeId = row.C_Number || row.c_number || row.id || `REQ-${index + 1}`;
-            const tr = document.createElement('tr');
-            const ownerName = currentTab === 'AWAITING PATTERN'
-              ? (row.PL_Name || row.pl_name || row.assignee || 'Unassigned')
-              : (row.PM_Name || row.pm_name || row.pattern_maker || row.assignee || 'Unknown');
-
-            const parseSheetDate = (dateStr) => {
-              if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
-              let parts = String(dateStr).trim().split(' ');
-              let datePart = parts[0];
-              let timePart = parts[1] || '00:00:00';
-              if (datePart.includes('/')) {
-                let pts = datePart.split('/');
-                if (pts.length === 3) {
-                  let yr = pts[2].length === 2 ? '20' + pts[2] : pts[2];
-                  let d = new Date(`${yr}-${pts[1]}-${pts[0]}T${timePart}`);
-                  if (!isNaN(d)) return d;
-                }
-              }
-              let fallback = new Date(dateStr);
-              return isNaN(fallback) ? null : fallback;
-            };
-
-            let colValue = '-';
-            const plUploaded = parseSheetDate(row.PL_Uploaded_Date || row.Uploaded_Date);
-
-            if (plUploaded) {
-              let targetEndTime = new Date(); // Timer continues if not yet assigned
-              if (currentTab === 'PM ASSIGN') {
-                const pmUploaded = parseSheetDate(row.PM_Uploaded_Date);
-                if (pmUploaded) {
-                  targetEndTime = pmUploaded;
-                }
-              }
-
-              const diffHours = Math.floor((targetEndTime - plUploaded) / (1000 * 60 * 60));
-              if (diffHours > 24) {
-                colValue = `<span style="background-color: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; display: inline-block; border: 1px solid #f87171; box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);">${diffHours} hr</span>`;
-              } else {
-                colValue = (diffHours >= 0 ? diffHours : 0) + ' hr';
-              }
-            }
-
-            tr.innerHTML = `
-        <td class="req-id" style="color: var(--primary-color); font-weight: 600;">${safeId}</td>
-        <td class="style-name" style="font-weight: 500;">${row.customer_ref || row.style || '-'}</td>
-        <td class="customer-name" style="color: var(--text-muted);">${row.customer || '-'}</td>
-        <td>
-          <div class="assignee" style="display: flex; align-items: center; gap: 8px;">
-            <img class="assignee-avatar" src="${row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId)}" alt="${ownerName}" style="width: 24px; height: 24px; border-radius: 50%;" />
-            ${ownerName}
-          </div>
-        </td>
-        <td>${formatToDDMMYYYY(row.Costing_Expected_Date || row.costing_expected_date || row.due)}</td>
-        <td>
-          <span class="status-badge ${currentTab === 'AWAITING PATTERN' ? 'pending-badge' : 'success-badge'}">
-            ${row.status || 'PENDING'}
-          </span>
-        </td>
-        <td style="display: ${(currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? 'table-cell' : 'none'}; font-weight: 500; color: var(--text-main);">
-          ${(currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? (row.PM_Name || row.pm_name || row.Pattern_Maker || 'Unknown') : ''}
-        </td>
-        <td style="text-align: center;">
-             ${currentTab === 'AWAITING PATTERN'
-                ? `<button class="assign-btn" data-id="${safeId}" style="margin: 0 auto; display: inline-flex; justify-content: center;">
-                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5c-2.2 0-4 1.8-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-                     Assign
-                   </button>`
-                : currentTab === 'PM ASSIGN'
-                  ? `<div style="display: flex; justify-content: center; gap: 10px; align-items: center;">
-                <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
-                <button class="btn-outline remarks-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Upload</button>
-              </div>`
-                  : `<div style="display: flex; justify-content: center; align-items: center;">
-                <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
-              </div>`
-              }
-        </td>
-      `;
-            tableBody.appendChild(tr);
-          });
-
-          // --- Assignment Action Card Logic (Mirroring Techpack) ---
-          const assignmentCard = document.getElementById('pattern-assignment-card');
-          const clearSelectionBtn = document.getElementById('clear-selection-btn');
-
-          if (clearSelectionBtn) {
-            clearSelectionBtn.addEventListener('click', () => {
-              assignmentCard.style.display = 'none';
-            });
-          }
-
-          // --- Event Delegation for Table Buttons ---
-          // This ensures buttons work even after the table is re-rendered (tab switches, etc.)
-          if (tableBody) {
-            tableBody.addEventListener('click', (e) => {
-              const btn = e.target.closest('button');
-              if (!btn) return;
-
-              const id = btn.getAttribute('data-id');
-              const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
-              console.log("Table interaction - ID:", id, "Action:", btn.className);
-
-              if (btn.classList.contains('assign-btn')) {
-                handleAssignClick(id, rowData);
-              } else if (btn.classList.contains('details-btn')) {
-                handleDetailsClick(id, rowData);
-              } else if (btn.classList.contains('remarks-btn')) {
-                handleRemarksClick(id, rowData);
-              }
-            });
-          }
-        }
-
-        function handleAssignClick(id, rowData) {
-          if (!rowData) return;
-          const assignmentCard = document.getElementById('pattern-assignment-card');
-          
-          // Populate Details Grid
-          const idPill = document.getElementById('sel-detail-id-pill');
-          if (idPill) idPill.textContent = id;
-
-          const fieldMap = {
-            'sel-detail-id': id,
-            'sel-detail-title': rowData.Customer_Ref || rowData.customer_ref || rowData.style || '-',
-            'sel-detail-cust': rowData.Customer || rowData.customer || '-',
-            'sel-detail-dept': rowData.Customer_Department || rowData.customer_department || rowData.cus_dept || '-',
-            'sel-detail-season': rowData.Season || rowData.season || rowData.tkl_season || '-',
-            'sel-detail-fabric': rowData.Fabric_Add_Ons || rowData.fabric_add_ons || '-',
-            'sel-detail-pl': rowData.PL_Name || rowData.pl_name || rowData.assignee || '-',
-            'sel-detail-status': rowData.Status || rowData.status || '-',
-            'sel-detail-created': rowData.PL_Uploaded_Date || rowData.pl_uploaded_date || rowData.uploaded_date || '-',
-            'sel-detail-created-by': rowData.Created_By || rowData.created_by || rowData.plalias || 'System',
-            'sel-detail-remarks': rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-',
-            'sel-detail-remarks-tp': rowData.Techpack_Remarks || rowData.techpack_remarks || '-',
-            'sel-detail-remarks-pm': rowData.Pattern_Remarks || rowData.pattern_remarks || '-'
-          };
-
-          for (const [eid, val] of Object.entries(fieldMap)) {
-            const el = document.getElementById(eid);
-            if (el) el.textContent = val;
-          }
-
-          // --- Render Fabric Table (Synced with Techpack) ---
-          renderFabricDetails(rowData);
-
-          const folderValue = rowData.folder_path || rowData.folder_link || '-';
-          const folderEl = document.getElementById('sel-detail-folder');
-          if (folderEl) {
-            if (folderValue !== '-' && String(folderValue).startsWith('http')) {
-              folderEl.innerHTML = `<a href="${folderValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Folder</a>`;
-            } else {
-              folderEl.textContent = folderValue;
-            }
-          }
-
-          const pmNameInput = document.getElementById('action-pm-name');
-          if (pmNameInput) pmNameInput.value = '';
-          
-          const browseBtn = document.getElementById('action-browse-files-btn');
-          if (browseBtn) browseBtn.dataset.link = folderValue;
-
-          if (assignmentCard) {
-            assignmentCard.style.display = 'block';
-            assignmentCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-
-        function handleDetailsClick(id, rowData) {
-          if (!rowData) return;
-          const detailsContent = document.getElementById('details-content');
-          if (!detailsContent) return;
-
-          const displayFields = [
-            { label: 'C Number', key: 'C_Number', value: id },
-            { label: 'Customer Reference', key: 'Customer_Ref', value: rowData.Customer_Ref || rowData.customer_ref || rowData.style },
-            { label: 'Customer', key: 'Customer', value: rowData.Customer || rowData.customer },
-            { label: 'Cus Dept', key: 'Customer_Department', value: rowData.Customer_Department || rowData.customer_department || rowData.cus_dept },
-            { label: 'Season', key: 'Season', value: rowData.Season || rowData.season || rowData.tkl_season },
-            { label: 'PM Name', key: 'PM_Name', value: rowData.PM_Name || rowData.pm_name || rowData.pattern_maker || '-' },
-            { label: 'Status', key: 'Status', value: rowData.Status || rowData.status },
-            { label: 'Expected Date', key: 'Costing_Expected_Date', value: formatToDDMMYYYY(rowData.Costing_Expected_Date || rowData.costing_expected_date || rowData.due) },
-            { label: 'Remarks Request', key: 'Req_Remarks', value: rowData.Req_Remarks || rowData.req_remarks || rowData.remarks || '-' },
-            { label: 'Remarks Techpack', key: 'Techpack_Remarks', value: rowData.Techpack_Remarks || rowData.techpack_remarks || '-' },
-            { label: 'Remarks Pattern', key: 'Pattern_Remarks', value: rowData.Pattern_Remarks || rowData.pattern_remarks || '-' }
-          ];
-
-          let html = `<div class="form-grid">`;
-          displayFields.forEach(field => {
-            let displayValue = field.value || '-';
-            if (field.label === 'Status') {
-              displayValue = `<span class="status-pill success-badge" style="background-color: #d1fae5; color: #059669;">${displayValue}</span>`;
-            }
-            html += `
-              <div class="detail-card">
-                <span class="detail-label">${field.label}</span>
-                <div class="detail-value">${displayValue}</div>
-              </div>`;
-          });
-          html += `</div>`;
-
-          // Add Fabric Details Container
-          html += `
-            <div style="margin-top: 24px;">
-              <h3 style="font-size: 14px; color: #1e293b; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                Fabric Details
-              </h3>
-              <div id="modal-fabric-container"></div>
-            </div>`;
-
-          // Add Folder Path
-          const folderValue = rowData.Folder_Path || rowData.folder_path || rowData.folder_link || '-';
-          let folderDisplay = folderValue;
-          if (folderValue !== '-' && String(folderValue).startsWith('http')) {
-            folderDisplay = `<a href="${folderValue}" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Open Folder</a>`;
-          }
-          
-          html += `
-            <div class="detail-card" style="margin-top: 16px;">
-              <span class="detail-label">Folder Path</span>
-              <div class="detail-value">${folderDisplay}</div>
-            </div>`;
-
-          detailsContent.innerHTML = html;
-
-          // Render Fabric Details in the modal
-          renderFabricDetails(rowData, 'modal-fabric-container');
-
-          document.getElementById('details-modal').style.display = 'flex';
-        }
-
-        function handleRemarksClick(id, rowData) {
-          currentRemarksReqId = id;
-          const ridEl = document.getElementById('remarks-req-id');
-          const txt = document.getElementById('remarks-textarea');
-          const statusEl = document.getElementById('remarks-status');
-          const modal = document.getElementById('remarks-modal');
-
-          if (ridEl) ridEl.textContent = id;
-          if (txt) txt.value = localStorage.getItem(`patternRemarks:${id}`) || '';
-          if (statusEl) statusEl.style.display = 'none';
-          
-          syncRemarksModalMode();
-          if (modal) modal.style.display = 'flex';
-          if (txt) setTimeout(() => txt.focus(), 0);
-        }
-
-        // --- Modals Logic ---
-        const closeDetailsBtn = document.getElementById('close-details-btn');
-        if (closeDetailsBtn) {
-          closeDetailsBtn.addEventListener('click', () => {
-            document.getElementById('details-modal').style.display = 'none';
-          });
-        }
-
-        // --- Remarks Modal Logic ---
-        const remarksModal = document.getElementById('remarks-modal');
-        const closeRemarksBtn = document.getElementById('close-remarks-btn');
-        const saveRemarksBtn = document.getElementById('save-remarks-btn');
-        const remarksTextarea = document.getElementById('remarks-textarea');
-
-        // Set by the "Remarks" button click handler inside renderTable()
-        let currentRemarksReqId = null;
-
-        if (closeRemarksBtn) {
-          closeRemarksBtn.addEventListener('click', () => {
-            if (remarksModal) remarksModal.style.display = 'none';
-          });
-        }
-
-        // --- Fabric Details Table Logic (Synced with Techpack) ---
-        function renderFabricDetails(row, targetContainerId = 'sel-detail-fabric-container') {
-          const container = document.getElementById(targetContainerId);
-          if (!container) return;
-          container.innerHTML = '';
-
-          // Support both backend naming conventions
-          const rawAddOns = row['fabric_add_ons'] || row.fabric_add_ons || row['Fabric Add Ons'] || row.Fabric_Add_Ons || '';
-          let fabricRows = [];
-
-          if (rawAddOns && String(rawAddOns).startsWith('[')) {
-            try {
-              fabricRows = JSON.parse(rawAddOns);
-            } catch (e) {
-              console.error("Fabric JSON parse error", e);
-            }
-          }
-
-          // Fallback if not JSON or empty
-          if (!Array.isArray(fabricRows) || fabricRows.length === 0) {
-            const mainFabric = row.main_fabric || row.fabric_add_ons || row.Fabric_Add_Ons || '';
-            if (mainFabric && mainFabric !== '-' && mainFabric !== '') {
-              fabricRows = [{ opt: 'A', fabric: mainFabric, type: '', gms: '', composition: '', width: '', header: '' }];
-            }
-          }
-
-          if (!Array.isArray(fabricRows) || fabricRows.length === 0) {
-            container.innerHTML = '<div style="color: var(--text-muted); font-style: italic; font-size: 11px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">No fabric details available</div>';
-            return;
-          }
-
-          const columns = [
-            { key: "opt", label: "OPT", width: "45px" },
-            { key: "type", label: "Type", width: "" },
-            { key: "fabric", label: "Fabric Name", width: "" },
-            { key: "gms", label: "GMS", width: "70px" },
-            { key: "composition", label: "Composition", width: "" },
-            { key: "width", label: "Width", width: "70px" },
-            { key: "header", label: "Header", width: "" }
-          ];
-
-          const activeCols = columns.filter(col => {
-            if (col.key === 'opt' || col.key === 'fabric') return true;
-            return fabricRows.some(r => {
-              const v = r[col.key];
-              return v != null && String(v).trim() !== '' && String(v).trim() !== '-' && String(v).trim().toLowerCase() !== 'undefined';
-            });
-          });
-
-          const tableHtml = `
-            <div class="fabric-table-wrap">
-              <div class="fabric-table-toolbar">
-                <span class="fabric-table-title">Fabric Details</span>
-              </div>
-              <div style="overflow-x: auto;">
-                <table class="fabric-table">
-                  <thead>
-                    <tr>
-                      ${activeCols.map(col => `<th ${col.width ? `style="width: ${col.width};"` : ''}>${col.label}</th>`).join('')}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${fabricRows.map((item, idx) => `
-                      <tr>
-                        ${activeCols.map(col => {
-                          let raw = item[col.key];
-                          let val = (raw != null && String(raw).trim() !== '' && String(raw).trim().toLowerCase() !== 'undefined') ? raw : (col.key === 'opt' ? String.fromCharCode(65 + idx) : '-');
-                          let displayVal = val;
-                          if (String(val).startsWith('http')) {
-                            displayVal = `<a href="${val}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: underline;">Open Folder</a>`;
-                          }
-                          if (col.key === 'opt') return `<td><div class="fabric-opt-chip">${val}</div></td>`;
-                          return `<td ${col.key === 'fabric' ? 'style="font-weight: 600;"' : ''}>${displayVal}</td>`;
-                        }).join('')}
-                      </tr>
-                    `).join('')}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          `;
-          container.innerHTML = tableHtml;
-        }
-
-        if (saveRemarksBtn) {
-          saveRemarksBtn.addEventListener('click', async () => {
-            if (!currentRemarksReqId) {
-              alert('No request selected for remarks.');
-              return;
-            }
-            const isPmAssignContext = currentTab === 'PM ASSIGN';
-            const value = (remarksTextarea ? remarksTextarea.value : '').trim();
-            let saveSucceeded = false;
-            const originalText = saveRemarksBtn.textContent;
-            saveRemarksBtn.textContent = 'Saving...';
-            saveRemarksBtn.style.opacity = '0.7';
-            saveRemarksBtn.style.pointerEvents = 'none';
-
-            const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === currentRemarksReqId);
-            const folderLink = getRowFolderLink(rowData);
-            const isValidFolderLink = Boolean(folderLink) && folderLink !== '-';
-            if (isValidFolderLink) {
-              window.open(folderLink, '_blank', 'noopener,noreferrer');
-            }
-
-            try {
-              const unifiedPayload = {
-                action: 'saveStorageAreaRemarks',
-                requestId: currentRemarksReqId,
-                remarks: value,
-                Remarks: value,
-                status: 'Awaiting Conso',
-                Status: 'Awaiting Conso',
-                nextStatus: 'Awaiting Conso',
-                moveToFolder: 'Conso', // PD Folder requirement
-                currentRef: rowData ? (rowData.customer_ref || '-') : '-',
-                currentCustomer: rowData ? (rowData.customer || '-') : '-',
-                appLink: window.location.origin + window.location.pathname,
-                timestamp: new Date().toISOString()
-              };
-
-              await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                // Content-Type: application/json is not allowed in no-cors mode
-                body: JSON.stringify(unifiedPayload)
-              });
-
-              // Keep local copy as a fallback (and for instant UI reflection).
-              localStorage.setItem(`patternRemarks:${currentRemarksReqId}`, value);
-              saveSucceeded = true;
-
-              // Optimistically update status so the item leaves "PM Assigned" immediately.
-              if (rowData) {
-                rowData.status = 'Awaiting Conso';
-                rowData.status = 'Awaiting Conso';
-                rowData.req_remarks = value;
-              }
-
-              alert(isPmAssignContext
-                ? (isValidFolderLink
-                  ? '✅ Saved. Status is now Awaiting Conso. The folder opens in a new tab for upload.'
-                  : '✅ Saved. Status is now Awaiting Conso. No folder path was found on this row.')
-                : '✅ Remarks successfully saved and status changed to Awaiting Conso!');
-
-              // Switch UI to the List View so the user can easily see the updated status.
-              currentTab = 'LIST_VIEW';
-              // Fallback for global element references which might not be defined in all contexts
-              if (typeof setActiveTab === 'function') setActiveTab('nav-list');
-
-              const titleEl = document.getElementById('table-header-title');
-              if (titleEl) titleEl.textContent = 'Awaiting Conso';
-
-              renderTable(); // Re-render the UI using optimistic state
-
-              // Refresh full dataset to ensure sheet/UI are fully in sync.
-              await loadPatternTasks();
-
-              // UI refreshed
-            } catch (err) {
-              console.error('Error saving remarks:', err);
-              localStorage.setItem(`patternRemarks:${currentRemarksReqId}`, value);
-              alert('Remarks saved locally, but Google save failed.\n\nError: ' + err.message);
-            } finally {
-              saveRemarksBtn.textContent = originalText;
-              saveRemarksBtn.style.opacity = '1';
-              saveRemarksBtn.style.pointerEvents = 'auto';
-            }
-
-            const remarksStatusEl = document.getElementById('remarks-status');
-            if (remarksStatusEl) {
-              remarksStatusEl.style.display = 'block';
-              remarksStatusEl.textContent = saveSucceeded ? 'Saved' : 'Saved locally';
-            }
-
-            // Small delay so the user sees the "Saved" status
-            setTimeout(() => {
-              if (remarksModal) remarksModal.style.display = 'none';
-            }, 500);
-          });
-        }
-
-        // --- Inline Assign PM Card Logic ---
-        const pmNameInput = document.getElementById('action-pm-name');
-        const confirmAssignBtn = document.getElementById('action-confirm-assign-btn');
-
-        // Auto-fill or Logic for PM could be added here
-        if (pmNameInput) {
-          // Optional logic if needed
-        }
-
-        if (confirmAssignBtn) {
-          confirmAssignBtn.addEventListener('click', async () => {
-            const reqId = document.getElementById('sel-detail-id-pill').textContent;
-            const pmName = pmNameInput.value.trim();
-
-            if (!pmName || pmName === '-') {
-              alert("Please enter or select a Pattern Maker Name.");
-              return;
-            }
-
-            const originalText = confirmAssignBtn.textContent;
-            confirmAssignBtn.textContent = 'Saving...';
-            confirmAssignBtn.style.opacity = '0.7';
-            confirmAssignBtn.style.pointerEvents = 'none';
-
-            const rowData = allRequests.find(r => (r.id || r.requestId) === reqId);
-            const plDueDate = rowData ? (rowData.due || '-') : '-';
-            let plLeadtime = '-';
-            const todayStamp = new Date().toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', '');
-
-            // Handle dynamic recipients
-            let pmEmail = '';
-            if (allSettings && allSettings.pmEmails && allSettings.pmEmails[pmName]) {
-              pmEmail = allSettings.pmEmails[pmName];
-            }
-
-            const sessionData = JSON.parse(localStorage.getItem('ACC_REMEMBERED_USER') || 'null');
-            const userEmail = sessionData ? (sessionData.email || sessionData.loginId || '') : '';
-
-            let recipients = [];
-            if (pmEmail) recipients.push(pmEmail);
-            if (userEmail) recipients.push(userEmail);
-            
-            const finalTo = recipients.filter(e => e && e.includes('@')).join(',');
-
-            const payload = {
-              requestId: reqId,
-              status: 'PM Assigned', 
-              PL_Due_Date: plDueDate,
-              PL_Leadtime: plLeadtime,
-              PM_Name: pmName,
-              PM_Uploaded_Date: todayStamp,
-              PM_Date: todayStamp,
-              PM_Due_Date: '-',
-              processRoute: 'N/A',
-              plAlias: pmName,
-              currentRef: rowData ? (rowData.customer_ref || '-') : '-',
-              currentCustomer: rowData ? (rowData.customer || '-') : '-',
-              appLink: window.location.origin + window.location.pathname,
-              emailTo: finalTo || 'YTeeluck@tropicknits.com', 
-              emailSubject: `Assigned PM: ${reqId} for ${rowData ? rowData.customer_ref : 'Ref'}`,
-              emailBody: `Hi,\n\nPattern Maker ${pmName} has been assigned to Request ${reqId}.\n\nRegards,\nPortal`,
-              timestamp: new Date().toISOString()
-            };
-
-            try {
-              await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-              });
-
-              // Ensure assignment UI closes immediately after successful sync.
-              const assignmentCard = document.getElementById('pattern-assignment-card');
-              const assignPmModal = document.getElementById('assign-pm-modal');
-              if (assignmentCard) assignmentCard.style.display = 'none';
-              if (assignPmModal) assignPmModal.style.display = 'none';
-              if (pmNameInput) pmNameInput.value = '';
-
-              // Move user directly to Assigned screen after sync.
-              currentTab = 'PM ASSIGN';
-              if (typeof setActiveTab === 'function') setActiveTab('nav-complete');
-              if (tableSection) tableSection.style.display = 'block';
-              if (calendarSection) calendarSection.style.display = 'none';
-              const titleEl = document.getElementById('table-header-title');
-              if (titleEl) titleEl.textContent = 'Assigned Pattern';
-              renderTable();
-
-              alert('✅ Pattern Maker successfully assigned!');
-              await loadPatternTasks();
-            } catch (err) {
-              console.error("Error saving PM data:", err);
-              alert('❌ Failed to assign Pattern Maker.');
-            } finally {
-              confirmAssignBtn.textContent = originalText;
-              confirmAssignBtn.style.opacity = '1';
-              confirmAssignBtn.style.pointerEvents = 'auto';
-            }
-          });
-        }
-
-        loadPatternTasks();
-
-        // --- Calendar GUI Rendering Logic ---
-        let calCurrentDate = new Date();
-
-        function renderCalendar() {
-          const grid = document.getElementById('calendar-grid');
-          if (!grid) return;
-          grid.innerHTML = '';
-
-          const year = calCurrentDate.getFullYear();
-          const month = calCurrentDate.getMonth();
-
-          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          document.getElementById('cal-month-title').textContent = `${monthNames[month]} ${year}`;
-
-          const firstDayIndex = new Date(year, month, 1).getDay();
-          const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-          // Struct to hold counts for two types per day
-          // { day: { pmAssign: 0, awaitingConso: 0 } }
-          let dayCounts = {};
-
-          const globalParseSheetDate = (dateStr) => {
+          // Helper to parse DD/MM/YYYY or DD/MM/YY reliably (WITH TIME!)
+          const parseSheetDate = (dateStr) => {
             if (!dateStr || String(dateStr).trim() === '-' || String(dateStr).trim() === '') return null;
+
             let parts = String(dateStr).trim().split(' ');
             let datePart = parts[0];
             let timePart = parts[1] || '00:00:00';
+
             if (datePart.includes('/')) {
               let pts = datePart.split('/');
               if (pts.length === 3) {
@@ -2736,402 +1900,811 @@
                 if (!isNaN(d)) return d;
               }
             }
+
             let fallback = new Date(dateStr);
             return isNaN(fallback) ? null : fallback;
           };
 
-          // Filter rows for the relevant statuses (Strictly PM ASSIGNED and AWAITING CONSO)
-          const calendarRows = allRequests.filter(r => {
-            const s = normalizeStatus(r.status);
-            return s === 'PM ASSIGNED' || s === 'AWAITING CONSO';
-          });
+          if (currentTab === 'Uploads') {
+            // Calculate PL Overdue (Today - Created Date)
+            const created = parseSheetDate(row.Created || row.createdDate);
+            if (created && !isNaN(created)) {
+              const today = new Date();
+              // Multiply by 1000 ms * 60 s * 60 m = hours
+              const diffHours = Math.floor((today - created) / (1000 * 60 * 60));
 
-          calendarRows.forEach(row => {
-            const status = normalizeStatus(row.status);
-            let dateStr = '';
-            let type = '';
-
-            if (status === 'PM ASSIGNED') {
-              dateStr = row.PL_Uploaded_Date || row.pl_uploaded_date || row.Uploaded_Date || row.uploaded_date;
-              type = 'pmAssign';
-            } else if (status === 'AWAITING CONSO') {
-              dateStr = row.PM_Uploaded_Date || row.pm_uploaded_date || row.PM_Date || row.pm_date;
-              type = 'awaitingConso';
-            }
-
-            const d = globalParseSheetDate(dateStr);
-            if (d && !isNaN(d)) {
-              if (d.getFullYear() === year && d.getMonth() === month) {
-                let day = d.getDate();
-                if (!dayCounts[day]) dayCounts[day] = { pmAssign: 0, awaitingConso: 0 };
-                dayCounts[day][type]++;
+              if (diffHours > 24) {
+                colValue = `<span style="background-color: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; display: inline-block; border: 1px solid #f87171; box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);">${diffHours} hr</span>`;
+              } else {
+                colValue = diffHours + ' hr';
               }
             }
-          });
 
-          for (let x = 0; x < firstDayIndex; x++) {
-            let emptyCell = document.createElement('div');
-            emptyCell.style.background = '#f9fafb';
-            emptyCell.style.borderRadius = '6px';
-            grid.appendChild(emptyCell);
+            actionButtons = `
+          <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+            <button class="btn-primary upload-techpack-btn" data-id="${safeId}" style="display: inline-flex; padding: 6px 12px; font-size: 12px; margin-top: 4px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Upload
+            </button>
+          </div>
+        `;
+          } else {
+            // Calculate PL_Leadtime (Uploaded Date - Created Date) for Completed
+            const created = parseSheetDate(row.Created || row.createdDate);
+            const uploaded = parseSheetDate(row.PL_Uploaded_Date);
+
+            if (created && !isNaN(created) && uploaded && !isNaN(uploaded)) {
+              // Multiply by 1000 ms * 60 s * 60 m = hours
+              const diffHours = Math.floor((uploaded - created) / (1000 * 60 * 60));
+
+              if (diffHours > 24) {
+                colValue = `<span style="background-color: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 12px; display: inline-block; border: 1px solid #f87171; box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);">${diffHours} hr</span>`;
+              } else {
+                colValue = diffHours + ' hr';
+              }
+            }
+
+            actionButtons = `
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <button class="btn-outline details-btn" data-id="${safeId}" style="padding: 6px 16px; font-size: 12px; font-weight: 600;">Details</button>
+          </div>
+        `;
           }
 
-          for (let i = 1; i <= daysInMonth; i++) {
-            let dayCell = document.createElement('div');
-            dayCell.style.border = '1px solid #e5e7eb';
-            dayCell.style.borderRadius = '6px';
-            dayCell.style.padding = '8px';
-            dayCell.style.display = 'flex';
-            dayCell.style.flexDirection = 'column';
-            dayCell.style.gap = '4px';
-            dayCell.style.backgroundColor = '#ffffff';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+        <td class="req-id">${safeId}</td>
+        <td class="style-name">${row.Customer_Ref || row.style || '-'}</td>
+        <td class="customer-name">${row.Customer || row.customer || '-'}</td>
+        <td>
+          <div class="assignee">
+            <img class="assignee-avatar" src="${row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId)}" alt="${row.PL_Name || row.assignee || 'User'}" />
+            ${row.PL_Name || row.assignee || 'Unassigned'}
+          </div>
+        </td>
+        <td>${formatToDDMMYYYY(row.Costing_Expected_Date || row.due)}</td>
+        <td>
+          <span class="status-pill ${(row.Status || row.status || '').toLowerCase().replace(/\s+/g, '-')}">
+            ${row.Status || row.status || 'PENDING'}
+          </span>
+        </td>
+        <td>${colValue}</td>
+        <td style="text-align: center;">
+          ${actionButtons}
+        </td>
+      `;
+          tableBody.appendChild(tr);
+        });
 
-            let dateNumber = document.createElement('strong');
-            dateNumber.style.color = '#374151';
-            dateNumber.textContent = i;
-            dayCell.appendChild(dateNumber);
+        // Attach Click Events to newly created buttons
+        const uploadBtns = document.querySelectorAll('.upload-techpack-btn');
+        uploadBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            const rowData = requestsRows.find((r, i) => (r.C_Number || r.id || `REQ-${i + 1}`) === id);
 
-            const counts = dayCounts[i];
-            if (counts) {
-              // PM Assign Badge (Blue)
-              if (counts.pmAssign > 0) {
-                let b = document.createElement('div');
-                b.style.backgroundColor = 'var(--primary-color)';
-                b.style.color = '#fff';
-                b.style.padding = '2px 4px';
-                b.style.borderRadius = '4px';
-                b.style.fontSize = '10px';
-                b.style.fontWeight = 'bold';
-                b.style.textAlign = 'center';
-                b.style.cursor = 'pointer';
-                b.textContent = `${counts.pmAssign} Assigned`;
-                b.onclick = () => showDayModal(i, 'pmAssign');
-                dayCell.appendChild(b);
+            if (rowData) {
+              document.getElementById('sel-detail-id').textContent = rowData.C_Number || rowData.id || id;
+              document.getElementById('sel-detail-title').textContent = rowData.Customer_Ref || rowData.style || rowData.Style || '-';
+              document.getElementById('sel-detail-cust').textContent = rowData.Customer || rowData.customer || '-';
+              document.getElementById('sel-detail-dept').textContent = rowData.Customer_Department || rowData.Cus_Dept || '-';
+              document.getElementById('sel-detail-season').textContent = rowData.Season || rowData.TKL_Season || '-';
+
+              // Fabric Details Consolidation
+              renderFabricDetails(rowData);
+
+              document.getElementById('sel-detail-pl').textContent = rowData.PL_Name || rowData.assignee || '-';
+              document.getElementById('sel-detail-status').textContent = rowData.status || rowData.Status || '-';
+              document.getElementById('sel-detail-created').textContent = formatDateOnly(rowData.createdDate || rowData.Created);
+              document.getElementById('sel-detail-created-by').textContent = rowData.createdBy || rowData['Created By'] || '-';
+              const uploadRemarkInput = document.getElementById('upload-remark-input');
+              if (uploadRemarkInput) {
+                uploadRemarkInput.value = rowData.remarks || rowData.Remarks || '';
               }
-              // Awaiting Conso Badge (Green)
-              if (counts.awaitingConso > 0) {
-                let b = document.createElement('div');
-                b.style.backgroundColor = '#10b981'; // Emerald/Green
-                b.style.color = '#fff';
-                b.style.padding = '2px 4px';
-                b.style.borderRadius = '4px';
-                b.style.fontSize = '10px';
-                b.style.fontWeight = 'bold';
-                b.style.textAlign = 'center';
-                b.style.cursor = 'pointer';
-                b.textContent = `${counts.awaitingConso} Conso`;
-                b.onclick = () => showDayModal(i, 'awaitingConso');
-                dayCell.appendChild(b);
+
+              const folderValue = rowData.folderLink || rowData.Folder_Path || '-';
+              const folderEl = document.getElementById('sel-detail-folder');
+              if (folderValue !== '-' && String(folderValue).startsWith('http')) {
+                folderEl.innerHTML = `<a href="${folderValue}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">Open Folder</a>`;
+              } else {
+                folderEl.textContent = folderValue;
               }
+
+              document.getElementById('config-req-id').textContent = rowData.id || id;
+              const plNameElem = document.getElementById('config-pl-name');
+              if (plNameElem) {
+                plNameElem.textContent = rowData.assignee || rowData.PL_Name ? `PL: ${rowData.assignee || rowData.PL_Name}` : 'PL: Unassigned';
+              }
+
+              uploadConfigSection.style.display = 'block';
+              uploadConfigSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-            grid.appendChild(dayCell);
-          }
-
-          function showDayModal(day, filterType) {
-            const dailyReqs = calendarRows.filter(r => {
-              const status = normalizeStatus(r.status);
-              let ds = '';
-              let t = '';
-              if (status === 'PM ASSIGNED') {
-                ds = r.PL_Uploaded_Date || r.pl_uploaded_date || r.Uploaded_Date || r.uploaded_date;
-                t = 'pmAssign';
-              } else if (status === 'AWAITING CONSO') {
-                ds = r.PM_Uploaded_Date || r.pm_uploaded_date || r.PM_Date || r.pm_date;
-                t = 'awaitingConso';
-              }
-              const rd = globalParseSheetDate(ds);
-              const dateMatch = rd && !isNaN(rd) && rd.getFullYear() === year && rd.getMonth() === month && rd.getDate() === day;
-              return dateMatch && (filterType ? t === filterType : true);
-            });
-
-            const modal = document.getElementById('calendar-day-modal');
-            const title = document.getElementById('calendar-day-title');
-            const content = document.getElementById('calendar-day-content');
-
-            if (modal && title && content) {
-              title.textContent = `Tasks on ${monthNames[month]} ${day}, ${year}`;
-              content.innerHTML = dailyReqs.map(r => {
-                const s = normalizeStatus(r.status);
-                const isConso = s === 'AWAITING CONSO';
-                const color = isConso ? '#10b981' : 'var(--primary-color)';
-                const label = isConso ? 'Conso' : 'PM Assigned';
-
-                return `
-                <div style="padding: 10px 8px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                   <div style="display:flex; flex-direction: column;">
-                       <div style="display:flex; align-items:center; gap:6px;">
-                           <span style="width:8px; height:8px; border-radius:50%; background-color:${color};"></span>
-                           <span style="font-weight: 500; color: var(--text-main);">${r.id || 'Unknown ID'}</span>
-                       </div>
-                       <span style="font-size: 11px; color: var(--text-muted); padding-left:14px;">${label} • ${r.customer || r.Customer || 'No Customer'}</span>
-                   </div>
-                   <button class="btn-outline calendar-details-btn" data-id="${r.id || ''}" style="padding: 6px 10px; font-size: 12px; display: inline-flex;">Details</button>
-                </div>
-              `}).join('');
-
-              content.querySelectorAll('.calendar-details-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                  const id = e.currentTarget.getAttribute('data-id');
-                  const rowData = allRequests.find((r, idx) => (r.id || `REQ-${idx + 1}`) === id);
-                  if (rowData) {
-                    handleDetailsClick(id, rowData);
-                  }
-                });
-              });
-
-              modal.style.display = 'flex';
-            }
-          }
-        }
-
-        const closeCalDayBtn = document.getElementById('close-calendar-day-btn');
-        if (closeCalDayBtn) {
-          closeCalDayBtn.addEventListener('click', () => {
-            document.getElementById('calendar-day-modal').style.display = 'none';
           });
-        }
+        });
 
-        function renderGallery() {
-          const gallery = document.getElementById('gallery-container');
-          if (!gallery) return;
-          gallery.innerHTML = '';
-          const usePlName = currentTab === 'AWAITING PATTERN';
-
-          // Same filter rules as the table for PM ASSIGN (aligned with Techpack Completed gallery behaviour)
-          const filtered = allRequests.filter(row => {
-            const status = normalizeStatus(row.status);
-            if (!isPmAssignedStatus(status)) return false;
-
-            if (searchText) {
-              const query = searchText.toLowerCase();
-              const idVal = (row.id || '').toLowerCase();
-              const styleVal = (row.style || row.Style || '').toLowerCase();
-              const custVal = (row.customer || row.Customer || '').toLowerCase();
-              if (!idVal.includes(query) && !styleVal.includes(query) && !custVal.includes(query)) return false;
-            }
-
-            if (advFilter.id && !(row.id || '').includes(advFilter.id)) return false;
-            if (advFilter.style && !(row.style || row.Style || '').includes(advFilter.style)) return false;
-            if (advFilter.customer && !(row.customer || row.Customer || '').includes(advFilter.customer)) return false;
-            if (advFilter.pm && !(row.PM_Name || row.Pattern_Maker || '').includes(advFilter.pm)) return false;
-            if (advFilter.status && !(row.status || row.Status || '').toLowerCase().includes(advFilter.status.toLowerCase())) return false;
-
-            return true;
+        const detailsBtns = document.querySelectorAll('.details-btn');
+        detailsBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            const rowData = requestsRows.find((r, i) => (r.C_Number || r.id || `REQ-${i + 1}`) === id);
+            openDetailsInternal(rowData);
           });
+        });
 
-          const footerLabel = document.querySelector('.pattern-footer-text');
-          if (footerLabel) footerLabel.textContent = `Showing ${filtered.length} patterns`;
+        const remarksBtns = document.querySelectorAll('.remarks-btn');
+        remarksBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            const row = requestsRows.find(r => (r.C_Number || r.id) === id);
+            document.getElementById('remarks-req-id').textContent = id;
+            document.getElementById('remarks-input').value = row ? (row.Techpack_Remarks || row.techpack_remarks || row['Remarks Techpack'] || row.remarks || '') : '';
+            document.getElementById('remarks-modal').style.display = 'flex';
+          });
+        });
 
-          if (filtered.length === 0) {
-            gallery.innerHTML = '<div class="pattern-gallery-empty">No assigned tasks found.</div>';
+        const openLinkBtns = document.querySelectorAll('.open-link-btn');
+        openLinkBtns.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const link = e.currentTarget.getAttribute('data-link');
+            if (link && link.trim() !== '') {
+              window.open(link, '_blank');
+            }
+          });
+        });
+      }
+
+      const getFullDateTime = () => {
+        const d = new Date();
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        const hr = String(d.getHours()).padStart(2, '0');
+        const min = String(d.getMinutes()).padStart(2, '0');
+        const sec = String(d.getSeconds()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hr}:${min}:${sec}`;
+      };
+
+      // --- Clear Selection ---
+      const clearBtn = document.getElementById('clear-request-btn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          if (activeRequestBanner) activeRequestBanner.style.display = 'none';
+          if (uploadConfigSection) uploadConfigSection.style.display = 'none';
+          const uploadRemarkInput = document.getElementById('upload-remark-input');
+          if (uploadRemarkInput) uploadRemarkInput.value = '';
+          const previewUploadRemark = document.getElementById('preview-upload-remark');
+          if (previewUploadRemark) previewUploadRemark.value = '';
+        });
+      }
+
+      // --- Submit & Email Preview ---
+      const submitBtn = document.getElementById('submit-techpack-btn');
+      const emailModal = document.getElementById('email-preview-modal');
+      const cancelEmailBtn = document.getElementById('cancel-email-btn');
+      const confirmUploadBtn = document.getElementById('confirm-upload-send-btn');
+      const previewEmailTo = document.getElementById('preview-email-to');
+      const previewEmailSubject = document.getElementById('preview-email-subject');
+      const previewEmailBody = document.getElementById('preview-email-body');
+      const previewUploadRemark = document.getElementById('preview-upload-remark');
+
+      if (submitBtn) {
+        submitBtn.addEventListener('click', async () => {
+          const activeReqId = document.getElementById('sel-detail-id').textContent;
+          if (!activeReqId || activeReqId === '-' || activeReqId === 'C Number: -' || activeReqId === 'Request ID: -') {
+            alert("No active request selected!");
             return;
           }
 
-          const head = document.createElement('div');
-          head.className = 'pattern-gallery-row pattern-gallery-row--head';
-          head.innerHTML = `
-      <span>C Number</span>
-      <span>Customer Reference</span>
-      <span>Customer</span>
-      <span>${usePlName ? 'PL Name' : 'PM Name'}</span>
-      <span>Costing expected</span>
-      <span>Status</span>
-      <span class="pattern-gallery-row__actions">Action</span>
-    `;
-          gallery.appendChild(head);
+          const currentId = activeReqId.replace('C Number: ', '').replace('Request ID: ', '').trim();
+          const rowData = requestsRows.find((r, i) => (r.C_Number || r.id || `REQ-${i + 1}`) === currentId);
 
-          filtered.forEach((row, index) => {
-            const safeId = row.id || `REQ-${index + 1}`;
-            const line = document.createElement('div');
-            line.className = 'pattern-gallery-row';
-
-            const styleDisp = row.Customer_Ref || row.customer_ref || row.style || row.Style || '-';
-            const customerDisp = row.Customer || row.customer || row.Customer || '-';
-            const plDisp = usePlName
-              ? (row.PL_Name || row.assignee || row.PL_Name || 'Unassigned')
-              : (row.PM_Name || row.pm_name || row.Pattern_Maker || 'Unknown');
-            const dueDisp = formatToDDMMYYYY(row.Costing_Expected_Date || row.costing_expected_date || row.due || '-');
-            const statusDisp = row.status || 'PENDING';
-            const av = row.avatar || 'https://i.pravatar.cc/150?u=' + encodeURIComponent(safeId);
-
-            line.innerHTML = `
-        <span class="pattern-gallery-cell pattern-gallery-cell--id">${safeId}</span>
-        <span class="pattern-gallery-cell pattern-gallery-cell--truncate">${styleDisp}</span>
-        <span class="pattern-gallery-cell pattern-gallery-cell--mute pattern-gallery-cell--truncate">${customerDisp}</span>
-        <span class="pattern-gallery-cell pattern-gallery-cell--pl">
-          <img class="pattern-gallery-row__avatar" src="${av}" alt="" />
-          <span class="pattern-gallery-cell--truncate">${plDisp}</span>
-        </span>
-        <span class="pattern-gallery-cell">${dueDisp}</span>
-        <span class="pattern-gallery-cell"><span class="status-badge success-badge">${statusDisp}</span></span>
-        <span class="pattern-gallery-row__actions">
-          <button type="button" class="btn-outline details-btn" data-id="${safeId}">Details</button>
-          <button type="button" class="btn-outline remarks-btn" data-id="${safeId}">Upload</button>
-        </span>
-      `;
-
-            gallery.appendChild(line);
-          });
-
-          gallery.querySelectorAll('.details-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-              const id = e.currentTarget.dataset.id;
-              const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
-              handleDetailsClick(id, rowData);
-            });
-          });
-
-          gallery.querySelectorAll('.remarks-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-              const id = e.currentTarget.dataset.id;
-              const rowData = allRequests.find((r, i) => (r.id || `REQ-${i + 1}`) === id);
-              handleRemarksClick(id, rowData);
-            });
-          });
-        }
-
-
-        const prevBtn = document.getElementById('cal-prev-btn');
-        if (prevBtn) {
-          prevBtn.addEventListener('click', () => {
-            calCurrentDate.setMonth(calCurrentDate.getMonth() - 1);
-            renderCalendar();
-          });
-        }
-
-        const nextBtn = document.getElementById('cal-next-btn');
-        if (nextBtn) {
-          nextBtn.addEventListener('click', () => {
-            calCurrentDate.setMonth(calCurrentDate.getMonth() + 1);
-            renderCalendar();
-          });
-        }
-
-        // Search Listener
-        const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-          searchInput.addEventListener('input', (e) => {
-            searchText = e.target.value.trim();
-            renderTable();
-          });
-        }
-
-        // --- Export to Excel ---
-        const exportBtn = document.getElementById('export-excel-btn');
-        if (exportBtn) {
-          exportBtn.addEventListener('click', () => {
-            if (typeof XLSX === 'undefined') {
-              alert("Excel export library is loading. Please try again in a few seconds.");
-              return;
-            }
-
-            const exportData = allRequests.filter(row => {
-              const rowStatus = normalizeStatus(row.status);
-              if (currentTab === 'PM ASSIGN') {
-                if (!isPmAssignedStatus(rowStatus)) return false;
-              } else {
-                if (rowStatus !== currentTab) return false;
-              }
-              if (currentTab === 'PM ASSIGN' && pmFilterName) {
-                const pmName = (row.PM_Name || row.Pattern_Maker || '').toLowerCase();
-                if (!pmName.includes(pmFilterName.toLowerCase())) return false;
-              }
-              return true;
-            }).map(row => ({
-              "C Number": row.id || '',
-              "Customer Reference": row.style || '',
-              "Customer": row.customer || '',
-              "PM Name": row.PM_Name || row.Pattern_Maker || row.assignee || '',
-              "Costing Expected Date": row.due || '',
-              "Status": row.status || '',
-              "Assigned PM Date": row.PM_Uploaded_Date || '',
-              "Remarks": row.remarks || row.Remarks || ''
-            }));
-
-            if (exportData.length === 0) {
-              alert("No data available to export for the current view.");
-              return;
-            }
-
-            const worksheet = XLSX.utils.json_to_sheet(exportData);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, currentTab === 'PM ASSIGN' ? "Completed" : "Patterns");
-            const fileName = `Pattern_Tasks_${currentTab.replace(' ', '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
-            XLSX.writeFile(workbook, fileName);
-          });
-        }
-
-        // --- SESSION MANAGEMENT (Meeting Style) ---
-
-        function consumeUrlSession() {
-          const REMEMBERED_USER_KEY = 'ACC_REMEMBERED_USER';
-          const hash = window.location.hash;
-          const urlParams = new URLSearchParams(window.location.search);
-          const querySession = urlParams.get('session');
-
-          let encodedData = null;
-          if (hash.startsWith('#session=')) {
-            encodedData = hash.substring(9);
-          } else if (querySession) {
-            encodedData = querySession;
+          if (!rowData || !rowData._rowIndex) {
+            alert("Row identification error. Please refresh.");
+            return;
           }
 
-          if (encodedData) {
-            try {
-              const decodedData = JSON.parse(decodeURIComponent(escape(atob(encodedData))));
-              if (decodedData && decodedData.loginId) {
-                localStorage.setItem(REMEMBERED_USER_KEY, JSON.stringify(decodedData));
-                window.history.replaceState(null, null, window.location.pathname);
-                return true;
-              }
-            } catch (e) { console.error('Session error:', e); }
+          // 1. Automatic Folder Opening
+          const folderPath = (rowData.Folder_Path || rowData.folderLink || '').trim();
+          if (folderPath && folderPath !== '-' && /^https?:\/\//i.test(folderPath)) {
+            window.open(folderPath, '_blank');
           }
-          return false;
-        }
 
-        function setupUserSession() {
-          const REMEMBERED_USER_KEY = 'ACC_REMEMBERED_USER';
-          consumeUrlSession();
+          // 2. Start Processing (Direct Upload)
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = "Processing & Sending...";
+          submitBtn.style.opacity = '0.7';
+          submitBtn.style.pointerEvents = 'none';
 
-          const userAvatar = document.getElementById('user-avatar');
-          const dropdownEmail = document.getElementById('dropdown-email');
-          const dropdownName = document.getElementById('dropdown-name');
-          const profileTrigger = document.getElementById('profile-trigger');
-          const userDropdown = document.getElementById('user-dropdown');
-          const signOutBtn = document.getElementById('sign-out-btn');
+          const uploadRemarkInput = document.getElementById('upload-remark-input');
+          const finalRemarks = uploadRemarkInput ? uploadRemarkInput.value.trim() : '';
 
-          if (!userAvatar || !dropdownEmail || !profileTrigger || !userDropdown || !signOutBtn) return;
+          // Construct Dynamic Recipients
+          const recipients = [
+            rowData['Created By'] || rowData.createdBy,
+            rowData['Acc_Email'] || rowData.acc_email || rowData.AccManagerEmail,
+            rowData['PL_Mail'] || rowData.plMasterEmail || rowData.PL_Email
+          ].filter(email => email && email.includes('@')).join(', ');
 
-          const sessionData = JSON.parse(localStorage.getItem(REMEMBERED_USER_KEY) || 'null');
-          if (sessionData) {
-            const name = sessionData.username || sessionData.loginId || 'User';
-            const email = sessionData.email || sessionData.loginId || 'No email';
-            userAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=ed8936&color=fff&bold=true`;
-            dropdownEmail.textContent = email;
-            if (dropdownName) dropdownName.textContent = name;
+          const currentRef = rowData.Customer_Ref || rowData.style || '-';
+          const currentCustomer = rowData.Customer || rowData.customer || '-';
+          const currentPL = rowData.PL_Name || rowData.assignee || 'Techpack Team';
+          const appLink = "https://techpack-costing1.vercel.app/";
+          const timestamp = getFullDateTime();
+
+          const payload = {
+            action: 'update',
+            rowIndex: rowData._rowIndex,
+            updates: {
+              'Status': 'Awaiting Pattern',
+              'PL_Uploaded_Date': timestamp,
+              'Techpack_Remarks': finalRemarks
+            },
+            emailParams: {
+              to: recipients || "YTeeluck@tropicknits.com",
+              subject: `Update Request: ${currentId}`,
+              body: `Hello,\n\nThe request ${currentId} has been updated.\n\nChanges:\n- Status : "Awaiting Techpack" -> "Awaiting Pattern"\n- PL_Uploaded_Date : "" -> "${timestamp}"\nRemarks: ${finalRemarks || 'N/A'}\n\nApp access: ${appLink}\n\nRegards,\n\n${currentPL}`
+            }
+          };
+
+          try {
+            const response = await fetch(APPS_SCRIPT_URL, {
+              method: 'POST',
+              body: JSON.stringify(payload)
+            });
+            const result = await response.json();
+            if (result.status !== 'success') throw new Error(result.message || "Update failed");
+
+            alert("Techpack submitted and notification emails sent!");
+            if (uploadRemarkInput) uploadRemarkInput.value = '';
+            uploadConfigSection.style.display = 'none';
+            if (activeRequestBanner) activeRequestBanner.style.display = 'none';
+
+            // Switch to Completed Tab
+            currentTab = 'Completed';
+            if (navCompleted && navUploads) {
+              navCompleted.classList.add('active');
+              navUploads.classList.remove('active');
+            }
+            await loadTableData();
+          } catch (error) {
+            console.error("Submission error:", error);
+            alert("Error: " + error.message);
+          } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.pointerEvents = 'auto';
+          }
+        });
+      }
+
+      const remarksModal = document.getElementById('remarks-modal');
+      const closeRemarksBtn = document.getElementById('close-remarks-btn');
+      const saveRemarksBtn = document.getElementById('save-remarks-btn');
+
+      if (closeRemarksBtn) {
+        closeRemarksBtn.addEventListener('click', () => {
+          remarksModal.style.display = 'none';
+        });
+      }
+
+      if (saveRemarksBtn) {
+        saveRemarksBtn.addEventListener('click', async () => {
+          const id = document.getElementById('remarks-req-id').textContent;
+          const remarksVal = document.getElementById('remarks-input').value.trim();
+          const row = requestsRows.find(r => (r.C_Number || r.id) === id);
+
+          saveRemarksBtn.textContent = 'Saving...';
+          saveRemarksBtn.disabled = true;
+          try {
+            const response = await fetch(APPS_SCRIPT_URL, {
+              method: 'POST',
+              body: JSON.stringify({
+                action: 'update',
+                rowIndex: row ? row._rowIndex : null,
+                requestId: id,
+                updates: {
+                  'Techpack_Remarks': remarksVal
+                }
+              })
+            });
+            const result = await response.json();
+            if (result.status !== 'success') throw new Error(result.message || "Failed to update remark");
+
+            await loadTableData();
+            alert('Remark saved successfully.');
+            remarksModal.style.display = 'none';
+          } catch (error) {
+            console.error("Save remark error:", error);
+            alert("Error saving remark: " + error.message);
+          } finally {
+            saveRemarksBtn.textContent = 'Save Remark';
+            saveRemarksBtn.disabled = false;
+          }
+        });
+      }
+
+      if (cancelEmailBtn) {
+        cancelEmailBtn.addEventListener('click', () => emailModal.style.display = 'none');
+      }
+
+      if (confirmUploadBtn) {
+        confirmUploadBtn.addEventListener('click', () => {
+          emailModal.style.display = 'none';
+        });
+      }
+
+      // --- Search Input ---
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchText = e.target.value.trim();
+          renderTable();
+        });
+      }
+
+
+      if (exportExcelBtn) {
+        exportExcelBtn.addEventListener('click', () => {
+          if (typeof XLSX === 'undefined') {
+            alert("Excel export library is loading. Please try again in a second.");
+            return;
+          }
+
+          const rows = getFilteredRowsForCurrentTab();
+          if (!rows.length) {
+            alert(currentTab === 'Uploads'
+              ? 'No upload queue rows to export. Adjust filters or load data.'
+              : 'No completed rows to export. Adjust filters or load data.');
+            return;
+          }
+
+          let excelData;
+          let sheetName;
+          let fileName;
+
+          if (currentTab === 'Uploads') {
+            excelData = rows.map(row => {
+              const created = parseSheetDateForExport(row.createdDate);
+              let plOverdueHrs = '';
+              if (created && !isNaN(created)) {
+                plOverdueHrs = String(Math.floor((new Date() - created) / (1000 * 60 * 60)));
+              }
+              return {
+                "C Number": row.id || '',
+                "Customer Ref": row.style || row.Style || '',
+                "Customer": row.customer || row.Customer || '',
+                "PL": row.assignee || row.PL_Name || '',
+                "Remarks": row.remarks || row.Remarks || '',
+                "Costing Expected Date": row.due || '',
+                "Status": row.status || row.Status || '',
+                "PL Overdue (hrs)": plOverdueHrs,
+                "Folder Link": row.folderLink || row.Folder_Path || ''
+              };
+            });
+            sheetName = 'Upload Queue';
+            fileName = `Techpack_Upload_Queue_${new Date().toISOString().split('T')[0]}.xlsx`;
           } else {
-            dropdownEmail.textContent = 'Non connecté';
+            excelData = rows.map(row => {
+              const created = parseSheetDateForExport(row.createdDate);
+              const uploaded = parseSheetDateForExport(row.PL_Uploaded_Date);
+              let leadtimeHrs = '';
+              if (created && uploaded && !isNaN(created) && !isNaN(uploaded)) {
+                leadtimeHrs = String(Math.floor((uploaded - created) / (1000 * 60 * 60)));
+              }
+              return {
+                "C Number": row.id || '',
+                "Customer Ref": row.style || row.Style || '',
+                "Customer": row.customer || row.Customer || '',
+                "PL": row.assignee || row.PL_Name || '',
+                "Costing Expected Date": row.due || '',
+                "Status": row.status || row.Status || '',
+                "PL Leadtime (hrs)": leadtimeHrs,
+                "Uploaded Date": row.PL_Uploaded_Date || '',
+                "Folder Link": row.folderLink || row.Folder_Path || ''
+              };
+            });
+            sheetName = 'Completed Requests';
+            fileName = `Completed_Requests_${new Date().toISOString().split('T')[0]}.xlsx`;
           }
 
-          profileTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            userDropdown.classList.toggle('active');
-          });
+          const worksheet = XLSX.utils.json_to_sheet(excelData);
+          const workbook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+          XLSX.writeFile(workbook, fileName);
+        });
+      }
 
-          document.addEventListener('click', (e) => {
-            if (!profileTrigger.contains(e.target)) userDropdown.classList.remove('active');
-          });
+      // --- Details Modal ---
+      const closeDetailsBtn = document.getElementById('close-details-btn');
+      if (closeDetailsBtn) {
+        closeDetailsBtn.addEventListener('click', () => {
+          document.getElementById('details-modal').style.display = 'none';
+        });
+      }
 
-          signOutBtn.addEventListener('click', () => {
-            localStorage.removeItem(REMEMBERED_USER_KEY);
-            window.location.href = 'https://costing-app-beta.vercel.app/';
-          });
+      // --- Calendar GUI Rendering Logic ---
+      let calCurrentDate = new Date();
+
+      function renderCalendar() {
+        const grid = document.getElementById('calendar-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+
+        const year = calCurrentDate.getFullYear();
+        const month = calCurrentDate.getMonth();
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        document.getElementById('cal-month-title').textContent = `${monthNames[month]} ${year}`;
+
+        console.log(`[Calendar] Rendering ${monthNames[month]} ${year}. Total rows: ${requestsRows.length}`);
+
+        const firstDayIndex = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        let dayCounts = {};
+        requestsRows.forEach(row => {
+          const st = String(row.status || row.Status || '').toUpperCase().trim();
+
+          // Debug status
+          if (st === 'AWAITING PATTERN') {
+            const dateVal = row.PL_Uploaded_Date || row['PL_Uploaded_Date'] || '';
+            const d = globalParseSheetDate(dateVal);
+
+            if (d && !isNaN(d)) {
+              console.log(`[Calendar] Match found! ID: ${row.id || row.C_Number}, Date: ${dateVal}, Parsed: ${d.toDateString()}`);
+              if (d.getFullYear() === year && d.getMonth() === month) {
+                let day = d.getDate();
+                dayCounts[day] = (dayCounts[day] || 0) + 1;
+              } else {
+                console.warn(`[Calendar] Date is in different month/year: ${d.getFullYear()}/${d.getMonth() + 1}`);
+              }
+            } else {
+              console.error(`[Calendar] Failed to parse date: "${dateVal}" for ID: ${row.id || row.C_Number}`);
+            }
+          }
+        });
+
+        for (let x = 0; x < firstDayIndex; x++) {
+          let emptyCell = document.createElement('div');
+          emptyCell.style.background = '#f9fafb';
+          emptyCell.style.borderRadius = '6px';
+          grid.appendChild(emptyCell);
         }
 
-        // Final Init Call
-        setupUserSession();
-        loadPatternTasks();
-      });
-    </script>
+        for (let i = 1; i <= daysInMonth; i++) {
+          let dayCell = document.createElement('div');
+          dayCell.style.border = '1px solid #e5e7eb';
+          dayCell.style.borderRadius = '6px';
+          dayCell.style.padding = '8px';
+          dayCell.style.display = 'flex';
+          dayCell.style.flexDirection = 'column';
+          dayCell.style.backgroundColor = '#ffffff';
+
+          let dateNumber = document.createElement('strong');
+          dateNumber.style.color = '#374151';
+          dateNumber.textContent = i;
+          dayCell.appendChild(dateNumber);
+
+          if (dayCounts[i]) {
+            let countBadge = document.createElement('div');
+            // Premium Badge Styling
+            countBadge.style.marginTop = 'auto';
+            countBadge.style.backgroundColor = '#eff6ff'; // Light blue bg
+            countBadge.style.color = '#1d4ed8'; // Dark blue text
+            countBadge.style.padding = '6px 4px';
+            countBadge.style.borderRadius = '8px';
+            countBadge.style.fontSize = '11px';
+            countBadge.style.fontWeight = '700';
+            countBadge.style.textAlign = 'center';
+            countBadge.style.cursor = 'pointer';
+            countBadge.style.border = '1px solid #dbeafe';
+            countBadge.style.transition = 'all 0.2s';
+            countBadge.textContent = `${dayCounts[i]} Request${dayCounts[i] > 1 ? 's' : ''}`;
+
+            countBadge.addEventListener('mouseenter', () => {
+              countBadge.style.backgroundColor = '#dbeafe';
+              countBadge.style.transform = 'translateY(-1px)';
+            });
+            countBadge.addEventListener('mouseleave', () => {
+              countBadge.style.backgroundColor = '#eff6ff';
+              countBadge.style.transform = 'translateY(0)';
+            });
+
+            countBadge.addEventListener('click', () => {
+              const dailyReqs = requestsRows.filter(r => {
+                const st = String(r.status || r.Status || '').toUpperCase().trim();
+                if (st !== 'AWAITING PATTERN') return false;
+                const rd = globalParseSheetDate(r.PL_Uploaded_Date);
+                return rd && !isNaN(rd) && rd.getFullYear() === year && rd.getMonth() === month && rd.getDate() === i;
+              });
+
+              console.log(`[Calendar] Badge clicked for day ${i}. Found ${dailyReqs.length} items.`);
+
+              const modal = document.getElementById('calendar-day-modal');
+              const title = document.getElementById('calendar-day-title');
+              const content = document.getElementById('calendar-day-content');
+
+              if (modal && title && content) {
+                title.textContent = `${monthNames[month]} ${i}, ${year}`;
+
+                if (dailyReqs.length === 0) {
+                  content.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted);">No requests found.</div>';
+                } else {
+                  content.innerHTML = dailyReqs.map(r => `
+                      <div style="padding: 16px 20px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+                         <div style="display:flex; flex-direction: column; gap: 2px;">
+                             <span style="font-weight: 700; color: #1e293b; font-size: 14px;">${r.C_Number || r.id || 'Unknown'}</span>
+                             <span style="font-size: 12px; color: #64748b;">${r.Customer || r.customer || 'No Customer'}</span>
+                         </div>
+                         <button class="btn-outline calendar-details-btn" data-id="${r.C_Number || r.id}" 
+                           style="padding: 6px 12px; font-size: 12px; border-radius: 6px; font-weight: 600; border-color: #cbd5e1; color: #475569;">
+                           Details
+                         </button>
+                      </div>
+                   `).join('');
+                }
+
+                const calDetailsBtns = content.querySelectorAll('.calendar-details-btn');
+                calDetailsBtns.forEach(btn => {
+                  btn.addEventListener('click', (e) => {
+                    const id = e.currentTarget.getAttribute('data-id');
+                    const rowData = requestsRows.find(r => (r.C_Number || r.id) === id);
+                    if (rowData) openDetailsInternal(rowData);
+                  });
+                });
+
+                modal.style.display = 'flex';
+              }
+            });
+
+            dayCell.appendChild(countBadge);
+          }
+          grid.appendChild(dayCell);
+        }
+      }
+
+      // --- Calendar Modal Close Binding ---
+      const closeCalDayBtn = document.getElementById('close-calendar-day-btn');
+      if (closeCalDayBtn) {
+        closeCalDayBtn.addEventListener('click', () => {
+          document.getElementById('calendar-day-modal').style.display = 'none';
+        });
+      }
+
+      function openDetailsInternal(rowData) {
+        if (!rowData) return;
+        const detailsContent = document.getElementById('details-content');
+        detailsContent.innerHTML = "";
+
+        // 1. Fabric Details at the top
+        const fabricTableDiv = document.createElement('div');
+        fabricTableDiv.id = "modal-fabric-container";
+        fabricTableDiv.style.marginBottom = "24px";
+        detailsContent.appendChild(fabricTableDiv);
+        renderFabricDetails(rowData, 'modal-fabric-container');
+
+        // 2. Dynamic General Details based on all available keys
+        const listContainer = document.createElement('div');
+        listContainer.className = "form-grid";
+
+        // Internal/Technical keys to exclude from display loop
+        const excludeKeys = ['_rowIndex', 'Fabric Add Ons', 'Fabric_Add_Ons', 'folderLink', 'avatar', 'statusClass', 'id', 'Style', 'Main_Fabric', 'Fabric_Header', 'Folder_Path', 'Folder Path', 'PowerAppsId', 'PowerAppsId__', 'Techpack_Remarks', 'techpack_remarks'].map(k => k.toLowerCase().replace(/[\s_]/g, ''));
+
+        Object.keys(rowData).forEach(key => {
+          const normalizedKey = key.toLowerCase().replace(/[\s_]/g, '');
+          if (excludeKeys.includes(normalizedKey)) return;
+
+          let val = rowData[key];
+          if (val === undefined || val === null || String(val).trim() === "" || String(val).trim() === "-" || String(val).trim() === "N/A") return;
+
+          const card = document.createElement('div');
+          card.className = "detail-card";
+
+          let labelName = key.replace(/_/g, ' ');
+          if (labelName.toLowerCase() === "c number") labelName = "C Number";
+
+          let displayVal = val;
+          if (key.toLowerCase().includes('status')) {
+            const statusClass = String(val).toLowerCase().replace(/\s+/g, '-');
+            displayVal = `<span class="status-pill ${statusClass}">${val}</span>`;
+          } else if (key.toLowerCase().includes('date') || key.toLowerCase() === 'created') {
+            displayVal = formatDateOnly(val);
+          } else if (String(val).startsWith('http')) {
+            displayVal = `<a href="${val}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: none;">Open Folder</a>`;
+          }
+
+          card.innerHTML = `
+            <span class="detail-label">${labelName}</span>
+            <div class="detail-value">${displayVal}</div>
+          `;
+          listContainer.appendChild(card);
+        });
+
+        // 2b. Add Techpack Remarks (Explicitly at the end of the grid)
+        const remarkVal = rowData.Techpack_Remarks || rowData.techpack_remarks || rowData['Remarks Techpack'] || '';
+        if (remarkVal && String(remarkVal).trim() !== "" && String(remarkVal).trim() !== "-") {
+          const card = document.createElement('div');
+          card.className = "detail-card";
+          card.style.borderLeft = "4px solid var(--primary-color)";
+          card.innerHTML = `
+            <span class="detail-label" style="color: var(--primary-color);">Techpack Remarks</span>
+            <div class="detail-value">${remarkVal}</div>
+          `;
+          listContainer.appendChild(card);
+        }
+
+        // 3. Append Folder Path at the VERY END
+        const folderKey = Object.keys(rowData).find(k => {
+          const nk = k.toLowerCase().replace(/[\s_]/g, '');
+          return nk === 'folderpath' || nk === 'attachmenturl' || nk === 'folderlink';
+        });
+
+        if (folderKey && rowData[folderKey]) {
+          const folderVal = rowData[folderKey];
+          if (folderVal && String(folderVal).trim() !== "" && String(folderVal).trim() !== "-") {
+            const card = document.createElement('div');
+            card.className = "detail-card";
+            card.style.gridColumn = "1 / -1";
+            card.style.marginTop = "12px";
+            let displayVal = folderVal;
+            if (String(folderVal).startsWith('http')) {
+              displayVal = `<a href="${folderVal}" target="_blank" style="color: #3b82f6; font-weight: 700; text-decoration: none;">Open Folder</a>`;
+            }
+            card.innerHTML = `
+              <span class="detail-label">Folder Path</span>
+              <div class="detail-value">${displayVal}</div>
+            `;
+            listContainer.appendChild(card);
+          }
+        }
+
+        detailsContent.appendChild(listContainer);
+        document.getElementById('details-modal').style.display = 'flex';
+      }
+
+      function openDetails(id) {
+        const rowData = requestsRows.find((r, i) => (r.id || r.C_Number || `REQ-${i + 1}`) === id);
+        openDetailsInternal(rowData);
+      }
+
+      function openRemarks(id) {
+        const modal = document.getElementById('remarks-modal');
+        document.getElementById('remarks-req-id').textContent = id;
+        const textarea = document.getElementById('remarks-input');
+        const row = requestsRows.find(r => r.id === id);
+        if (textarea) textarea.value = row ? (row.remarks || row.Remarks || '') : '';
+        modal.style.display = 'flex';
+      }
+
+      const prevBtn = document.getElementById('cal-prev-btn');
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          calCurrentDate.setMonth(calCurrentDate.getMonth() - 1);
+          renderCalendar();
+        });
+      }
+
+      const nextBtn = document.getElementById('cal-next-btn');
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          calCurrentDate.setMonth(calCurrentDate.getMonth() + 1);
+          renderCalendar();
+        });
+      }
+
+      // --- Tab Navigation ---
+      const navUploads = document.getElementById('nav-uploads');
+      const navCompleted = document.getElementById('nav-completed');
+      const navCalendar = document.getElementById('nav-calendar');
+
+      if (navUploads && navCompleted && navCalendar) {
+        navUploads.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentTab = 'Uploads';
+          navUploads.classList.add('active');
+          navCompleted.classList.remove('active');
+          navCalendar.classList.remove('active');
+          renderTable();
+        });
+
+        navCompleted.addEventListener('click', (e) => {
+          e.preventDefault();
+          const detailsModal = document.getElementById('details-modal');
+          if (detailsModal) detailsModal.style.display = 'none';
+          if (uploadConfigSection) uploadConfigSection.style.display = 'none';
+          if (activeRequestBanner) activeRequestBanner.style.display = 'none';
+          currentTab = 'Completed';
+          navCompleted.classList.add('active');
+          navUploads.classList.remove('active');
+          navCalendar.classList.remove('active');
+          renderTable();
+        });
+
+        navCalendar.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentTab = 'Calendar';
+          navCalendar.classList.add('active');
+          navUploads.classList.remove('active');
+          navCompleted.classList.remove('active');
+          renderTable();
+        });
+      }
+
+      // --- SESSION MANAGEMENT (Meeting Style) ---
+
+      function consumeUrlSession() {
+        const REMEMBERED_USER_KEY = 'ACC_REMEMBERED_USER';
+        const hash = window.location.hash;
+        const urlParams = new URLSearchParams(window.location.search);
+        const querySession = urlParams.get('session');
+
+        let encodedData = null;
+        if (hash.startsWith('#session=')) {
+          encodedData = hash.substring(9);
+        } else if (querySession) {
+          encodedData = querySession;
+        }
+
+        if (encodedData) {
+          try {
+            const decodedData = JSON.parse(decodeURIComponent(escape(atob(encodedData))));
+            if (decodedData && decodedData.loginId) {
+              localStorage.setItem(REMEMBERED_USER_KEY, JSON.stringify(decodedData));
+              window.history.replaceState(null, null, window.location.pathname);
+              return true;
+            }
+          } catch (e) { console.error('Session error:', e); }
+        }
+        return false;
+      }
+
+      function setupUserSession() {
+        const REMEMBERED_USER_KEY = 'ACC_REMEMBERED_USER';
+        consumeUrlSession();
+
+        const userAvatar = document.getElementById('user-avatar');
+        const dropdownEmail = document.getElementById('dropdown-email');
+        const profileTrigger = document.getElementById('profile-trigger');
+        const userDropdown = document.getElementById('user-dropdown');
+        const signOutBtn = document.getElementById('sign-out-btn');
+
+        if (!userAvatar || !dropdownEmail || !profileTrigger || !userDropdown || !signOutBtn) return;
+
+        const sessionData = JSON.parse(localStorage.getItem(REMEMBERED_USER_KEY) || 'null');
+        if (sessionData) {
+          const name = sessionData.username || sessionData.loginId || 'User';
+          const email = sessionData.email || sessionData.loginId || 'No email';
+          userAvatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=ed8936&color=fff&bold=true`;
+          dropdownEmail.textContent = email;
+        } else {
+          dropdownEmail.textContent = 'Non connecté';
+        }
+
+        profileTrigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          userDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!profileTrigger.contains(e.target)) userDropdown.classList.remove('active');
+        });
+
+        signOutBtn.addEventListener('click', () => {
+          localStorage.removeItem(REMEMBERED_USER_KEY);
+          window.location.href = 'https://costing-app-beta.vercel.app/';
+        });
+      }
+
+      // Final Init Call
+      setupUserSession();
+      loadTableData();
+
+    });
+  </script>
 </body>
+
 </html>
