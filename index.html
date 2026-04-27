@@ -872,7 +872,15 @@
 
   /* Table Enhancements */
   .pattern-tasks table {
+    width: 100%;
     margin-top: 16px;
+    border-collapse: collapse;
+  }
+
+  #pattern-table-surface {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .pattern-tasks th {
@@ -1401,6 +1409,7 @@
 
   @media (max-width: 768px) {
     .container { padding: 16px; }
+    .pattern-tasks { padding: 16px; }
     .form-grid { grid-template-columns: 1fr !important; }
     .modal-window { width: 95vw; }
     .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -1766,7 +1775,7 @@
     <div class="modal-backdrop" id="details-modal">
       <div class="modal-window">
         <div class="modal-header">
-          <h2>Request Details</h2>
+          <h2>Details</h2>
           <button class="close-btn" id="close-details-btn">&times;</button>
         </div>
         <div class="modal-body">
@@ -2151,8 +2160,15 @@
           const thDynamic = document.getElementById('th-dynamic');
           const thOwnerName = document.getElementById('th-owner-name');
           if (thDynamic) {
-            thDynamic.style.display = (currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? 'table-cell' : 'none';
-            if (thDynamic.style.display !== 'none') thDynamic.textContent = 'PM Name';
+            if (currentTab === 'AWAITING PATTERN') {
+              thDynamic.style.display = 'none';
+            } else if (currentTab === 'PM ASSIGN') {
+              thDynamic.style.display = 'table-cell';
+              thDynamic.textContent = 'Processing Time';
+            } else if (currentTab === 'LIST_VIEW') {
+              thDynamic.style.display = 'table-cell';
+              thDynamic.textContent = 'Total Time';
+            }
           }
           if (thOwnerName) {
             thOwnerName.textContent = currentTab === 'AWAITING PATTERN' ? 'PL Name' : 'PM Name';
