@@ -1392,8 +1392,34 @@
     transition: background 0.2s;
   }
 
-  .sign-out-btn:hover {
-    background: rgba(239, 68, 68, 0.1);
+  /* Responsive Media Queries */
+  @media (max-width: 1024px) {
+    .sidebar { width: 80px; }
+    .sidebar-brand span, .sidebar-nav span { display: none; }
+    .main-content { margin-left: 80px; }
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 16px; }
+    .form-grid { grid-template-columns: 1fr !important; }
+    .modal-window { width: 95vw; }
+    .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .navbar { padding: 0.5rem 1rem; }
+    .nav-links { gap: 10px; }
+    .nav-links a { font-size: 13px; padding: 0.4rem 0.6rem; }
+    .stats-grid { grid-template-columns: 1fr; }
+    
+    /* Fix filters grid */
+    #filter-modal .form-grid {
+       grid-template-columns: 1fr !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar { flex-direction: column; height: auto; padding: 1rem; gap: 12px; }
+    .nav-links { width: 100%; justify-content: center; }
+    .nav-right { width: 100%; justify-content: center; }
+    .main-content { margin-left: 0; padding: 12px; }
   }
 </style>
 
@@ -2640,6 +2666,18 @@
         }
         if (modalPmNameInput) {
           modalPmNameInput.addEventListener('input', handlePmNameChange);
+        }
+
+        const browseBtn = document.getElementById('action-browse-files-btn');
+        if (browseBtn) {
+          browseBtn.addEventListener('click', () => {
+            const link = browseBtn.dataset.link;
+            if (link && link.trim() !== '' && link !== '-') {
+              window.open(link, '_blank');
+            } else {
+              alert("No valid folder path link available for this request.");
+            }
+          });
         }
 
         if (confirmAssignBtn) {
