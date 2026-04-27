@@ -1862,6 +1862,12 @@
             const el = document.getElementById(f.id);
             if (el) el.innerHTML = f.vals.map(v => `<option value="${v}">`).join('');
           });
+
+          // Also populate the assignment datalist (pm-list) from DB settings
+          const pmListEl = document.getElementById('pm-list');
+          if (pmListEl && allSettings && allSettings.pm) {
+            pmListEl.innerHTML = allSettings.pm.map(name => `<option value="${name}">`).join('');
+          }
         }
 
         async function fetchSettings() {
