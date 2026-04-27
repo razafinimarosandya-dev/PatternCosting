@@ -1775,7 +1775,7 @@
     <div class="modal-backdrop" id="details-modal">
       <div class="modal-window">
         <div class="modal-header">
-          <h2>Details</h2>
+          <h2>Request Details</h2>
           <button class="close-btn" id="close-details-btn">&times;</button>
         </div>
         <div class="modal-body">
@@ -2160,14 +2160,11 @@
           const thDynamic = document.getElementById('th-dynamic');
           const thOwnerName = document.getElementById('th-owner-name');
           if (thDynamic) {
-            if (currentTab === 'AWAITING PATTERN') {
+            if (currentTab === 'AWAITING PATTERN' || currentTab === 'LIST_VIEW') {
               thDynamic.style.display = 'none';
             } else if (currentTab === 'PM ASSIGN') {
               thDynamic.style.display = 'table-cell';
               thDynamic.textContent = 'Processing Time';
-            } else if (currentTab === 'LIST_VIEW') {
-              thDynamic.style.display = 'table-cell';
-              thDynamic.textContent = 'Total Time';
             }
           }
           if (thOwnerName) {
@@ -2272,8 +2269,8 @@
             ${row.status || 'PENDING'}
           </span>
         </td>
-        <td style="display: ${(currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? 'table-cell' : 'none'}; font-weight: 500; color: var(--text-main);">
-          ${(currentTab === 'PM ASSIGN' || currentTab === 'LIST_VIEW') ? (row.PM_Name || row.pm_name || row.Pattern_Maker || 'Unknown') : ''}
+        <td style="display: ${currentTab === 'PM ASSIGN' ? 'table-cell' : 'none'}; font-weight: 500; color: var(--text-main);">
+          ${currentTab === 'PM ASSIGN' ? (row.PM_Name || row.pm_name || row.Pattern_Maker || 'Unknown') : ''}
         </td>
         <td style="text-align: center;">
              ${currentTab === 'AWAITING PATTERN'
@@ -2405,10 +2402,11 @@
             if (field.label === 'Status') {
               displayValue = `<span class="status-pill success-badge" style="background-color: #d1fae5; color: #059669;">${displayValue}</span>`;
             }
+            const isRemark = field.label.toLowerCase().includes('remarks');
             html += `
-              <div class="detail-card">
+              <div class="detail-card" ${isRemark ? 'style="grid-column: 1 / -1;"' : ''}>
                 <span class="detail-label">${field.label}</span>
-                <div class="detail-value">${displayValue}</div>
+                <div class="detail-value" style="${isRemark ? 'white-space: pre-wrap;' : ''}">${displayValue}</div>
               </div>`;
           });
           html += `</div>`;
