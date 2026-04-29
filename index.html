@@ -2355,7 +2355,7 @@
           // --- Render Fabric Table (Synced with Techpack) ---
           renderFabricDetails(rowData);
 
-          const folderValue = rowData.folder_path || rowData.folder_link || '-';
+          const folderValue = rowData.Folder_Path || rowData.folder_path || rowData.folder_link || '-';
           const folderEl = document.getElementById('sel-detail-folder');
           if (folderEl) {
             if (folderValue !== '-' && String(folderValue).startsWith('http')) {
@@ -2421,7 +2421,7 @@
             </div>`;
 
           // Add Folder Path
-          const folderValue = rowData.Folder_Path || rowData.folder_path || rowData.folder_link || '-';
+          const folderValue = rowData.Folder_Path || rowData.folder_path || rowData.folder_link || rowData.folderLink || '-';
           let folderDisplay = folderValue;
           if (folderValue !== '-' && String(folderValue).startsWith('http')) {
             folderDisplay = `<a href="${folderValue}" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: underline;">Open Folder</a>`;
