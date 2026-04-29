@@ -2834,8 +2834,8 @@
 
           // Filter rows for the relevant statuses (Strictly PM ASSIGNED and AWAITING CONSO)
           const calendarRows = allRequests.filter(r => {
-            const s = normalizeStatus(r.status);
-            return s === 'PM ASSIGNED' || s === 'AWAITING CONSO';
+            const status = r.status || '';
+            return isPmAssignedStatus(status) || normalizeStatus(status) === 'AWAITING CONSO';
           });
 
           calendarRows.forEach(row => {
@@ -2843,10 +2843,10 @@
             let dateStr = '';
             let type = '';
 
-            if (status === 'PM ASSIGNED') {
-              dateStr = row.PL_Uploaded_Date || row.pl_uploaded_date || row.Uploaded_Date || row.uploaded_date;
+            if (isPmAssignedStatus(status)) {
+              dateStr = row.PM_Uploaded_Date || row.pm_uploaded_date || row.PM_Date || row.pm_date || row.PL_Uploaded_Date || row.pl_uploaded_date;
               type = 'pmAssign';
-            } else if (status === 'AWAITING CONSO') {
+            } else if (normalizeStatus(status) === 'AWAITING CONSO') {
               dateStr = row.PM_Uploaded_Date || row.pm_uploaded_date || row.PM_Date || row.pm_date;
               type = 'awaitingConso';
             }
@@ -2924,10 +2924,10 @@
               const status = normalizeStatus(r.status);
               let ds = '';
               let t = '';
-              if (status === 'PM ASSIGNED') {
-                ds = r.PL_Uploaded_Date || r.pl_uploaded_date || r.Uploaded_Date || r.uploaded_date;
+              if (isPmAssignedStatus(status)) {
+                ds = r.PM_Uploaded_Date || r.pm_uploaded_date || r.PM_Date || r.pm_date || r.PL_Uploaded_Date || r.pl_uploaded_date;
                 t = 'pmAssign';
-              } else if (status === 'AWAITING CONSO') {
+              } else if (normalizeStatus(status) === 'AWAITING CONSO') {
                 ds = r.PM_Uploaded_Date || r.pm_uploaded_date || r.PM_Date || r.pm_date;
                 t = 'awaitingConso';
               }
